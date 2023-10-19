@@ -72,7 +72,13 @@ p, .font-secondary-text {
 }
 
 .btn-secondary {
-  @apply btn-primary bg-black;
+  @apply btn-primary;
+  background-color: black;
+}
+
+.btn-edit {
+  @apply btn-primary text-black outline outline-2 outline-black;
+  background-color: white;
 }
 
 @media (prefers-color-scheme: dark) {
