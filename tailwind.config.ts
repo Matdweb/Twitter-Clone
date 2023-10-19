@@ -16,6 +16,12 @@ const config: Config = {
       fontFamily: {
         roboto: ['var(--font-roboto)'],
         segoe_ui: ['var(--font-segoe-ui)'],
+      },
+      colors: {
+        'primary-blue': '#1D9BF0',
+        'primary-gray': '#E7ECF0',
+        'black': '#000',
+        'white': '#FFF'
       }
     },
   },
