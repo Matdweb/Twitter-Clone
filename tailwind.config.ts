@@ -19,8 +19,10 @@ const config: Config = {
         segoe_ui: ['var(--font-segoe-ui)'],
       },
       colors: {
-        'primary-blue': '#1D9BF0',
-        'primary-gray': '#E7ECF0',
+        primary :{
+          blue: '#1D9BF0',
+          gray: '#E7ECF0'
+        },
         'black': '#000',
         'white': '#FFF'
       }
