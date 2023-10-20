@@ -22,6 +22,42 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## How to Contribute
+
+Thank you for showing interest in contributing to our `'Twitter-Clone'` project! Your help is greatly appreciated. To get started, please follow these steps:
+
+1. **Find a Ticket**: Browse our project's issues and identify a ticket you'd like to contribute to. This helps maintain a clear and organized development process.
+
+2. **Express Your Interest**: Leave a comment on the chosen ticket with your name and a clear statement indicating your intent to contribute. This helps us track who's working on what.
+
+3. **Ticket Assignment**: The first contributor to express interest in a ticket will be assigned to it, provided they confirm their readiness within 24 hours. This ensures efficient ticket allocation.
+
+4. **Single Contributor per Ticket**: To ensure focused development, only one contributor may work on a ticket at a time. However, we welcome feedback and suggestions from everyone.
+
+5. **Time Commitment**: Once a ticket is assigned to you, coordinate a suitable development timeline with the project's owner or lead developer. Please honor this commitment, as other contributors and project timelines depend on it.
+
+6. **Code Review**: Prior to merging any code, the project owner or lead developer will review your changes to ensure alignment with project standards and objectives.
+
+> In rare cases where guidance is extremely necessary, you can refer to the other `'Twitter-Clone'` repository to guide yourself. See [here](https://github.com/Matdweb/Twitter-Clone).
+
+By following these steps and communicating clearly, you can make valuable contributions to our project while keeping the development process organized and collaborative. Happy coding! 👨🏻‍💻
+
+## Showcase Your Contributions
+
+We encourage contributors to feature their `'Twitter-Clone'` project contributions in their portfolios and resumes. This helps you demonstrate your skills and experience to potential employers or collaborators. Here's how:
+
+1. **List Your Contributions**: In your portfolio, create a section for your `'Twitter-Clone'` project contributions. Provide a brief description of each contribution and its impact.
+
+2. **Link to the Repository**: Include a direct link to the `'Twitter-Clone'` repository, allowing others to explore your code and the overall project.
+
+3. **Highlight Achievements**: Spotlight specific challenges you tackled, improvements you made, or unique solutions you implemented.
+
+4. **Share Your Experience**: Discuss the valuable experience you gained while working on the project, including collaboration with the development team, adherence to coding standards, and real-world problem-solving.
+
+5. **Connect with Us**: Let us know when you've added your `'Twitter-Clone'` contributions to your portfolio. We'd love to celebrate your success and promote your work within our community.
+
+Your contributions are a testament to your skills and dedication. We're thrilled to have you as part of our project. Share your portfolio with us, and let's continue to grow and learn together!
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
