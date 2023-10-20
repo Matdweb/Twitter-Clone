@@ -8,14 +8,6 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -24,4 +16,79 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+h1,h2,h3,p {
+  @apply text-black;
+  line-height: normal;
+  font-style: normal;
+}
+
+.font-big-title {
+  font-family: var(--font-roboto);
+  font-size: 5rem;
+  font-weight: 900;
+}
+
+.font-primary-title-roboto {
+  font-family: var(--font-roboto);
+  font-size: 2.5rem;
+  font-weight: 900;
+}
+
+.font-primary-title-bold {
+  font-family: var(--font-segoe-ui);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.font-primary-text {
+  font-family: var(--font-segoe-ui);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+p, .font-secondary-text {
+  font-family: var(--font-segoe-ui);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.font-gray-text {
+  opacity: .6;
+}
+
+.btn-primary {
+  @apply bg-primary-blue font-primary-title-bold rounded-full;
+  transition: transform .8s;
+}
+
+.btn-primary:hover {
+  opacity: .8;
+}
+
+.btn-primary:active {
+  transform: scale(.8);
+}
+
+.btn-secondary {
+  @apply btn-primary;
+  background-color: black;
+}
+
+.btn-edit {
+  @apply btn-primary text-black outline outline-2 outline-black;
+  background-color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+
+  h1,h2,h3,p {
+    @apply text-white;
+  }
 }
