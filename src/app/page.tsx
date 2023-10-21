@@ -1,6 +1,11 @@
-import Image from 'next/image'
+'use client'
+import { useAppDispatch, useAppSelector } from '@/redux/hook'
+import { increment, decrement } from '@/redux/features/counterSlice';
 
 export default function Home() {
+  const counter = useAppSelector(state => state.counterReducer.counter);
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <section className='p-16'>
@@ -15,9 +20,9 @@ export default function Home() {
         </p>
       </section>
       <section className='p-16 pt-4 bg-white'>
-        <button className='btn-primary w-40 m-4 ml-0 p-4'>Tweet</button>
-        <button className='btn-secondary w-40 m-4 ml-0 p-4'>Follow</button>
-        <button className='btn-edit w-40 m-4 ml-0 p-4'>Edit profile</button>
+      <h3 className='font-primary-title-bold text-black'>Counter: {counter}</h3>
+        <button onClick={()=> dispatch(increment())} className='btn-primary m-4 ml-0 p-4'>Increment</button>
+        <button onClick={()=> dispatch(decrement())} className='btn-secondary m-4 ml-0 p-4'>Decrement</button>
       </section>
     </>
   )
