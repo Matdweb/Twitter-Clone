@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import localFont from '@next/font/local'
+import Providers from '@/redux/providers'
 import './globals.css'
 
 const roboto = Roboto({
@@ -42,7 +43,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${Segoe_UI.variable}`}>{children}</body>
+      <body className={`${roboto.variable} ${Segoe_UI.variable}`}>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   )
 }
