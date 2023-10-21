@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { BsTwitter } from 'react-icons/bs';
 
 export default function Home() {
   return (
@@ -18,6 +18,7 @@ export default function Home() {
         <button className='btn-primary w-40 m-4 ml-0 p-4'>Tweet</button>
         <button className='btn-secondary w-40 m-4 ml-0 p-4'>Follow</button>
         <button className='btn-edit w-40 m-4 ml-0 p-4'>Edit profile</button>
+        <BsTwitter size={50} color='#000' /> <p className='text-black'>react-icons</p>
       </section>
     </>
   )
