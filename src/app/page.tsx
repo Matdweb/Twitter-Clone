@@ -16,7 +16,7 @@ export default function Home() {
         <p className='font-primary-text'>font-primary-text: Home</p>
         <p>secondary text:
           <br />
-          4-kursni tugatgunimcha kamida bitta biznesim bo'lishini, uylanish uchun moddiy jihatdan to'la-to'kis tayyor bo'lishni, sog'lik va jismoniy holatni normallashtirishni reja qildim
+          4-kursni tugatgunimcha kamida bitta biznesim bo&apos;lishini, uylanish uchun moddiy jihatdan to&apos;la-to&apos;kis tayyor bo&apos;lishni, sog&apos;lik va jismoniy holatni normallashtirishni reja qildim
         </p>
       </section>
       <section className='p-16 pt-4 bg-white'>
