@@ -1,6 +1,7 @@
 'use client'
 import { useAppDispatch, useAppSelector } from '@/redux/hook'
 import { increment, decrement } from '@/redux/features/counterSlice';
+import { BsTwitter } from 'react-icons/bs';
 
 export default function Home() {
   const counter = useAppSelector(state => state.counterReducer.counter);
