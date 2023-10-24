@@ -1,7 +1,6 @@
 'use client'
 import { useAppDispatch, useAppSelector } from '@/redux/hook'
 import { increment, decrement } from '@/redux/features/counterSlice';
-import { BsTwitter } from 'react-icons/bs';
 
 export default function Home() {
   const counter = useAppSelector(state => state.counterReducer.counter);
@@ -21,9 +20,9 @@ export default function Home() {
         </p>
       </section>
       <section className='p-16 pt-4 bg-white'>
-      <h3 className='font-primary-title-bold text-black'>Counter: {counter}</h3>
-        <button onClick={()=> dispatch(increment())} className='btn-primary m-4 ml-0 p-4'>Increment</button>
-        <button onClick={()=> dispatch(decrement())} className='btn-secondary m-4 ml-0 p-4'>Decrement</button>
+        <h3 className='font-primary-title-bold text-black'>Counter: {counter}</h3>
+        <button onClick={() => dispatch(increment())} className='btn-primary m-4 ml-0 p-4'>Increment</button>
+        <button onClick={() => dispatch(decrement())} className='btn-secondary m-4 ml-0 p-4'>Decrement</button>
       </section>
     </>
   )
