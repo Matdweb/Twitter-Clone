@@ -1,4 +1,4 @@
-import type { Post } from "@/types/posts/posts";
+import type { Post } from "@/types/posts/Posts";
 import type { PiscumImage } from "@/types/posts/images/images";
 
 export async function POST(request: Request) {
