@@ -15,6 +15,7 @@ export default function Home() {
   const dispatch = useAppDispatch();
 
   const handleRequest = () => {
+    //fetchPost uses the lastPostId to fecth the missing posts from that point
     const lastPostId = posts.length > 0 ? posts[posts.length - 1].id : 0;
     dispatch(fecthPosts(lastPostId));
   }
