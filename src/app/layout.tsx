@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import localFont from '@next/font/local'
+import localFont from 'next/font/local'
 import Providers from '@/redux/providers'
 import './globals.css'
 
