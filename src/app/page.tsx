@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from '@/redux/hook'
 import { increment, decrement } from '@/redux/features/counterSlice';
-import { addPosts, addNewPost } from "@/redux/features/postsSlice";
 import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
 
