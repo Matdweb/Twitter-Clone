@@ -5,6 +5,7 @@ import { increment, decrement } from '@/redux/features/counterSlice';
 import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
 
+
 export default function Home() {
   const isLoading = useAppSelector(state => state.postsReducer.isLoading);
   const error = useAppSelector(state => state.postsReducer.error);
@@ -56,6 +57,7 @@ export default function Home() {
         })}
         {isLoading ? <p>Loading ...</p> : ''}
         {error ? <p>There was an loading the posts :(</p> : ''}
+
       </section>
     </>
   )
