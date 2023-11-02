@@ -1,15 +1,19 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react"
 import { useAppDispatch, useAppSelector } from '@/redux/hook'
 import { increment, decrement } from '@/redux/features/counterSlice';
 import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
+import Link from "next/link";
 
 
 export default function Home() {
   const isLoading = useAppSelector(state => state.postsReducer.isLoading);
   const error = useAppSelector(state => state.postsReducer.error);
   const posts = useAppSelector(state => state.postsReducer.posts);
+
+  const { data: session } = useSession()
 
   const counter = useAppSelector(state => state.counterReducer.counter);
   const dispatch = useAppDispatch();
@@ -20,7 +24,10 @@ export default function Home() {
     dispatch(fecthPosts(lastPostId));
   }
 
-
+  useEffect(() => {
+    console.log("session: ", session);
+  }, [session])
+  
   useEffect(() => {
     console.log(posts)
   }, [posts])
@@ -42,7 +49,8 @@ export default function Home() {
         <h3 className='font-primary-title-bold text-black'>Counter: {counter}</h3>
         <button onClick={() => dispatch(increment())} className='btn-primary m-4 ml-0 p-4'>Increment</button>
         <button onClick={() => dispatch(decrement())} className='btn-secondary m-4 ml-0 p-4'>Decrement</button>
-        <button className='btn-edit p-4' onClick={() => handleRequest()}>Request Posts</button>
+        <button className='btn-edit p-4 m-4 ml-0' onClick={() => handleRequest()}>Request Posts</button>
+        <Link className="text-black" href='auth/login'>Log In Page</Link>
       </section>
       <section>
         {posts?.map((post) => {
