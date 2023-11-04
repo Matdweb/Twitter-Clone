@@ -7,18 +7,38 @@ function LogInPage() {
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string>('');
 
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(email, password);
+        await authenticateUser();
+    }
 
-        signIn('credentials',{
-            email,
-            password,
-            callbackUrl: '/'
-        });
-        
-        console.log("succesfull")
+    const authenticateUser = async () => {
+        try {
+            const response = await fetch('../api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const { status, statusText } = await response.json();
+            console.log(status);
+
+            if (status === 201) {
+                signIn('credentials', {
+                    email,
+                    password,
+                    callbackUrl: '/'
+                })
+                console.log("succesfull")
+            } else {
+                setError(statusText);
+            }
+
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,18 +60,19 @@ function LogInPage() {
                     placeholder='email@example.com'
                     onChange={handleEmailChange}
                     required
-                    className='bg-transparent text-primary-gray border border-primary-gray rounded-lg p-2'
+                    className={`bg-transparent text-primary-gray border ${error ? `border-[red]` : `border-primary-gray` }  rounded-lg p-2`}
                 />
                 <input
                     type="password"
-                    value={password} 
+                    value={password}
                     placeholder='password'
                     onChange={handlePasswordChange}
                     required
-                    className='bg-transparent text-primary-gray border border-primary-gray rounded-lg p-2'
+                    className={`bg-transparent text-primary-gray border ${error ? `border-[red]` : `border-primary-gray` }  rounded-lg p-2`}
                 />
                 <button type="submit" className='bg-white text-black p-2 rounded-lg w-20'>Log in</button>
                 <Link href='../' className='bg-white text-black p-2 rounded-lg w-20'>Back</Link>
+                {error && <p className='font-gray-text'>{error}</p>}
             </div>
         </form>
     )
