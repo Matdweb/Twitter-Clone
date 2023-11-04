@@ -1,5 +1,6 @@
 import NextAuth, { type NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import findUserByEmail from "@/lib/findUserByEmail";
 
 export const authOptions: NextAuthOptions = {
     session: {
@@ -21,23 +22,15 @@ export const authOptions: NextAuthOptions = {
                     return null
                 }
 
-                // const storagedUser = localStorage.getItem("user");
-                // const user = storagedUser ? JSON.parse(storagedUser) : null;
-
-                // if (!user) {
-                //     return null
-                // }
-
-                if (credentials.email === "mat.dweb28@gmail.com"
-                    && credentials.password === "Bandicoot2580") {
-                    return {
-                        id: '1',
-                        email: credentials.email,
-                        name: 'matias',
-                        randomKey: 'Hey cool'
-                    }
+                const user = await findUserByEmail(credentials.email);
+                console.log(user);
+                if (user) {
+                    return null;
                 }
-                return null
+
+                if (credentials.password === user.password) {
+                    return user;
+                }
             }
         })
     ],
