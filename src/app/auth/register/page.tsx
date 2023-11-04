@@ -1,24 +1,35 @@
 'use client'
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 function Page() {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string>('');
+
+    const router = useRouter();
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(name, email, password);
+        setError("");
         try {
-            const response = await fetch('../api/auth/register',{
+            const response = await fetch('../api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password })
             });
-            const data = await response.json();
-            console.log(data);
-        } catch (e){
+            const { status, statusText } = await response.json();
+
+            if (status === 400) {
+                setError(statusText);
+            } else if (status === 201) {
+                router.push('/');
+            }
+
+        } catch (e) {
             console.log(e);
         }
     }
@@ -66,6 +77,7 @@ function Page() {
                 />
                 <button type="submit" className='bg-white text-black p-2 rounded-lg w-20'>Register</button>
                 <Link href='../' className='bg-white text-black p-2 rounded-lg w-20'>Back</Link>
+                {error && <p className='font-gray-text'>{error}</p>}
             </div>
         </form>
     )
