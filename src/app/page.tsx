@@ -6,6 +6,7 @@ import { increment, decrement } from '@/redux/features/counterSlice';
 import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function Home() {
   const isLoading = useAppSelector(state => state.postsReducer.isLoading);
@@ -52,6 +53,7 @@ export default function Home() {
         <Link className="text-black" href='auth/login'>Log In Page</Link><br />
         <Link className="text-black" href='auth/register'>Register Page</Link>
       </section>
+      {session ? <p className="cursor-pointer" onClick={()=> signOut()}>{session?.user?.name} / Sign Out</p>: ''}
       <section>
         {posts?.map((post) => {
           return (
