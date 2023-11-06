@@ -49,6 +49,7 @@ function Page() {
                     placeholder='name'
                     onChange={(e) => setName(e.target.value)}
                     required
+                    autoComplete="username"
                     className='bg-transparent text-primary-gray border border-primary-gray rounded-lg p-2'
                 />
                 <input
@@ -57,6 +58,7 @@ function Page() {
                     placeholder='email@example.com'
                     onChange={(e)=> setEmail(e.target.value)}
                     required
+                    autoComplete="email"
                     className='bg-transparent text-primary-gray border border-primary-gray rounded-lg p-2'
                 />
                 <input
@@ -65,6 +67,7 @@ function Page() {
                     placeholder='password'
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    autoComplete="current-password"
                     className='bg-transparent text-primary-gray border border-primary-gray rounded-lg p-2'
                 />
                 <button type="submit" className='bg-white text-black p-2 rounded-lg w-20'>Register</button>
