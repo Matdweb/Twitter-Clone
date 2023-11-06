@@ -14,6 +14,10 @@ function Page() {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(name, email, password);
+        await registerUser();
+    }
+
+    const registerUser = async () => {
         setError("");
         try {
             const response = await fetch('../api/register', {
@@ -34,18 +38,6 @@ function Page() {
         }
     }
 
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value);
-    }
-
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    }
-
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    }
-
     return (
         <form onSubmit={onSubmit} className='p-16'>
             <h2 className='font-primary-title-roboto mb-8'>Register User</h2>
@@ -55,7 +47,7 @@ function Page() {
                     type="text"
                     value={name}
                     placeholder='name'
-                    onChange={handleNameChange}
+                    onChange={(e) => setName(e.target.value)}
                     required
                     className='bg-transparent text-primary-gray border border-primary-gray rounded-lg p-2'
                 />
@@ -63,7 +55,7 @@ function Page() {
                     type="email"
                     value={email}
                     placeholder='email@example.com'
-                    onChange={handleEmailChange}
+                    onChange={(e)=> setEmail(e.target.value)}
                     required
                     className='bg-transparent text-primary-gray border border-primary-gray rounded-lg p-2'
                 />
@@ -71,7 +63,7 @@ function Page() {
                     type="password"
                     value={password}
                     placeholder='password'
-                    onChange={handlePasswordChange}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     className='bg-transparent text-primary-gray border border-primary-gray rounded-lg p-2'
                 />

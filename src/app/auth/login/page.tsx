@@ -41,14 +41,6 @@ function LogInPage() {
         }
     }
 
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    }
-
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    }
-
     return (
         <form onSubmit={onSubmit} className='p-16'>
             <h2 className='font-primary-title-roboto mb-8'>Log In</h2>
@@ -58,17 +50,17 @@ function LogInPage() {
                     type="email"
                     value={email}
                     placeholder='email@example.com'
-                    onChange={handleEmailChange}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
-                    className={`bg-transparent text-primary-gray border ${error ? `border-[red]` : `border-primary-gray` }  rounded-lg p-2`}
+                    className={`bg-transparent text-primary-gray border ${error ? `border-[red]` : `border-primary-gray`}  rounded-lg p-2`}
                 />
                 <input
                     type="password"
                     value={password}
                     placeholder='password'
-                    onChange={handlePasswordChange}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
-                    className={`bg-transparent text-primary-gray border ${error ? `border-[red]` : `border-primary-gray` }  rounded-lg p-2`}
+                    className={`bg-transparent text-primary-gray border ${error ? `border-[red]` : `border-primary-gray`}  rounded-lg p-2`}
                 />
                 <button type="submit" className='bg-white text-black p-2 rounded-lg w-20'>Log in</button>
                 <Link href='../' className='bg-white text-black p-2 rounded-lg w-20'>Back</Link>
