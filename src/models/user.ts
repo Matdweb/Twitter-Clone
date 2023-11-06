@@ -1,5 +1,23 @@
 import mongoose, { Schema, models } from "mongoose";
 
+const postSchema = new Schema({
+    userId: {
+        type: Number,
+    },
+    id: {
+        type: Number
+    },
+    title: {
+        type: String,
+    },
+    body: {
+        type: String
+    },
+    imageURL: {
+        type: String
+    }
+})
+
 const userSchema = new Schema(
     {
         name: {
@@ -12,6 +30,10 @@ const userSchema = new Schema(
         },
         password: {
             type: String,
+            required: true
+        },
+        posts: {
+            type: [postSchema],
             required: true
         }
     },

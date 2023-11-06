@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     }
 
     await connectMongoDB();
-    await User.create({ name, email, password });
+    await User.create({ name, email, password, posts: [] });
 
     return Response.json({ status: 201, statusText: 'User creation successfull' });
 }
