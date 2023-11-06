@@ -1,5 +1,4 @@
 import findUserByEmail from "@/lib/findUserByEmail";
-import { signIn } from "next-auth/react";
 
 export async function POST(request: Request) {
     const {
