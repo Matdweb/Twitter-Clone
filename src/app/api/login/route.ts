@@ -1,4 +1,5 @@
 import findUserByEmail from "@/lib/findUserByEmail";
+import bcrypt from 'bcrypt';
 
 export async function POST(request: Request) {
     const {
@@ -7,15 +8,19 @@ export async function POST(request: Request) {
     } = await request.json();
 
     const user = await findUserByEmail(email);
-    
+
     if (user) {
-        if (user.password === password) {
-            return Response.json({status: 201, statusText: 'Authenticated User'});
-        } else {
-            return Response.json({status: 400, statusText: 'Wrong password'})
+        try {
+            if (await bcrypt.compare(password, user.password)) {
+                return Response.json({ status: 201, statusText: 'Authenticated User' });
+            } else {
+                return Response.json({ status: 400, statusText: 'Wrong password' })
+            }
+        } catch (e) {
+            console.log(e);
+            return Response.json({ status: 400, statusText: 'Something went wrong ... Just try again!' })
         }
     } else {
         return Response.json({ status: 400, statusText: 'User doesnt exists' });
     }
-
 }

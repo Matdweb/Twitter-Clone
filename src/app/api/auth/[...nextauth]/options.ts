@@ -1,6 +1,7 @@
 import { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import findUserByEmail from "@/lib/findUserByEmail";
+import bcrypt from "bcrypt";
 
 const authOptions: NextAuthOptions = {
     session: {
@@ -28,8 +29,14 @@ const authOptions: NextAuthOptions = {
                     return null;
                 }
 
-                if (credentials.password === user.password) {
-                    return user;
+                try {
+                    if (await bcrypt.compare(credentials.password, user.password)) {
+                        return user;
+                    }
+                    
+                } catch (e) {
+                    console.log(e);
+                    return null;
                 }
 
                 return null;
