@@ -1,15 +1,18 @@
 'use client'
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { useSession } from "next-auth/react"
 import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
-
+import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function Home() {
   const isLoading = useAppSelector(state => state.postsReducer.isLoading);
   const error = useAppSelector(state => state.postsReducer.error);
   const posts = useAppSelector(state => state.postsReducer.posts);
 
+  const { data: session } = useSession()
   const dispatch = useAppDispatch();
 
   const handleRequest = () => {
@@ -18,6 +21,9 @@ export default function Home() {
     dispatch(fecthPosts(lastPostId));
   }
 
+  useEffect(() => {
+    console.log("session: ", session);
+  }, [session])
 
   useEffect(() => {
     console.log(posts)
@@ -37,8 +43,11 @@ export default function Home() {
         </p>
       </section> */}
       <section className='p-16 pt-4 bg-white'>
-        <button className='btn-edit p-4' onClick={() => handleRequest()}>Request Posts</button>
+        <button className='btn-edit p-4 m-4 ml-0' onClick={() => handleRequest()}>Request Posts</button>
+        <Link className="text-black" href='auth/login'>Log In Page</Link><br />
+        <Link className="text-black" href='auth/register'>Register Page</Link>
       </section>
+      {session ? <p className="cursor-pointer" onClick={()=> signOut()}>{session?.user?.name} / Sign Out</p>: ''}
       <section>
         {posts?.map((post) => {
           return (
@@ -52,7 +61,6 @@ export default function Home() {
         })}
         {isLoading ? <p>Loading ...</p> : ''}
         {error ? <p>There was an loading the posts :(</p> : ''}
-
       </section>
     </>
   )
