@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from '@/redux/hook'
-import { increment, decrement } from '@/redux/features/counterSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
 
@@ -11,7 +10,6 @@ export default function Home() {
   const error = useAppSelector(state => state.postsReducer.error);
   const posts = useAppSelector(state => state.postsReducer.posts);
 
-  const counter = useAppSelector(state => state.counterReducer.counter);
   const dispatch = useAppDispatch();
 
   const handleRequest = () => {
@@ -39,9 +37,6 @@ export default function Home() {
         </p>
       </section> */}
       <section className='p-16 pt-4 bg-white'>
-        <h3 className='font-primary-title-bold text-black'>Counter: {counter}</h3>
-        <button onClick={() => dispatch(increment())} className='btn-primary m-4 ml-0 p-4'>Increment</button>
-        <button onClick={() => dispatch(decrement())} className='btn-secondary m-4 ml-0 p-4'>Decrement</button>
         <button className='btn-edit p-4' onClick={() => handleRequest()}>Request Posts</button>
       </section>
       <section>
