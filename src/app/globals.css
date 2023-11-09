@@ -77,7 +77,7 @@ p, .font-secondary-text {
 }
 
 .btn-edit {
-  @apply btn-primary text-black outline outline-2 outline-black;
+  @apply btn-primary dark:bg-black text-black dark:text-white outline outline-2 outline-black dark:outline-white;
   background-color: white;
 }
 
