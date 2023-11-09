@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import localFont from 'next/font/local'
-import Providers from '@/components/Providers'
+import Providers from '@/components/Providers/Providers'
 import './globals.css'
+import ThemeProvider from '@/components/Providers/ThemeProvider'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -45,7 +46,7 @@ export default function RootLayout({
     <Providers>
       <html lang="en">
         <body className={`${roboto.variable} ${Segoe_UI.variable}`}>
-          {children}
+            {children}
         </body>
       </html>
     </Providers>
