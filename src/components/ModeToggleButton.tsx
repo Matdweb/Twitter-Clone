@@ -19,9 +19,9 @@ function ModeToggleButton({ className }: Props) {
 
   return (
     <div className={className}>
-      {/* <h3 className='font-primary-title-bold text-black dark:text-white mb-10'>
+      <h3 className='font-primary-title-bold text-black dark:text-white mb-10'>
         {theme === 'ligth' ? 'Dark' : 'Ligth'} Mode
-      </h3> */}
+      </h3>
 
       <section className='w-full flex justify-center items-center'>
         <div
