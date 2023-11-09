@@ -1,8 +1,7 @@
 'use client'
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { useSession } from "next-auth/react"
-import { useAppDispatch, useAppSelector } from '@/redux/hook'
-import { increment, decrement } from '@/redux/features/counterSlice';
 import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
 import Link from "next/link";
@@ -14,8 +13,6 @@ export default function Home() {
   const posts = useAppSelector(state => state.postsReducer.posts);
 
   const { data: session } = useSession()
-
-  const counter = useAppSelector(state => state.counterReducer.counter);
   const dispatch = useAppDispatch();
 
   const handleRequest = () => {
@@ -46,9 +43,6 @@ export default function Home() {
         </p>
       </section> */}
       <section className='p-16 pt-4 bg-white'>
-        <h3 className='font-primary-title-bold text-black'>Counter: {counter}</h3>
-        <button onClick={() => dispatch(increment())} className='btn-primary m-4 ml-0 p-4'>Increment</button>
-        <button onClick={() => dispatch(decrement())} className='btn-secondary m-4 ml-0 p-4'>Decrement</button>
         <button className='btn-edit p-4 m-4 ml-0' onClick={() => handleRequest()}>Request Posts</button>
         <Link className="text-black" href='auth/login'>Log In Page</Link><br />
         <Link className="text-black" href='auth/register'>Register Page</Link>
@@ -67,7 +61,6 @@ export default function Home() {
         })}
         {isLoading ? <p>Loading ...</p> : ''}
         {error ? <p>There was an loading the posts :(</p> : ''}
-
       </section>
     </>
   )
