@@ -6,6 +6,7 @@ import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import ModeToggleButton from "@/components/ModeToggleButton";
 
 export default function Home() {
   const isLoading = useAppSelector(state => state.postsReducer.isLoading);
@@ -42,12 +43,15 @@ export default function Home() {
           4-kursni tugatgunimcha kamida bitta biznesim bo&apos;lishini, uylanish uchun moddiy jihatdan to&apos;la-to&apos;kis tayyor bo&apos;lishni, sog&apos;lik va jismoniy holatni normallashtirishni reja qildim
         </p>
       </section> */}
-      <section className='p-16 pt-4 bg-white'>
+      <section className='p-16 pt-4 bg-white text-black dark:bg-black dark:text-white'>
         <button className='btn-edit p-4 m-4 ml-0' onClick={() => handleRequest()}>Request Posts</button>
-        <Link className="text-black" href='auth/login'>Log In Page</Link><br />
-        <Link className="text-black" href='auth/register'>Register Page</Link>
+        <Link href='auth/login'>Log In Page</Link><br />
+        <Link href='auth/register'>Register Page</Link>
       </section>
-      {session ? <p className="cursor-pointer" onClick={()=> signOut()}>{session?.user?.name} / Sign Out</p>: ''}
+      {session ? <p className="cursor-pointer" onClick={() => signOut()}>{session?.user?.name} / Sign Out</p> : ''}
+      <section className='w-full h-80 flex justify-center items-center bg-white dark:bg-black'>
+        <ModeToggleButton />
+      </section>
       <section>
         {posts?.map((post) => {
           return (
