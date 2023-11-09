@@ -44,9 +44,16 @@ export default function RootLayout({
 }) {
   return (
     <Providers>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={`${roboto.variable} ${Segoe_UI.variable}`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             {children}
+          </ThemeProvider>
         </body>
       </html>
     </Providers>
