@@ -27,7 +27,7 @@ function LogInPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
-            const { status, statusText, email: responseEmail, password: responsePassword  } = await response.json();
+            const { status, statusText, email: responseEmail, password: responsePassword } = await response.json();
             console.log(status);
 
             if (status === 201) {
@@ -76,9 +76,9 @@ function LogInPage() {
                 <button type="submit" className='btn-primary w-full py-5 mb-10'>
                     <h3 className='font-primary-title-bold text-white'>Log in</h3>
                 </button>
-                <div className='w-full flex justify-between items-center'>
-                    <Link href="#" className='text-primary-blue dark:text-primary-blue'>Forgot password?</Link>
-                    <Link href="../auth/register" className='text-primary-blue dark:text-primary-blue'>Sign up to Twitter</Link>
+                <div className='w-full flex justify-between items-center text-primary-blue dark:text-primary-blue'>
+                    <Link href="#" className=''>Forgot password?</Link>
+                    <Link href="../auth/register" className=''>Sign up to Twitter</Link>
                 </div>
             </form>
         </section>
