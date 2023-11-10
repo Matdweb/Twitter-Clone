@@ -2,7 +2,9 @@
 import { useTheme } from "next-themes"
 import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs'
 
-function ModeToggleButton() {
+type ButtonProps = React.ComponentProps<"button">;
+
+function ModeToggleButton({ className }: ButtonProps) {
   const { theme, setTheme } = useTheme();
 
   const toggleMode = () => {
@@ -14,7 +16,7 @@ function ModeToggleButton() {
   }
 
   return (
-    <div>
+    <div className={className}>
       <h3 className='font-primary-title-bold text-black dark:text-white mb-10'>
         {theme === 'ligth' ? 'Dark' : 'Ligth'} Mode
       </h3>
@@ -25,8 +27,8 @@ function ModeToggleButton() {
           onClick={() => toggleMode()}
         >
           {theme === 'ligth' ?
-            <BsFillMoonFill style={{color: "white", fontSize: "2.5em"}} /> :
-            <BsFillSunFill style={{color: "black", fontSize: "2.5em"}} />}
+            <BsFillMoonFill style={{ color: "white", fontSize: "2.5em" }} /> :
+            <BsFillSunFill style={{ color: "black", fontSize: "2.5em" }} />}
         </div>
       </section>
     </div>

@@ -12,15 +12,15 @@ export async function POST(request: Request) {
     if (user) {
         try {
             if (await bcrypt.compare(password, user.password)) {
-                return Response.json({ status: 201, statusText: 'Authenticated User' });
+                return Response.json({ status: 201, statusText: 'Authenticated User', email: true, password: true });
             } else {
-                return Response.json({ status: 400, statusText: 'Wrong password' })
+                return Response.json({ status: 400, statusText: 'Wrong password', email: true, password: false })
             }
         } catch (e) {
             console.log(e);
             return Response.json({ status: 400, statusText: 'Something went wrong ... Just try again!' })
         }
     } else {
-        return Response.json({ status: 400, statusText: 'User doesnt exists' });
+        return Response.json({ status: 400, statusText: 'User doesnt exists', email: false, password: true });
     }
 }
