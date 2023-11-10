@@ -2,11 +2,9 @@
 import { useTheme } from "next-themes"
 import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs'
 
-interface Props {
-  className?: string
-}
+type ButtonProps = React.ComponentProps<"button">;
 
-function ModeToggleButton({ className }: Props) {
+function ModeToggleButton({ className }: ButtonProps) {
   const { theme, setTheme } = useTheme();
 
   const toggleMode = () => {
