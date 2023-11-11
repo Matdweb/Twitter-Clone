@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { useSession } from "next-auth/react"
 import { fecthPosts } from '@/redux/features/postsSlice'
