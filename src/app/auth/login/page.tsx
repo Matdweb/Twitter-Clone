@@ -5,6 +5,7 @@ import Link from "next/link"
 import ModeToggleButton from "@/components/ModeToggleButton"
 import { BsTwitter } from 'react-icons/bs'
 import Input from "@/components/Input"
+import TwitterIcon from "@/components/TwitterIcon"
 
 function LogInPage() {
 
@@ -16,7 +17,6 @@ function LogInPage() {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(email, password);
         await authenticateUser();
     }
 
@@ -51,11 +51,11 @@ function LogInPage() {
     return (<>
         <section className='w-full min-h-screen flex justify-start items-center flex-col flex-nowrap bg-white dark:bg-black' >
             <form onSubmit={onSubmit} className='w-full sm:w-[30rem] p-4 sm:p-3 pt-0 flex justify-start items-start flex-col flex-nowrap mt-14 text-black dark:text-white'>
-                <BsTwitter style={{ color: "#1D9BF0", fontSize: "3.2rem" }} />
+                <TwitterIcon />
                 <h2 className='font-primary-title-roboto my-8 text-black dark:text-white'>Log in to Twitter</h2>
-                {emailError ? <p className='w-full text-primary-red dark:text-primary-red my-2'>{error}</p> : ''}
+                {emailError && <p className='w-full text-primary-red dark:text-primary-red my-2'>{error}</p>}
                 <Input
-                    type="email"
+                    type="text"
                     value={email}
                     placeholder='Phone number, email address'
                     onChange={(e) => setEmail(e.target.value)}
@@ -63,7 +63,7 @@ function LogInPage() {
                     autoComplete="email"
                     error={emailError}
                 />
-                {passwordError ? <p className='w-full text-primary-red dark:text-primary-red my-2'>{error}</p> : ''}
+                {passwordError && <p className='w-full text-primary-red dark:text-primary-red my-2'>{error}</p>}
                 <Input
                     type="password"
                     value={password}
