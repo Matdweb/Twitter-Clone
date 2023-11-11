@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 
 export async function POST(request: Request) {
     const {
+        username,
         name,
         email,
         password
@@ -12,14 +13,12 @@ export async function POST(request: Request) {
 
     const hashedPassword = await bcrypt.hash(password,10);
 
-    console.log(name, email, hashedPassword);
-
     if (await findUserByEmail(email)) {
-        return Response.json({ status: 400, statusText: 'There is already a User' });
+        return Response.json({ status: 400, statusText: 'The user already exists' });
     }
 
     await connectMongoDB();
-    await User.create({ name, email, password: hashedPassword, posts: [] });
+    await User.create({ username, name, email, password: hashedPassword, posts: [] });
 
     return Response.json({ status: 201, statusText: 'User creation successfull' });
 }
