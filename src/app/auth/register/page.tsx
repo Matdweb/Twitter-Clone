@@ -1,6 +1,5 @@
 'use client'
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Input from '@/components/Input';
 import ModeToggleButton from '@/components/ModeToggleButton';
@@ -42,14 +41,32 @@ function Page() {
         }
     }
 
+    const handleEmailorPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (registerWith === 'phoneNumber') {
+            if (/^[^a-zA-Z]+$/.test(value)) {
+                setError('')
+            } else {
+                setError('This is not a valid phone-number (only numbers)');
+            }
+        }
+        setEmail(value);
+    }
+
     const toggleRegisterWith = () => {
-        if(registerWith === 'email') {
-            setRegisterWith('username');
-        } else { 
+        if (registerWith === 'email') {
+            setRegisterWith('phoneNumber');
+        } else {
             setRegisterWith('email')
         }
         setEmail('');
     }
+
+    useEffect(() => {
+        if (email.length === 0) {
+            setError('');
+        }
+    }, [email])
 
     return (<>
         <section className='w-full min-h-screen flex justify-start items-center flex-col flex-nowrap bg-white dark:bg-black'>
@@ -87,7 +104,7 @@ function Page() {
                             type="email"
                             value={email}
                             placeholder='Email address'
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => handleEmailorPhoneChange(e)}
                             required
                             autoComplete="email"
                             error={error}
@@ -97,7 +114,7 @@ function Page() {
                             type="text"
                             value={email}
                             placeholder='Phone number'
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => handleEmailorPhoneChange(e)}
                             required
                             autoComplete="text"
                             error={error}
@@ -116,7 +133,7 @@ function Page() {
                         className='underline underline-offset-2 cursor-pointer mb-4 text-primary-blue dark:text-primary-blue'
                         onClick={() => toggleRegisterWith()}
                     >
-                        Use {registerWith === 'email' ? 'Phone Number': 'Email'}
+                        Use {registerWith === 'email' ? 'Phone Number' : 'Email'}
                     </p>
                     <button type="submit" className='btn-primary w-full py-5 mb-10'>
                         <h3 className='font-primary-title-bold text-white'>Register</h3>
