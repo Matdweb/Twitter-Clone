@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Input from '@/components/Input';
+import FormInput from '@/components/FormInput';
 import ModeToggleButton from '@/components/ModeToggleButton';
 import TwitterIcon from '@/components/TwitterIcon';
 
@@ -78,7 +78,7 @@ function Page() {
                 <h2 className='font-primary-title-roboto mb-8 text-black dark:text-white'>Create an account</h2>
                 <div className='w-full flex justify-center items-start flex-col flex-nowrap gap-3'>
                     <div className='w-full flex justify-between items-center flex-row flex-wrap'>
-                        <Input
+                        <FormInput
                             type="text"
                             value={name}
                             placeholder='Full Name'
@@ -88,7 +88,7 @@ function Page() {
                             className='sm:max-w-[19rem] w-full'
                             error={false}
                         />
-                        <Input
+                        <FormInput
                             type="text"
                             value={username}
                             placeholder='Username'
@@ -101,7 +101,7 @@ function Page() {
                     </div>
                     {error && <p className='w-full text-primary-red dark:text-primary-red'>{error}</p>}
                     {registerWith === 'email' ?
-                        <Input
+                        <FormInput
                             type="email"
                             value={email}
                             placeholder='Email address'
@@ -111,7 +111,7 @@ function Page() {
                             error={error}
                         />
                         :
-                        <Input
+                        <FormInput
                             type="text"
                             value={email}
                             placeholder='Phone number'
@@ -120,7 +120,7 @@ function Page() {
                             autoComplete="text"
                             error={error}
                         />}
-                    <Input
+                    <FormInput
                         type="password"
                         value={password}
                         placeholder='Password'
