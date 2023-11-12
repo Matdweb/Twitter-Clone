@@ -17,6 +17,7 @@ function Page() {
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if(error) return;
         await registerUser();
     }
 
@@ -135,9 +136,10 @@ function Page() {
                     >
                         Use {registerWith === 'email' ? 'Phone Number' : 'Email'}
                     </p>
-                    <button type="submit" className='btn-primary w-full py-5 mb-10'>
+                    <button type="submit" className='btn-primary w-full py-5 mb-1'>
                         <h3 className='font-primary-title-bold text-white'>Register</h3>
                     </button>
+                    {error && <p className='font-gray-text'>Not possible :( There is an error</p>}
                 </div>
             </form>
         </section>
