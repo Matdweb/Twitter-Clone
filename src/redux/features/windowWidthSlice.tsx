@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const windowWidthSlice = createSlice({
     name: "windowWidth",
-    initialState: window?.innerWidth || 0,
+    initialState: 0,
     reducers: {
         setWindowWidth: (state: number, action) => {
             return state = action.payload
