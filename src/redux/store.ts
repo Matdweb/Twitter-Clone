@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import postsReducer from './features/postsSlice'
+import windowWidthReducer from "./features/windowWidthSlice";
 
 export const store = configureStore({ 
     reducer: {
-        postsReducer
+        postsReducer,
+        windowWidth: windowWidthReducer
     }
 });
 
