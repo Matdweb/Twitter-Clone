@@ -18,6 +18,10 @@ function Home() {
   }
 
   useEffect(() => {
+    dispatch(setWindowWidth(window.innerWidth));
+  });
+
+  useEffect(() => {
     console.log(windowWidth);
     const handleResize = () => {
       dispatch(setWindowWidth(window.innerWidth));
