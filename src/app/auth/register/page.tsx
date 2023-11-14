@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import FormInput from '@/components/FormInput';
+import FormInput from '@/components/Form/FormInput';
 import ModeToggleButton from '@/components/ModeToggleButton';
 import TwitterIcon from '@/components/TwitterIcon';
 

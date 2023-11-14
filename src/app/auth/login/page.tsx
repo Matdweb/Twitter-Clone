@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react"
 import Link from "next/link"
 import ModeToggleButton from "@/components/ModeToggleButton"
 import { BsTwitter } from 'react-icons/bs'
-import FormInput from "@/components/FormInput"
+import FormInput from "@/components/Form/FormInput"
 import TwitterIcon from "@/components/TwitterIcon"
 
 function LogInPage() {
