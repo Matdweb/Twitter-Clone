@@ -1,13 +1,11 @@
 import React from 'react'
 import { BsTwitter } from 'react-icons/bs'
 
-interface Props {
-  fontSize?: string
-}
+type Props = React.CSSProperties
 
-function TwitterIcon({ fontSize = "3.2rem" }: Props) {
+function TwitterIcon({ fontSize = "3.2rem", ...rest }: Props) {
   return (
-    <BsTwitter style={{ color: "#1D9BF0", fontSize }} />
+    <BsTwitter style={{ color: "#1D9BF0", fontSize, ...rest }} />
   )
 }
 
