@@ -5,9 +5,9 @@ function Footer() {
 
     return (
         <div className='py-6 flex justify-between itmes-center flex-row flex-wrap' >
-            {options.map((option) => {
+            {options.map((option,i) => {
                 return (
-                    <Link href='#'>
+                    <Link key={i} href='#'>
                         <p className='font-gray-text '>{option}</p>
                     </Link>
                 )
