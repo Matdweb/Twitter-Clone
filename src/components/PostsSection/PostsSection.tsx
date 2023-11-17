@@ -15,11 +15,14 @@ function PostsSection() {
             <header className='h-11 w-full flex justify-between items-center flex-row flex-nowrap'>
                 {
                     responsiveMenu ?
-                        <div className='w-8 h-8 bg-black dark:bg-white rounded-full flex justify-center items-center'>
-                            <FaArrowRight style={{fontSize: "1rem"}} />
+                        <div
+                            className='w-8 h-8 ml-1 outline outline-black dark:outline-white rounded-full flex justify-center items-center cursor-pointer'
+                            onClick={() => dispatch(toggleResponsiveMenu())}
+                        >
+                            <FaArrowRight style={{ fontSize: "1rem" }} />
                         </div>
                         :
-                        <UserImage className='w-8 h-8 outline outline-2 outline-offset-2 outline-black dark:outline-white cursor-pointer ml-5' onClick={() => dispatch(toggleResponsiveMenu())} />
+                        <UserImage className='w-8 h-8 outline outline-2 outline-offset-2 outline-black dark:outline-white cursor-pointer ml-5' onClick={() => windowWidth <= 640 && dispatch(toggleResponsiveMenu())} />
                 }
                 <TwitterIcon fontSize="1.6rem" />
                 <BsStars style={{ fontSize: "1.6rem", color: "theme(colors.primary.blue)", marginRight: "1.25rem" }} />
