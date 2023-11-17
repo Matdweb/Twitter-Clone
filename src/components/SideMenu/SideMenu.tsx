@@ -35,7 +35,7 @@ function SideMenu() {
     }
 
     return (
-        <section className={`${windowWidth < 640 && !responsiveMenu ? `hidden` : windowWidth < 1024 ? `w-16 p-2` : `w-1/4`} ${responsiveMenu && `min-w-[16rem]`} min-h-screen outline outline-2 outline-black dark:outline-white rounded-md p-1 m-1 shrink flex justify-between items-start flex-col flex-nowrap`}>
+        <section className={`${windowWidth < 640 && !responsiveMenu ? `hidden` : windowWidth < 1024 && `w-16 p-2`} ${responsiveMenu && `min-w-[16rem]`} min-h-screen outline outline-2 outline-black dark:outline-white rounded-md p-1 m-1 shrink flex justify-between items-start flex-col flex-nowrap`}>
             {
                 responsiveMenu &&
                 <UserAccout />
