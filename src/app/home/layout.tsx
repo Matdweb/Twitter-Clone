@@ -27,7 +27,7 @@ function HomeLayout({
     }, [])
 
     return (
-        <section className='w-full min-h-screen bg-white dark:bg-black text-black dark:text-white flex justify-start items-start overflow-x-hidden'>
+        <section className='w-full min-h-screen bg-white dark:bg-black flex justify-start items-start overflow-x-hidden'>
             <SideMenu />
 
             {children}
