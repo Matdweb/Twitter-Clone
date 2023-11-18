@@ -1,3 +1,5 @@
+'use client'
+import { useState, useRef, useEffect } from "react";
 import UserImage from "../UserImage"
 import { LuImage } from "react-icons/lu";
 import { MdOutlineGifBox } from "react-icons/md";
@@ -6,23 +8,47 @@ import { GrEmoji } from "react-icons/gr";
 import { FaRegCalendarMinus } from "react-icons/fa";
 
 function CreatePost() {
+    const textArea = useRef<HTMLTextAreaElement>(null);
+    const [postText, setPostText] = useState<string>('');
+
+    const iconStyles = {
+        fontSize: "1.5rem",
+        cursor: " pointer",
+    }
+
+    const resizeTextArea = () => {
+        textArea.current.style.height = "auto"
+        textArea.current.style.height = textArea.current?.scrollHeight + "px";
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        resizeTextArea();
+        setPostText(e.target.value);
+    }
+
     return (
-        <div className='w-full h-40 p-5 flex justify-start items-center flex-row flex-nowrap outline outline-[red]'>
-            <div className='w-8 h-full flex justify-center items-start'>
+        <section className='w-full h-full min-h-[10rem] overflow-visible p-5 flex justify-start items-start flex-row flex-nowrap outline outline-[red]'>
+            <div className='w-8 h-full'>
                 <UserImage />
             </div>
-            <div className='h-full ml-4 flex justify-center items-start flex-col flex-nowrap'>
-                <textarea name="post_text" id="post_text_area" placeholder="What’s happening" className='max-w-[24rem] min-h-[4.5rem]'>
-                </textarea>
-                <div className='text-primary-blue w-52 flex justify-between items-center mt-4'>
-                    <LuImage style={{fontSize: "1.5rem"}} />
-                    <MdOutlineGifBox style={{fontSize: "1.5rem"}} />
-                    <IoStatsChartSharp style={{fontSize: "1.5rem"}} />
-                    <GrEmoji style={{fontSize: "1.5rem"}} />
-                    <FaRegCalendarMinus style={{fontSize: "1.5rem"}} />
+            <div className='h-full ml-4 flex justify-between items-start flex-col flex-nowrap'>
+                <textarea
+                    name="post_text"
+                    id="post_text_area"
+                    placeholder="What’s happening"
+                    className='w-[24rem] h-6 mt-1 bg-transparent focus:outline-none resize-none'
+                    onChange={(e) => handleChange(e)}
+                    ref={textArea}
+                />
+                <div className='text-primary-blue w-52 flex justify-between items-center mt-12'>
+                    <LuImage style={iconStyles} />
+                    <MdOutlineGifBox style={iconStyles} />
+                    <IoStatsChartSharp style={iconStyles} />
+                    <GrEmoji style={iconStyles} />
+                    <FaRegCalendarMinus style={iconStyles} />
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
