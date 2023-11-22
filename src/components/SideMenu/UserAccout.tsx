@@ -10,7 +10,7 @@ function UserAccout() {
     return (
         <>
             <div
-                className={`rounded-full mt-3 cursor-pointer ${windowWidth > 1024 ? `w-60 p-3 hover:bg-primary-gray dark:hover:bg-primary-dark-gray` : `w-full`} flex ${responsiveMenu ? `justify-start items-start flex-col pl-3` : `justify-between items-center flex-row`}`}
+                className={`rounded-full mt-3 cursor-pointer w-full lg:w-60 lg:p-3 lg:hover:bg-primary-gray lg:dark:hover:bg-primary-dark-gray flex ${responsiveMenu ? `justify-start items-start flex-col pl-3` : `justify-between items-center flex-row`}`}
                 onClick={responsiveMenu ? () => dispatch(toggleResponsiveMenu()) : () => { }}
             >
                 {

@@ -14,7 +14,7 @@ function MenuOption({ href = "#", name, icon, onClick, active }: Props) {
     return (
         <Link
             href={href}
-            className={`p-3.5 pl-3 ${windowWidth > 1024 || responsiveMenu && `ml-1`} rounded-full flex justify-start items-center flex-nowrap flex-row hover:bg-primary-gray dark:hover:bg-primary-dark-gray/20`}
+            className={`p-3.5 pl-3 ${responsiveMenu && `ml-1`} lg:ml-1 rounded-full flex justify-start items-center flex-nowrap flex-row hover:bg-primary-gray dark:hover:bg-primary-dark-gray/20`}
             onClick={onClick}
         >
             {active ? icon.bold : icon.ligth}

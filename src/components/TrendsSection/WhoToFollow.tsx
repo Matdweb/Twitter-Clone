@@ -1,9 +1,6 @@
-'use client'
-import { useAppSelector } from "@/redux/hook";
 import Link from "next/link";
 
 function WhoToFollow() {
-    const windowWidth = useAppSelector(state => state.windowWidth);
     const users = [
         {
             id: 0,
@@ -25,7 +22,7 @@ function WhoToFollow() {
 
             {users?.map(({ id, username, name, profileImg }) => {
                 return (
-                    <div key={id} className={`rounded-full cursor-pointer w-full p-3 pb-6 flex justify-between items-center flex-row`}>
+                    <div key={id} className='rounded-full cursor-pointer w-full p-3 pb-6 flex justify-between items-center flex-row'>
                         <div className='flex justify-start items-center flex-row flex-nowrap'>
                             <img
                                 src={profileImg}
@@ -37,12 +34,9 @@ function WhoToFollow() {
                                 <p className='font-gray-text'>@{username}</p>
                             </div>
                         </div>
-                        {
-                            windowWidth > 1024 &&
-                            <button className='btn-secondary px-4 py-2'>
-                                <p className='font-bold text-white dark:text-white'>Follow</p>
-                            </button>
-                        }
+                        <button className='hidden lg:block btn-secondary px-4 py-2'>
+                            <p className='font-bold text-white dark:text-white'>Follow</p>
+                        </button>
                     </div>
                 )
             })}
