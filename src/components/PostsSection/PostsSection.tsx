@@ -1,3 +1,4 @@
+'use client'
 import { useAppSelector } from '@/redux/hook';
 import TwitterHeader from '../Header/TwitterHeader';
 import CreatePost from './CreatePost';
