@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import FormInput from '@/components/Form/FormInput';
-import ModeToggleButton from '@/components/ModeToggleButton';
+import ModeToggleButton from '@/components/Buttons/ModeToggleButton';
 import TwitterIcon from '@/components/TwitterIcon';
 
 function Page() {

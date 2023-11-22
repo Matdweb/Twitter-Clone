@@ -6,7 +6,7 @@ import { fecthPosts } from '@/redux/features/postsSlice'
 import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import ModeToggleButton from "@/components/ModeToggleButton";
+import ModeToggleButton from "@/components/Buttons/ModeToggleButton";
 
 export default function Home() {
   const isLoading = useAppSelector(state => state.postsReducer.isLoading);
