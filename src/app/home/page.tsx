@@ -1,4 +1,3 @@
-'use client'
 import PostsSection from '@/components/PostsSection/PostsSection';
 
 function Home() {
