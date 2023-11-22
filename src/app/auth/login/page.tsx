@@ -2,8 +2,7 @@
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import ModeToggleButton from "@/components/ModeToggleButton"
-import { BsTwitter } from 'react-icons/bs'
+import ModeToggleButton from "@/components/Buttons/ModeToggleButton"
 import FormInput from "@/components/Form/FormInput"
 import TwitterIcon from "@/components/TwitterIcon"
 
@@ -73,7 +72,11 @@ function LogInPage() {
                     autoComplete="current-password"
                     error={passwordError}
                 />
-                <button type="submit" className='btn-primary w-full py-5 mb-10'>
+                <button
+                    disabled={emailError || passwordError}
+                    type="submit"
+                    className='btn-primary w-full py-5 mb-10'
+                >
                     <h3 className='font-primary-title-bold text-white'>Log in</h3>
                 </button>
                 <div className='w-full flex justify-between items-center text-primary-blue dark:text-primary-blue'>
