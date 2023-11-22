@@ -61,6 +61,10 @@ p, .font-secondary-text {
   transition: transform .8s;
 }
 
+.btn-primary:disabled {
+  @apply opacity-30 hover:opacity-30 active:scale-110 cursor-not-allowed transition-none;
+}
+
 .btn-primary:hover {
   opacity: .8;
 }
