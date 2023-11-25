@@ -22,6 +22,12 @@ export default function Home() {
     dispatch(fecthPosts(lastPostId));
   }
 
+  const handleLoad = () => {
+    console.log("Loaded");
+    console.log("Loading new posts")
+    handleRequest();
+  }
+
   useEffect(() => {
     console.log("session: ", session);
   }, [session])
@@ -52,10 +58,10 @@ export default function Home() {
       <section className='w-full h-80 flex justify-center items-center bg-white dark:bg-black'>
         <ModeToggleButton />
       </section>
-      <section>
+      <section onLoadedData={()=> console.log("Loaded everthing")}>
         {posts?.map((post) => {
           return (
-            <article key={post.id} className='flex flex-col p-8'>
+            <article key={post.id} className='flex flex-col p-8' onLoad={() => post.id===posts.length && handleLoad() }>
               <p>{post.id}</p>
               <h3 className='font-primary-title-bold'>{post.title}</h3>
               <p>{post.body}</p>
