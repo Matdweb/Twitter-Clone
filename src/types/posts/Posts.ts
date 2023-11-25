@@ -1,7 +1,10 @@
 export type Post = {
-    userId: number,
+    userId?: number,
     id: number,
     title: string,
     body: string,
-    imageURL?: string
+    imageURL?: string,
+    likes: number,
+    comments: [],
+    retweets: number
   }
