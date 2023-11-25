@@ -1,7 +1,7 @@
 'use client'
 import { useState, useRef } from "react";
-import UserImage from "../UserImage"
-import { bottomMenuOptions } from "./BottomMenuOptions";
+import UserImage from "../../UserImage"
+import { bottomCreatePostOptions } from "./BottomCreatePostOptions";
 
 function CreatePost() {
     const textArea = useRef<HTMLTextAreaElement>(null);
@@ -34,7 +34,7 @@ function CreatePost() {
                 />
                 <div className='w-full flex justify-between items-center flex-row flex-nowrap mt-12'>
                     <div className='text-primary-blue w-52 flex justify-between items-center'>
-                        {bottomMenuOptions.map(({ Icon, id, style, onClick }) => {
+                        {bottomCreatePostOptions.map(({ Icon, id, style, onClick }) => {
                             return <Icon key={id} style={style} onClick={() => onClick()} />
                         })}
                     </div>
