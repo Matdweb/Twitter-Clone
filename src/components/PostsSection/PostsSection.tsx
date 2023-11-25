@@ -5,7 +5,7 @@ import { toggleResponsiveMenu } from '@/redux/features/responsiveMenuSlice';
 import TwitterHeader from '../Header/TwitterHeader';
 import CreatePost from './CreatePost/CreatePost';
 import Post from './Post/Post';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 function PostsSection() {
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
@@ -20,14 +20,8 @@ function PostsSection() {
         dispatch(fecthPosts(lastPostId));
     }
 
-    const isMounted = useRef(false);
-
     useEffect(() => {
-        if (!isMounted.current) {
-            isMounted.current = true;
-        } else {
-            handleRequest();
-        }
+        handleRequest();
     }, []);
 
     return (
