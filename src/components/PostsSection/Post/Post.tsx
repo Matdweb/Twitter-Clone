@@ -2,7 +2,6 @@
 import { bottomPostOptions } from "./BottomPostOptions";
 import UserImage from "../../UserImage";
 import { useState } from "react";
-import { useAppSelector } from "@/redux/hook";
 import type { Post } from "@/types/posts/Posts";
 import Image from "next/image";
 import PostOption from "./PostOption";
@@ -16,7 +15,6 @@ interface Props {
 
 function Post({ postContent, onLoad }: Props) {
     const [bottomOptions, setBottomOptions] = useState<PostOptions[]>(bottomPostOptions);
-    const posts = useAppSelector(state => state.postsReducer.posts);
 
     const handleClick = (idClicked: number) => {
         const options = bottomOptions.map(({ id, active, ...rest }) => {
