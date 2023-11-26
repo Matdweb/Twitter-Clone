@@ -34,9 +34,9 @@ function PostOption({
             <div className='flex justify-start items-center flex-row flex-nowrap cursor-pointer'>
                 {
                     active && ActiveIcon ?
-                        <ActiveIcon.Icon style={ActiveIcon.style} />
+                        <ActiveIcon.Icon style={ActiveIcon.style} className='active:animate-bounce' />
                         :
-                        <Icon.Icon style={Icon.style} />
+                        <Icon.Icon style={Icon.style} className='active:animate-bounce'  />
                 }
                 {
                     active != undefined &&
