@@ -35,13 +35,12 @@ function SideMenu() {
     }
 
     return (
-        <section className={`${responsiveMenu ? `flex min-w-[16rem]` : `hidden sm:flex`} w-16 lg:w-auto min-h-screen p-1 m-1 sm:flex shrink justify-between items-start flex-col flex-nowrap`}>
+        <section className={`${responsiveMenu ? `flex min-w-[16rem]` : `hidden sm:flex`} w-16 lg:w-auto max-h-screen min-h-screen p-1 m-1 sm:flex shrink justify-between items-start flex-col flex-nowrap overflow-y-scroll`}>
             {
                 responsiveMenu &&
                 <UserAccout />
             }
             <nav className={`w-full ${!responsiveMenu && `lg:w-60`} max-h-[37rem] flex items-start flex-nowrap flex-col`}>
-
                 {
                     !responsiveMenu &&
                     <TwitterIcon fontSize="2.5rem" marginLeft={windowWidth > 1024 ? "1rem" : "0.3rem"} marginBottom="2rem" marginTop="2rem" />
