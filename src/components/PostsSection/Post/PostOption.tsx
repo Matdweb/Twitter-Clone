@@ -32,12 +32,12 @@ function PostOption({
             onClick={() => { clickable && handleClick() }}
         >
             <div className='flex justify-start items-center flex-row flex-nowrap cursor-pointer'>
-                {
-                    active && ActiveIcon ?
-                        <ActiveIcon.Icon style={ActiveIcon.style} className='active:animate-bounce' />
-                        :
-                        <Icon.Icon style={Icon.style} className='active:animate-bounce'  />
-                }
+                    {
+                        active && ActiveIcon ?
+                            <ActiveIcon.Icon style={ActiveIcon.style} className="animate-bounce" />
+                            :
+                            <Icon.Icon style={Icon.style} />
+                    }
                 {
                     active != undefined &&
                     <p className='ml-2 text-primary-dark-gray dark:text-primary-gray'>
