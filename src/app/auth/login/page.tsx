@@ -2,9 +2,8 @@
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import ModeToggleButton from "@/components/ModeToggleButton"
-import { BsTwitter } from 'react-icons/bs'
-import Input from "@/components/Input"
+import ModeToggleButton from "@/components/Buttons/ModeToggleButton"
+import FormInput from "@/components/Form/FormInput"
 import TwitterIcon from "@/components/TwitterIcon"
 
 function LogInPage() {
@@ -54,7 +53,7 @@ function LogInPage() {
                 <TwitterIcon />
                 <h2 className='font-primary-title-roboto my-8 text-black dark:text-white'>Log in to Twitter</h2>
                 {emailError && <p className='w-full text-primary-red dark:text-primary-red my-2'>{error}</p>}
-                <Input
+                <FormInput
                     type="text"
                     value={email}
                     placeholder='Phone number, email address'
@@ -64,7 +63,7 @@ function LogInPage() {
                     error={emailError}
                 />
                 {passwordError && <p className='w-full text-primary-red dark:text-primary-red my-2'>{error}</p>}
-                <Input
+                <FormInput
                     type="password"
                     value={password}
                     placeholder='Password'

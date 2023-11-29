@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        bounce: 'bounce .8s ease-in-out 2',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -19,10 +22,11 @@ const config: Config = {
         segoe_ui: ['var(--font-segoe-ui)'],
       },
       colors: {
-        primary :{
+        primary: {
           blue: '#1D9BF0',
           gray: '#E7ECF0',
-          red: '#EF1C5C'
+          red: '#EF1C5C',
+          ['dark-gray']: '#6E767D'
         },
         'black': '#000',
         'white': '#FFF'

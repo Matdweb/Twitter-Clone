@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import postsReducer from './features/postsSlice'
+import windowWidthReducer from "./features/windowWidthSlice";
+import responsiveMenuReducer from "./features/responsiveMenuSlice";
 
 export const store = configureStore({ 
     reducer: {
-        postsReducer
+        postsReducer,
+        windowWidth: windowWidthReducer,
+        responsiveMenu: responsiveMenuReducer
     }
 });
 

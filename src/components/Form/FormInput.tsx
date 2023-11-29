@@ -4,7 +4,7 @@ type InputProps = React.ComponentProps<"input"> & {
     error: string | boolean
 };
 
-export default function Input({ error, className="", ...rest }: InputProps) {
+export default function FormInput({ error, className="", ...rest }: InputProps) {
     return (
         <input
             {...rest}
