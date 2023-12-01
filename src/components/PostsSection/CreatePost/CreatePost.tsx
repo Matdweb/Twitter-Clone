@@ -2,10 +2,12 @@
 import { useState, useRef } from "react";
 import UserImage from "../../UserImage"
 import { bottomCreatePostOptions } from "./BottomCreatePostOptions";
+import { useAppSelector } from "@/redux/hook";
 
 function CreatePost() {
     const textArea = useRef<HTMLTextAreaElement>(null);
     const [postText, setPostText] = useState<string>('');
+    const user = useAppSelector(state => state.userReducer.user);
 
     const resizeTextArea = () => {
         textArea.current ? textArea.current.style.height = "auto" : '';
@@ -20,7 +22,7 @@ function CreatePost() {
     return (
         <section className='w-full h-full min-h-[10rem] overflow-visible p-5 hidden sm:flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray'>
             <div className='w-8 h-full'>
-                <UserImage />
+                <UserImage className='w-10 h-10' username={user?.name} />
             </div>
             <div className='w-full h-full ml-4 flex justify-between items-start flex-col flex-nowrap'>
                 <textarea

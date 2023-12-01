@@ -9,6 +9,7 @@ import { FaArrowRight } from 'react-icons/fa';
 function TwitterHeader({ section }: { section: string }) {
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
     const windowWidth = useAppSelector(state => state.windowWidth);
+    const user = useAppSelector(state => state.userReducer.user);
     const dispatch = useAppDispatch();
 
     return (
@@ -22,7 +23,11 @@ function TwitterHeader({ section }: { section: string }) {
                         <FaArrowRight style={{ fontSize: "1rem" }} />
                     </div>
                     :
-                    <UserImage className='w-8 h-8 outline outline-2 outline-offset-2 outline-black dark:outline-white cursor-pointer ml-5' onClick={() => windowWidth <= 640 && dispatch(toggleResponsiveMenu())} />
+                    <UserImage
+                        className='w-9 h-9 outline outline-2 outline-offset-2 outline-black dark:outline-white cursor-pointer ml-5'
+                        onClick={() => windowWidth <= 640 && dispatch(toggleResponsiveMenu())}
+                        username={user?.name}
+                    />
             }
             {
                 windowWidth < 640 ?
