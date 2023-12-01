@@ -1,10 +1,10 @@
 import React from 'react'
 
 type InputProps = React.ComponentProps<"input"> & {
-    error: string | boolean
+    error?: string | boolean
 };
 
-export default function FormInput({ error, className="", ...rest }: InputProps) {
+export default function FormInput({ error=false, className="", ...rest }: InputProps) {
     return (
         <input
             {...rest}
