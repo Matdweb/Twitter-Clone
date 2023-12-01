@@ -1,10 +1,14 @@
 import { MdOutlineMoreHoriz } from 'react-icons/md';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { toggleResponsiveMenu } from '@/redux/features/responsiveMenuSlice';
+import UserImage from '../UserImage';
 
 function UserAccout() {
     const windowWidth = useAppSelector(state => state.windowWidth);
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
+    const user = useAppSelector(state => state.userReducer.user);
+    const userIsLoading = useAppSelector(state => state.userReducer.isLoading);
+    const userError = useAppSelector(state => state.userReducer.error);
     const dispatch = useAppDispatch();
 
     return (
@@ -17,30 +21,29 @@ function UserAccout() {
                     windowWidth > 1024 || responsiveMenu ?
                         <>
                             <div className={`flex justify-start flex-nowrap ${responsiveMenu ? `items-start flex-col` : `items-center flex-row`}`}>
-                                <img
-                                    src="https://pbs.twimg.com/profile_images/1546362031854559232/_vKO9a8v_400x400.jpg"
-                                    alt="profile-image"
-                                    className='w-12 h-12 rounded-full mr-2 mb-1'
+                                <UserImage
+                                    username={user?.name}
+                                    className='w-12 h-12 mr-2 mb-1'
                                 />
+
                                 <div className='mt-1 flex justify-center items-start flex-col flex-nowrap'>
-                                    <p className='font-bold'>Mat.dweb</p>
-                                    <p className='font-gray-text'>@MatDweb28</p>
+                                    <p className='font-bold'>{userIsLoading ? "Loading..." : user?.name}</p>
+                                    <p className='font-gray-text'>@{userIsLoading ? "..." : user?.username}</p>
                                 </div>
                             </div>
                             {!responsiveMenu && <MdOutlineMoreHoriz style={{ marginRight: ".5rem", marginLeft: ".5rem" }} />}
                         </>
                         :
-                        <img
-                            src="https://pbs.twimg.com/profile_images/1546362031854559232/_vKO9a8v_400x400.jpg"
-                            alt="profile-image"
-                            className='w-full rounded-full'
+                        <UserImage
+                            username={user?.name}
+                            className='w-12 h-12'
                         />
                 }
                 {responsiveMenu &&
                     <div className='mt-4 w-52 flex'>
-                        <p className='mr-1'>212</p>
+                        <p className='mr-1'>{user?.followers}</p>
                         <p className='font-gray-text mr-2'>Followers</p>
-                        <p className='mr-1'>189</p>
+                        <p className='mr-1'>{user?.following}</p>
                         <p className='font-gray-text'>Following</p>
                     </div>}
             </div>
