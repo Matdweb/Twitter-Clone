@@ -15,6 +15,8 @@ function LogInPage() {
     const [emailError, setEmailError] = useState<boolean>(false);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        setEmailError(false);
+        setPasswordError(false);
         e.preventDefault();
         await authenticateUser();
     }
