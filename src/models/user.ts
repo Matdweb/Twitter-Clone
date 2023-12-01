@@ -36,8 +36,30 @@ const userSchema = new Schema(
             type: String,
             required: true
         },
+        profileImage: {
+            type: {
+                url: String
+            },
+            required: true
+        },
+        bio: {
+            type: String,
+            required: false
+        },
         posts: {
             type: [postSchema],
+            required: true
+        },
+        country: {
+            type: String,
+            required: true
+        },
+        followers: {
+            type: Number,
+            required: true
+        },
+        following: {
+            type: Number,
             required: true
         }
     },
