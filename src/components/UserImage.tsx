@@ -7,7 +7,7 @@ function UserImage({ className, username, src = "", onClick }: Props) {
     if (src) {
         return (
             <img
-                src="https://pbs.twimg.com/profile_images/1546362031854559232/_vKO9a8v_400x400.jpg"
+                src={src}
                 alt="profile-image"
                 className={`${className} rounded-full`}
                 onClick={onClick}
