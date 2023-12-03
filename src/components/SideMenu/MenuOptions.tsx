@@ -15,12 +15,12 @@ export const menuOptions = [
     {
         id: 0,
         name: "Home",
-        href: '../home',
+        href: '/home',
         icon: {
             ligth: <BiHomeCircle style={{ fontSize: "1.75rem" }} />,
             bold: <BiSolidHomeAlt2 style={{ fontSize: "1.75rem" }} />
         },
-        active: true
+        active: false
     },
     {
         id: 1,
@@ -52,7 +52,7 @@ export const menuOptions = [
     {
         id: 4,
         name: "Profile",
-        href: "home/MatDweb",
+        href: "./home/user/profile",
         icon: {
             ligth: <BsPerson style={{ fontSize: "1.75rem" }} />,
             bold: <BsPersonFill style={{ fontSize: "1.75rem" }} />
