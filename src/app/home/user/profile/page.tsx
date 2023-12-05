@@ -1,5 +1,4 @@
 'use client'
-import Link from "next/dist/client/link";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { toggleResponsiveMenu } from "@/redux/features/responsiveMenuSlice";
@@ -7,6 +6,7 @@ import { fecthPosts } from "@/redux/features/postsSlice";
 import TwitterHeader from "@/components/Header/TwitterHeader";
 import TwitterBackImage from "../../../../../public/assets/img/twitter-background-img.png";
 import Image from "next/image";
+import Link from 'next/link';
 import Post from "@/components/PostsSection/Post/Post";
 import UserImage from "@/components/UserImage";
 import { CiLocationOn } from "react-icons/ci";
@@ -29,10 +29,7 @@ function Page() {
     }, []);
 
     return (
-        <section
-            className={`${responsiveMenu ? `min-w-full border-l` : `w-1/3`} max-h-screen min-h-screen sm:border-l sm:border-r border-primary-gray dark:border-primary-dark-gray grow overflow-y-scroll`}
-            onLoad={() => console.log("Loaded")}
-        >
+        <>
             <TwitterHeader section='Profile' />
             <section className={`w-full mt-14 sm:mt-0 ${responsiveMenu && `cursor-pointer opacity-50`}`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
                 <Image
@@ -42,11 +39,16 @@ function Page() {
                     alt="Twitter background image"
                     className="w-full"
                 />
-                <UserImage
-                    src=""
-                    username={user?.name}
-                    className='relative ml-6 sm:ml-10 bottom-8 sm:mb-16 w-20 h-20 sm:scale-150 border-white dark:border-black border-[5px]'
-                />
+                <div className='w-full flex justify-between items-center flex-row flex-nowrap'>
+                    <UserImage
+                        src=""
+                        username={user?.name}
+                        className='relative ml-6 sm:ml-10 bottom-8 sm:mb-16 w-20 h-20 sm:scale-150 border-white dark:border-black border-[5px]'
+                    />
+                    <button className='btn-edit px-3 sm:px-4 py-2 mr-5 sm:mr-6 mb-6 sm:mb-20'>
+                        <Link href='./edit' className='no-underline'>Edit profile</Link>
+                    </button>
+                </div>
                 <div className='ml-6 mt-[-1.5rem] sm:mt-[-3.75rem]'>
                     <h3 className='font-primary-title-bold'>{user?.name}</h3>
                     <p className='font-gray-text mb-4'>@{user?.username}</p>
@@ -75,7 +77,7 @@ function Page() {
                     )
                 })} */}
             </section>
-        </section>
+        </>
     )
 }
 
