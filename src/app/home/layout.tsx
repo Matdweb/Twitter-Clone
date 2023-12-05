@@ -41,8 +41,11 @@ function HomeLayout({
     return (
         <section className='w-full max-w-[93rem] m-auto max-h-screen min-h-screen bg-white dark:bg-black flex justify-start items-start overflow-x-hidden overflow-y-hidden'>
             <SideMenu />
-  
-            {children}
+
+            <section className={`${responsiveMenu ? `min-w-full border-l` : `w-1/3`} max-h-screen min-h-screen border-primary grow overflow-y-scroll`}>
+                {children}
+            </section>
+
 
             {windowWidth > 768 &&
                 <PopularTrendsSection />
