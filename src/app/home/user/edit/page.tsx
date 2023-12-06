@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import TwitterHeader from '@/components/Header/TwitterHeader';
 import FormInput from '@/components/Form/FormInput';
 import { useAppSelector } from '@/redux/hook';
+import Link from 'next/dist/client/link';
 import { BiObjectsHorizontalCenter } from 'react-icons/bi';
 
 function Page() {
@@ -23,8 +24,11 @@ function Page() {
     return (
         <>
             <TwitterHeader section='Edit Profile' />
-            <form onSubmit={handleSubmit} className='w-full h-full mt-14 sm:mt-5 flex justify-center items-center flex-col'>
-                <div className='flex justify-center items-start flex-col'>
+            <form onSubmit={handleSubmit} className='p-10 sm:p-0 w-full mt-14 sm:mt-5  h-full flex justify-center items-center flex-col'>
+                <Link href="/home/user/profile" className=' place-self-start sm:ml-5 mb-4 underline'>
+                    <p>Back</p>
+                </Link>
+                <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
                     <label htmlFor="username" className='pb-2'>
                         <p>User Image</p>
                     </label>
@@ -32,10 +36,10 @@ function Page() {
                         type="file"
                         id='username'
                         autoComplete="username"
-                        className='w-full sm:w-[19rem]'
+                        className=''
                     />
                 </div>
-                <div className='flex justify-center items-start flex-col'>
+                <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
                     <label htmlFor="username" className='pb-2'>
                         <p>Email:</p>
                     </label>
@@ -46,11 +50,11 @@ function Page() {
                         readOnly
                         autoComplete="email"
                         disabled
-                        className='w-full sm:w-[19rem]'
+                        className=''
                         style={{ padding: '0.7rem' }}
                     />
                 </div>
-                <div className='flex justify-center items-start flex-col'>
+                <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
                     <label htmlFor="username" className='pb-2'>
                         <p>Password:</p>
                     </label>
@@ -62,11 +66,11 @@ function Page() {
                         minLength={5}
                         autoComplete="current-password"
                         disabled
-                        className='w-full sm:w-[19rem]'
+                        className=''
                         style={{ padding: '0.7rem' }}
                     />
                 </div>
-                <div className='flex justify-center items-start flex-col'>
+                <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
                     <label htmlFor="username" className='pb-2'>
                         <p>Name:</p>
                     </label>
@@ -77,11 +81,11 @@ function Page() {
                         onChange={(e) => setName(e.target.value)}
                         required
                         autoComplete="username"
-                        className='w-full sm:w-[19rem]'
+                        className=''
                         style={{ padding: '0.7rem' }}
                     />
                 </div>
-                <div className='flex justify-center items-start flex-col'>
+                <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
                     <label htmlFor="username" className='pb-2'>
                         <p>Username:</p>
                     </label>
@@ -92,11 +96,11 @@ function Page() {
                         onChange={(e) => setUsername(e.target.value)}
                         required
                         autoComplete="username"
-                        className='w-full sm:w-[19rem]'
+                        className=''
                         style={{ padding: '0.7rem' }}
                     />
                 </div>
-                <div className='flex justify-center items-start flex-col'>
+                <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
                     <label htmlFor="username" className='pb-2'>
                         <p>Country:</p>
                     </label>
@@ -107,11 +111,11 @@ function Page() {
                         onChange={(e) => setCountry(e.target.value)}
                         required
                         autoComplete="country"
-                        className='w-full sm:w-[19rem]'
+                        className=''
                         style={{ padding: '0.7rem' }}
                     />
                 </div>
-                <div className='flex justify-center items-start flex-col pb-2'>
+                <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col pb-2'>
                     <label htmlFor="username" className='pb-2'>
                         <p>Bio:</p>
                     </label>
@@ -122,12 +126,12 @@ function Page() {
                         onChange={(e) => setBio(e.target.value)}
                         required
                         autoComplete="Bio Description"
-                        className='w-full sm:w-[19rem]'
+                        className=''
                         style={{ padding: '0.7rem' }}
                     />
                 </div>
                 <button type="submit" className='btn-edit w-full sm:w-[19rem] py-3 mt-6 mb-1'>
-                    <h3 className='font-primary-title-bold text-white'>Save Changes</h3>
+                    <h3 className='font-primary-title-bold'>Save Changes</h3>
                 </button>
             </form>
 
