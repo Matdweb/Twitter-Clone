@@ -27,7 +27,17 @@ function UserAccout() {
                                 />
 
                                 <div className='mt-1 flex justify-center items-start flex-col flex-nowrap'>
-                                    <p className='font-bold'>{userIsLoading ? "Loading..." : user?.name}</p>
+                                    <p className='font-bold'>
+                                        {/* if the username is greater than 13 it will render until 13 characters and "..."
+                                        If there's no user it renders "Unauthenticated" */}
+                                        
+                                        {userIsLoading ? "Loading..." :
+                                            user ?
+                                                user.name.length > 13 ? user.name.slice(0, 13) + "..." : user.name
+                                                :
+                                                "Unauthenticated"
+                                        }
+                                    </p>
                                     <p className='font-gray-text'>@{userIsLoading ? "..." : user?.username}</p>
                                 </div>
                             </div>
