@@ -52,7 +52,7 @@ function Page() {
                 <div className='ml-6 mt-[-1.5rem] sm:mt-[-3.75rem]'>
                     <h3 className='font-primary-title-bold'>{user?.name}</h3>
                     <p className='font-gray-text mb-4'>@{user?.username}</p>
-                    <p className='max-w-[20rem] mb-4'>{user?.bio || "Bio description"}</p>
+                    <p className='w-10/12 mb-4'>{user?.bio || "Bio description"}</p>
                     <div className='w-full mb-4 flex justify-start items-center flex-row flex-wrap gap-1'>
                         <CiLocationOn style={{ fontSize: "1.5rem" }} />
                         <p className='font-gray-text mr-2'>{user?.country}</p>
