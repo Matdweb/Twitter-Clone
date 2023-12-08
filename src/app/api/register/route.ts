@@ -1,6 +1,6 @@
-import { connectMongoDB } from "@/lib/mongodb";
+import { connectMongoDB } from "@/lib/mongoDB/mongodb";
 import User from "@/models/user";
-import findUserByEmail from "@/lib/findUserByEmail";
+import findUserByEmail from "@/lib/mongoDB/findUserByEmail";
 import bcrypt from "bcrypt";
 
 export async function POST(request: Request) {
@@ -26,7 +26,8 @@ export async function POST(request: Request) {
         password: hashedPassword,
         country,
         profileImage: {
-            url: ""
+            url: "",
+            thumbnailUrl: ""
         },
         bio: "",
         posts: [],
