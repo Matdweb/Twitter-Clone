@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import TwitterHeader from '@/components/Header/TwitterHeader';
 import FormInput from '@/components/Form/FormInput';
 import { useAppSelector, useAppDispatch } from '@/redux/hook';
@@ -9,7 +9,6 @@ import { fetchUser } from '@/redux/features/userSlice';
 import { toggleResponsiveMenu } from '@/redux/features/responsiveMenuSlice';
 import updateUser from '@/lib/mongoDB/updateUser';
 import { useEdgeStore } from '@/lib/edgestore/EdgeStoreProvider';
-import { SingleImageDropzone } from '@/components/edgestore/SingleImageDropzone';
 import UserImage from '@/components/UserImage';
 
 function Page() {
@@ -27,29 +26,34 @@ function Page() {
     const [error, setError] = useState<string>('');
 
     const [file, setFile] = useState<File>();
+    const [imagePreviewUrl, setImagePreviewUrl] = useState<string>('');
+
     const [urls, setUrls] = useState<{
         url: string,
         thumbnailUrl: string
-    }>({
+    } | null>(null);
+
+    const urlsInitialState = {
         url: "",
         thumbnailUrl: ""
-    });
+    }
 
     const { edgestore } = useEdgeStore();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await handleUploadImage();
-        await handleUpdateUser();
     }
 
     const handleUploadImage = async () => {
         if (file) {
-            const res = await edgestore.publicImages.upload({ file });
+            const { url, thumbnailUrl } = await edgestore.publicImages.upload({ file });
             setUrls({
-                url: res.url,
-                thumbnailUrl: res.thumbnailUrl || ""
+                url: url,
+                thumbnailUrl: thumbnailUrl || ""
             });
+        } else {
+            setUrls(urlsInitialState);
         }
     }
 
@@ -63,7 +67,7 @@ function Page() {
             email,
             country,
             bio,
-            profileImage: urls
+            profileImage: urls?.url ? urls : user?.profileImage || urlsInitialState
         });
 
         if (status !== 201) {
@@ -74,6 +78,28 @@ function Page() {
         }
     }
 
+    useEffect(() => {
+        const handleUpdate = async () => {
+            if (urls !== null) {
+                await handleUpdateUser();
+            }
+        }
+        handleUpdate();
+    }, [urls]);
+
+    const handlePreviewImage = (e: ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0] || undefined;
+
+        if (selectedFile) {
+            setFile(selectedFile);
+            // Read the file as a data URL
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreviewUrl(reader.result as string);
+            };
+            reader.readAsDataURL(selectedFile);
+        }
+    }
 
     const InputStyles = {
         padding: '0.7rem'
@@ -88,25 +114,17 @@ function Page() {
                         <p>Back</p>
                     </Link>
                     <div className='w-full sm:w-[19rem] flex justify-center items-center flex-col pb-3'>
-                        <label htmlFor="userImage" className='pb-2'>
+                        <label htmlFor="userImage" className=''>
                             <p>User Image:</p>
+                            <UserImage src={imagePreviewUrl} className="w-20 h-20 mt-2 m-2 hover:opacity-60" />
                         </label>
 
-                        {
-                            user?.profileImage.url &&
-                            <UserImage className=" w-20 h-20 m-2" />
-                        }
-
-                        <SingleImageDropzone
+                        <input
                             id="userImage"
-                            width={200}
-                            height={200}
-                            value={file}
-                            onChange={(file) => {
-                                setFile(file);
-                            }}
+                            type='file'
+                            className='hidden'
+                            onChange={handlePreviewImage}
                         />
-                        {}
                     </div>
 
                     <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
