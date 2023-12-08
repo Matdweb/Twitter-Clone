@@ -1,9 +1,14 @@
+'use client'
+import { useAppSelector } from "@/redux/hook";
 
 type Props = React.ComponentProps<"img"> & {
     username?: string
 };
 
-function UserImage({ className, username, src = "", onClick }: Props) {
+function UserImage({ className, username, onClick }: Props) {
+    const user = useAppSelector(state => state.userReducer.user);
+    const src = user?.profileImage.thumbnailUrl || user?.profileImage.url;
+
     if (src) {
         return (
             <img
