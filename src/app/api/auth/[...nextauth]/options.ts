@@ -1,6 +1,6 @@
 import { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import findUserByEmail from "@/lib/findUserByEmail";
+import findUserByEmail from "@/lib/mongoDB/findUserByEmail";
 import bcrypt from "bcrypt";
 
 const authOptions: NextAuthOptions = {

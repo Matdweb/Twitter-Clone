@@ -1,4 +1,4 @@
-import findUserByEmail from "@/lib/findUserByEmail";
+import findUserByEmail from "@/lib/mongoDB/findUserByEmail";
 
 export async function POST(request: Request) {
     const { email } = await request.json();
