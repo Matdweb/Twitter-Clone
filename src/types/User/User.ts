@@ -5,7 +5,8 @@ export type User = {
     id: number,
     country: string,
     profileImage: {
-        url: string
+        url: string,
+        thumbnailUrl: string
     }
     bio: string,
     followers: [],

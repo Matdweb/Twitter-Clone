@@ -38,9 +38,10 @@ const userSchema = new Schema(
         },
         profileImage: {
             type: {
-                url: String
+                url: String,
+                thumbnailUrl: String
             },
-            required: true
+            required: false
         },
         bio: {
             type: String,
