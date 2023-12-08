@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import TwitterHeader from '@/components/Header/TwitterHeader';
 import FormInput from '@/components/Form/FormInput';
 import { useAppSelector, useAppDispatch } from '@/redux/hook';
@@ -7,7 +7,10 @@ import Link from 'next/dist/client/link';
 import { useRouter } from 'next/navigation';
 import { fetchUser } from '@/redux/features/userSlice';
 import { toggleResponsiveMenu } from '@/redux/features/responsiveMenuSlice';
-import updateUser from '@/lib/updateUser';
+import updateUser from '@/lib/mongoDB/updateUser';
+import { useEdgeStore } from '@/lib/edgestore/EdgeStoreProvider';
+import { SingleImageDropzone } from '@/components/edgestore/SingleImageDropzone';
+import UserImage from '@/components/UserImage';
 
 function Page() {
 
@@ -23,20 +26,44 @@ function Page() {
     const [bio, setBio] = useState<string>(user?.bio || '');
     const [error, setError] = useState<string>('');
 
+    const [file, setFile] = useState<File>();
+    const [urls, setUrls] = useState<{
+        url: string,
+        thumbnailUrl: string
+    }>({
+        url: "",
+        thumbnailUrl: ""
+    });
+
+    const { edgestore } = useEdgeStore();
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        await handleUploadImage();
         await handleUpdateUser();
+    }
+
+    const handleUploadImage = async () => {
+        if (file) {
+            const res = await edgestore.publicImages.upload({ file });
+            setUrls({
+                url: res.url,
+                thumbnailUrl: res.thumbnailUrl || ""
+            });
+        }
     }
 
     const handleUpdateUser = async () => {
         const email = user?.email || "";
 
+        console.log(urls);
         const { status, statusText } = await updateUser({
             name,
             username,
             email,
             country,
-            bio
+            bio,
+            profileImage: urls
         });
 
         if (status !== 201) {
@@ -46,6 +73,7 @@ function Page() {
             rounter.push('/home/user/profile')
         }
     }
+
 
     const InputStyles = {
         padding: '0.7rem'
@@ -59,15 +87,26 @@ function Page() {
                     <Link href="/home/user/profile" className=' place-self-start sm:ml-5 mb-4 underline'>
                         <p>Back</p>
                     </Link>
-                    <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
+                    <div className='w-full sm:w-[19rem] flex justify-center items-center flex-col pb-3'>
                         <label htmlFor="userImage" className='pb-2'>
-                            <p>User Image</p>
+                            <p>User Image:</p>
                         </label>
-                        <FormInput
-                            id='userImage'
-                            type="file"
-                            autoComplete="username"
+
+                        {
+                            user?.profileImage.url &&
+                            <UserImage className=" w-20 h-20 m-2" />
+                        }
+
+                        <SingleImageDropzone
+                            id="userImage"
+                            width={200}
+                            height={200}
+                            value={file}
+                            onChange={(file) => {
+                                setFile(file);
+                            }}
                         />
+                        {}
                     </div>
 
                     <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
