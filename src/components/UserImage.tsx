@@ -1,5 +1,6 @@
 'use client'
 import { useAppSelector } from "@/redux/hook";
+import Image from "next/image";
 
 type Props = React.ComponentProps<"img"> & {
     username?: string
@@ -11,8 +12,10 @@ function UserImage({ className, username, onClick }: Props) {
 
     if (src) {
         return (
-            <img
+            <Image
                 src={src}
+                width={100}
+                height={100}
                 alt="profile-image"
                 className={`${className} rounded-full`}
                 onClick={onClick}
