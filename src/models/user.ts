@@ -47,6 +47,13 @@ const userSchema = new Schema(
             type: String,
             required: false
         },
+        web_page: {
+            type: {
+                name: String,
+                url: String
+            },
+            required: false
+        },
         posts: {
             type: [postSchema],
             required: true

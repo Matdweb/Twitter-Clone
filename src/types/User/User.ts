@@ -9,6 +9,10 @@ export type User = {
         thumbnailUrl: string
     }
     bio: string,
+    web_page: {
+        name: string,
+        ulr: string
+    },
     followers: [],
     following: [],
     posts: []
