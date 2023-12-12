@@ -29,7 +29,7 @@ function PostsSection() {
             <TwitterHeader section='Home' />
             <CreatePost />
             <section className={`mt-14 sm:mt-0 ${responsiveMenu && `opacity-50`}`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
-                {/* {posts.map((post) => {
+                {posts.map((post) => {
                     return (
                         <Post
                             key={post.id}
@@ -37,7 +37,7 @@ function PostsSection() {
                             onLoad={() => post.id === posts.length && handleRequest()}
                         />
                     )
-                })} */}
+                })}
             </section>
             {isLoading && <p className='m-4'>Loading...</p>}
             {error && <p className='m-4'>There was an loading the posts :(</p>}
