@@ -62,7 +62,7 @@ function Page() {
     const handleUpdateUser = async () => {
         const email = user?.email || "";
 
-        console.log(urls);
+        
         const { status, statusText } = await updateUser({
             name,
             username,
