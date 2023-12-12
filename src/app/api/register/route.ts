@@ -30,6 +30,10 @@ export async function POST(request: Request) {
             thumbnailUrl: ""
         },
         bio: "",
+        web_page: {
+            name: "",
+            url: ""
+        },
         posts: [],
         followers: 0,
         following: 0,

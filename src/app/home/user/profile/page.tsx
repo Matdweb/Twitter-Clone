@@ -57,7 +57,11 @@ function Page() {
                         <CiLocationOn style={{ fontSize: "1.5rem" }} />
                         <p className='font-gray-text mr-2'>{user?.country}</p>
                         <CiLink style={{ fontSize: "1.5rem" }} />
-                        <Link href="#" className='font-gray-text'>nice_web_page</Link>
+                        <Link
+                            href={user?.web_page.url || `#`}
+                            className='font-gray-text'
+                        >{user?.web_page.name || "nice_web_page"}
+                        </Link>
                     </div>
                     <div className='mt-4 mb-7 w-52 flex'>
                         <p className='mr-1'>{user?.followers}</p>

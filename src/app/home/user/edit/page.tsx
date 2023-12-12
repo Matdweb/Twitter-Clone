@@ -23,6 +23,8 @@ function Page() {
     const [username, setUsername] = useState<string>(user?.username || '');
     const [country, setCountry] = useState<string>(user?.country || '');
     const [bio, setBio] = useState<string>(user?.bio || '');
+    const [webPageName, setWebPageName] = useState<string>(user?.web_page.name || '');
+    const [webPageUrl, setWebPageUrl] = useState<string>(user?.web_page.url || '');
     const [error, setError] = useState<string>('');
 
     const [file, setFile] = useState<File>();
@@ -67,6 +69,10 @@ function Page() {
             email,
             country,
             bio,
+            web_page: {
+                name: webPageName,
+                url: webPageUrl
+            },
             profileImage: urls?.url ? urls : user?.profileImage || urlsInitialState
         });
 
@@ -214,6 +220,28 @@ function Page() {
                             placeholder='Bio Description'
                             onChange={(e) => setBio(e.target.value)}
                             autoComplete="Bio Description"
+                            style={InputStyles}
+                        />
+                    </div>
+                    <div className='w-full sm:w-[19rem] flex justify-center items-start flex-col'>
+                        <label htmlFor="web_page" className='pb-2'>
+                            <p>Your personal web page:</p>
+                        </label>
+                        <FormInput
+                            id='web_page'
+                            type="text"
+                            value={webPageName}
+                            placeholder='Name of the page'
+                            onChange={(e) => setWebPageName(e.target.value)}
+                            autoComplete="name"
+                            style={InputStyles}
+                        />
+                        <FormInput
+                            type="text"
+                            value={webPageUrl}
+                            placeholder='Link to the page'
+                            onChange={(e) => setWebPageUrl(e.target.value)}
+                            autoComplete="link"
                             style={InputStyles}
                         />
                     </div>

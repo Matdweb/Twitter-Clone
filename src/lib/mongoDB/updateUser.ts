@@ -4,6 +4,10 @@ type UserParameter = {
     email: string
     country: string
     bio: string,
+    web_page: {
+        name: string,
+        url: string
+    }
     profileImage: {
         url: string,
         thumbnailUrl: string
@@ -16,13 +20,14 @@ const updateUser = async ({
     email,
     country,
     bio,
+    web_page,
     profileImage
 }: UserParameter) => {
     try {
         const response = await fetch('/api/user/update', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, name, email, country, bio, profileImage })
+            body: JSON.stringify({ username, name, email, country, bio, web_page, profileImage })
         });
         const data = await response.json();
         return data;

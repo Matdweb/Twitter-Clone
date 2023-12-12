@@ -8,6 +8,7 @@ export async function POST(request: Request) {
         email,
         country,
         bio,
+        web_page,
         profileImage
     } = await request.json();
 
@@ -15,7 +16,7 @@ export async function POST(request: Request) {
         await connectMongoDB();
         const user = await User.findOneAndUpdate(
             { email: email },
-            { $set: { username, name, country, bio, profileImage } },
+            { $set: { username, name, country, bio, web_page, profileImage } },
             { new: true, runValidators: true }
         );
 
