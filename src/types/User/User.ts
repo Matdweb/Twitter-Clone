@@ -11,7 +11,7 @@ export type User = {
     bio: string,
     web_page: {
         name: string,
-        ulr: string
+        url: string
     },
     followers: [],
     following: [],
