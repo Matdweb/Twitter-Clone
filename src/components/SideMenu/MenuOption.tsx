@@ -13,12 +13,12 @@ function MenuOption({ href = "#", name, icon, onClick, active }: Props) {
 
     return (
         <Link
-            href={href}
+            href={active ? "#" : href}
             className={`p-3.5 pl-3 ${responsiveMenu && `ml-1`} lg:ml-1 rounded-full flex justify-start items-center flex-nowrap flex-row hover:bg-primary-gray dark:hover:bg-primary-dark-gray/20`}
             onClick={onClick}
         >
             {active ? icon.bold : icon.ligth}
-            {windowWidth > 1024 || responsiveMenu ? <p className={`pl-4 ${active && `font-bold`}`}>{name}</p>: ''}
+            {windowWidth > 1024 || responsiveMenu ? <p className={`pl-4 ${active && `font-bold`}`}>{name}</p> : ''}
         </Link>
     )
 }

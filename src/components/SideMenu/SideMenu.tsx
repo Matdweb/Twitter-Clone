@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react"
 import { useAppSelector } from '@/redux/hook';
-import { menuOptions as Options } from "@/lib/MenuOptions";
+import { menuOptions as Options } from "@/components/SideMenu/MenuOptions";
 import type { MenuOptionType } from '@/types/MenuOptions/menuOptionType';
 import TweetButton from "../Buttons/TweetButton";
 import TwitterIcon from '../TwitterIcon';

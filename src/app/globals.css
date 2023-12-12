@@ -61,7 +61,7 @@ p,
 }
 
 .btn-primary {
-  @apply bg-primary-blue font-segoe_ui text-base font-bold rounded-full;
+  @apply bg-primary-blue font-segoe_ui text-sm sm:text-base font-bold rounded-full;
   transition: transform .8s;
 }
 
@@ -85,6 +85,10 @@ p,
 .btn-edit {
   @apply btn-primary dark:bg-black text-black dark:text-white outline outline-2 outline-black dark:outline-white;
   background-color: white;
+}
+
+.border-primary {
+  @apply sm:border-l sm:border-r border-primary-gray dark:border-primary-dark-gray;
 }
 
 *::-webkit-scrollbar {

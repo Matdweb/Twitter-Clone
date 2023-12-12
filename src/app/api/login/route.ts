@@ -1,4 +1,4 @@
-import findUserByEmail from "@/lib/findUserByEmail";
+import findUserByEmail from "@/lib/mongoDB/findUserByEmail";
 import bcrypt from 'bcrypt';
 
 export async function POST(request: Request) {

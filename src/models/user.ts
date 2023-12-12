@@ -36,8 +36,38 @@ const userSchema = new Schema(
             type: String,
             required: true
         },
+        profileImage: {
+            type: {
+                url: String,
+                thumbnailUrl: String
+            },
+            required: false
+        },
+        bio: {
+            type: String,
+            required: false
+        },
+        web_page: {
+            type: {
+                name: String,
+                url: String
+            },
+            required: false
+        },
         posts: {
             type: [postSchema],
+            required: true
+        },
+        country: {
+            type: String,
+            required: true
+        },
+        followers: {
+            type: Number,
+            required: true
+        },
+        following: {
+            type: Number,
             required: true
         }
     },

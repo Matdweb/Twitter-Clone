@@ -8,6 +8,7 @@ import TwitterIcon from '@/components/TwitterIcon';
 function Page() {
     const [name, setName] = useState<string>('');
     const [username, setUsername] = useState<string>('');
+    const [country, setCountry] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
@@ -26,7 +27,7 @@ function Page() {
             const response = await fetch('../api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, name, email, password })
+                body: JSON.stringify({ username, name, email, password, country })
             });
             const { status, statusText } = await response.json();
 
@@ -85,7 +86,6 @@ function Page() {
                             required
                             autoComplete="username"
                             className='sm:max-w-[19rem] w-full'
-                            error={false}
                         />
                         <FormInput
                             type="text"
@@ -95,7 +95,14 @@ function Page() {
                             required
                             autoComplete="username"
                             className='sm:max-w-[19rem] w-full'
-                            error={false}
+                        />
+                        <FormInput
+                            type="text"
+                            value={country}
+                            placeholder='Country'
+                            onChange={(e) => setCountry(e.target.value)}
+                            required
+                            autoComplete="country"
                         />
                     </div>
                     {error && <p className='w-full text-primary-red dark:text-primary-red'>{error}</p>}
@@ -127,7 +134,6 @@ function Page() {
                         required
                         minLength={5}
                         autoComplete="current-password"
-                        error={false}
                     />
                     <p
                         className='underline underline-offset-2 cursor-pointer mb-4 text-primary-blue dark:text-primary-blue'

@@ -25,7 +25,7 @@ function PostsSection() {
     }, []);
 
     return (
-        <section className={`${responsiveMenu ? `min-w-full border-l` : `w-1/3`} max-h-screen min-h-screen sm:border-l sm:border-r border-primary-gray dark:border-primary-dark-gray grow overflow-y-scroll`}>
+        <>
             <TwitterHeader section='Home' />
             <CreatePost />
             <section className={`mt-14 sm:mt-0 ${responsiveMenu && `opacity-50`}`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
@@ -41,7 +41,7 @@ function PostsSection() {
             </section>
             {isLoading && <p className='m-4'>Loading...</p>}
             {error && <p className='m-4'>There was an loading the posts :(</p>}
-        </section>
+        </>
     )
 }
 

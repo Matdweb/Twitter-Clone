@@ -7,6 +7,12 @@ const nextConfig = {
                 hostname: 'picsum.photos',
                 port: '',
                 pathname: '/id/**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'files.edgestore.dev',
+                port: '',
+                pathname: '/**'
             }
         ]
     }
