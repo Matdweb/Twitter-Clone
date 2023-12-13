@@ -13,7 +13,7 @@ function TwitterHeader({ section }: { section: string }) {
     const dispatch = useAppDispatch();
 
     return (
-        <header className='h-14 py-1.5 w-full fixed sm:static flex justify-between items-center flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray bg-white dark:bg-black z-[1000]'>
+        <header className='h-14 py-1.5 w-full fixed sm:static flex justify-between items-center flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray bg-white dark:bg-black z-40'>
             {
                 responsiveMenu ?
                     <div
