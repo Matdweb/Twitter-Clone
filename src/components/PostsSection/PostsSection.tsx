@@ -28,7 +28,8 @@ function PostsSection() {
         <>
             <TwitterHeader section='Home' />
             <CreatePost />
-            <section className={`mt-14 sm:mt-0 ${responsiveMenu && `opacity-50`}`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
+
+            <section className={`pt-14 sm:pt-0 ${responsiveMenu && `opacity-50`}`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
                 {posts.map((post) => {
                     return (
                         <Post

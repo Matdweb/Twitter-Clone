@@ -21,16 +21,18 @@ function UserAccout() {
                     windowWidth > 1024 || responsiveMenu ?
                         <>
                             <div className={`flex justify-start flex-nowrap ${responsiveMenu ? `items-start flex-col` : `items-center flex-row`}`}>
-                                <UserImage
-                                    username={user?.name}
-                                    className='w-12 h-12 mr-2 mb-1'
-                                />
+                                <div className='w-12 h-12 mr-2 mb-1'>
+                                    <UserImage
+                                        username={user?.name}
+                                        className='w-full h-full'
+                                    />
+                                </div>
 
                                 <div className='mt-1 flex justify-center items-start flex-col flex-nowrap'>
                                     <p className='font-bold'>
                                         {/* if the username is greater than 13 it will render until 13 characters and "..."
                                         If there's no user it renders "Unauthenticated" */}
-                                        
+
                                         {userIsLoading ? "Loading..." :
                                             user ?
                                                 user.name.length > 13 ? user.name.slice(0, 13) + "..." : user.name
