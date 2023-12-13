@@ -4,7 +4,8 @@ import { signIn } from "next-auth/react"
 import Link from "next/link"
 import ModeToggleButton from "@/components/Buttons/ModeToggleButton"
 import FormInput from "@/components/Form/FormInput"
-import TwitterIcon from "@/components/TwitterIcon"
+import TwitterIcon from "@/components/TwitterIcon";
+import Loader from "@/components/Loaders/Loader"
 
 function LogInPage() {
 
@@ -13,12 +14,15 @@ function LogInPage() {
     const [error, setError] = useState<string>('');
     const [passwordError, setPasswordError] = useState<boolean>(false);
     const [emailError, setEmailError] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        setIsLoading(true);
         setEmailError(false);
         setPasswordError(false);
         e.preventDefault();
         await authenticateUser();
+        setIsLoading(false);
     }
 
     const authenticateUser = async () => {
@@ -29,7 +33,6 @@ function LogInPage() {
                 body: JSON.stringify({ email, password })
             });
             const { status, statusText, email: responseEmail, password: responsePassword } = await response.json();
-            console.log(status);
 
             if (status === 201) {
                 signIn('credentials', {
@@ -37,7 +40,6 @@ function LogInPage() {
                     password,
                     callbackUrl: '/'
                 })
-                console.log("succesfull")
             } else {
                 setEmailError(!responseEmail);
                 setPasswordError(!responsePassword);
@@ -75,7 +77,15 @@ function LogInPage() {
                     error={passwordError}
                 />
                 <button type="submit" className='btn-primary w-full py-5 mb-10'>
-                    <h3 className='font-primary-title-bold text-white'>Log in</h3>
+                    {
+                        isLoading ?
+                            <div className='w-full flex justify-center items-center'>
+                                <Loader className='w-10 h-10' />
+                            </div>
+                            :
+                            <h3 className='font-primary-title-bold text-white'>Log in</h3>
+                    }
+
                 </button>
                 <div className='w-full flex justify-between items-center text-primary-blue dark:text-primary-blue'>
                     <Link href="#" className=''>Forgot password?</Link>

@@ -10,6 +10,7 @@ import { toggleResponsiveMenu } from '@/redux/features/responsiveMenuSlice';
 import updateUser from '@/lib/mongoDB/updateUser';
 import { useEdgeStore } from '@/lib/edgestore/EdgeStoreProvider';
 import UserImage from '@/components/UserImage';
+import Loader from '@/components/Loaders/Loader';
 
 function Page() {
 
@@ -26,6 +27,7 @@ function Page() {
     const [webPageName, setWebPageName] = useState<string>(user?.web_page.name || '');
     const [webPageUrl, setWebPageUrl] = useState<string>(user?.web_page.url || '');
     const [error, setError] = useState<string>('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [file, setFile] = useState<File>();
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string>('');
@@ -43,8 +45,10 @@ function Page() {
     const { edgestore } = useEdgeStore();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        setIsLoading(true);
         e.preventDefault();
         await handleUploadImage();
+        setIsLoading(false);
     }
 
     const handleUploadImage = async () => {
@@ -62,7 +66,7 @@ function Page() {
     const handleUpdateUser = async () => {
         const email = user?.email || "";
 
-        
+
         const { status, statusText } = await updateUser({
             name,
             username,
@@ -84,15 +88,7 @@ function Page() {
         }
     }
 
-    useEffect(() => {
-        const handleUpdate = async () => {
-            if (urls !== null) {
-                await handleUpdateUser();
-            }
-        }
-        handleUpdate();
-    }, [urls]);
-
+    
     const handlePreviewImage = (e: ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files?.[0] || undefined;
 
@@ -110,6 +106,15 @@ function Page() {
     const InputStyles = {
         padding: '0.7rem'
     };
+
+    useEffect(() => {
+        const handleUpdate = async () => {
+            if (urls !== null) {
+                await handleUpdateUser();
+            }
+        }
+        handleUpdate();
+    }, [urls]);
 
     return (
         <>
@@ -246,7 +251,14 @@ function Page() {
                         />
                     </div>
                     <button type="submit" className='btn-edit w-full sm:w-[19rem] py-3 mt-6 mb-1'>
-                        <h3 className='font-primary-title-bold'>Save Changes</h3>
+                        {
+                            isLoading ?
+                                <div className='w-full flex justify-center items-center'>
+                                    <Loader className='w-10 h-10' />
+                                </div>
+                                :
+                                <h3 className='font-primary-title-bold'>Save Changes</h3>
+                        }
                     </button>
                     <p className='py-5 font-gray-text'>{error}</p>
                 </form>
