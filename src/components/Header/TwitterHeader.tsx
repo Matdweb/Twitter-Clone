@@ -13,7 +13,7 @@ function TwitterHeader({ section }: { section: string }) {
     const dispatch = useAppDispatch();
 
     return (
-        <header className='h-14 py-1.5 w-full fixed sm:static flex justify-between items-center flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray bg-white dark:bg-black z-[1000]'>
+        <header className='h-14 py-1.5 w-full fixed sm:static flex justify-between items-center flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray bg-white dark:bg-black z-40'>
             {
                 responsiveMenu ?
                     <div
@@ -23,11 +23,13 @@ function TwitterHeader({ section }: { section: string }) {
                         <FaArrowRight style={{ fontSize: "1rem" }} />
                     </div>
                     :
-                    <UserImage
-                        className='w-9 h-9 outline outline-2 outline-offset-2 outline-black dark:outline-white cursor-pointer ml-5'
-                        onClick={() => windowWidth <= 640 && dispatch(toggleResponsiveMenu())}
-                        username={user?.name}
-                    />
+                    <div className='w-9 h-9 outline outline-2 outline-offset-2 outline-black dark:outline-white cursor-pointer ml-5 rounded-full'>
+                        <UserImage
+                            className='w-full h-full '
+                            onClick={() => windowWidth <= 640 && dispatch(toggleResponsiveMenu())}
+                            username={user?.name}
+                        />
+                    </div>
             }
             {
                 windowWidth < 640 ?

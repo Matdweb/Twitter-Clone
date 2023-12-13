@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import FormInput from '@/components/Form/FormInput';
 import ModeToggleButton from '@/components/Buttons/ModeToggleButton';
 import TwitterIcon from '@/components/TwitterIcon';
+import Loader from '@/components/Loaders/Loader';
 
 function Page() {
     const [name, setName] = useState<string>('');
@@ -13,12 +14,15 @@ function Page() {
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [registerWith, setRegisterWith] = useState<string>('email');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const router = useRouter();
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        setIsLoading(true);
         e.preventDefault();
         await registerUser();
+        setIsLoading(false);
     }
 
     const registerUser = async () => {
@@ -142,7 +146,14 @@ function Page() {
                         Use {registerWith === 'email' ? 'Phone Number' : 'Email'}
                     </p>
                     <button type="submit" className='btn-primary w-full py-5 mb-1'>
-                        <h3 className='font-primary-title-bold text-white'>Register</h3>
+                        {
+                            isLoading ?
+                                <div className='w-full flex justify-center items-center'>
+                                    <Loader className='w-10 h-10' />
+                                </div>
+                                :
+                                <h3 className='font-primary-title-bold text-white'>Register</h3>
+                        }
                     </button>
                     {error && <p className='font-gray-text'>Not possible :( There is an error</p>}
                 </div>

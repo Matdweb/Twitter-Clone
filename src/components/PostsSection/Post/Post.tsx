@@ -6,6 +6,7 @@ import type { Post } from "@/types/posts/Posts";
 import Image from "next/image";
 import PostOption from "./PostOption";
 import type { PostOptions } from "@/types/posts/PostOptions";
+import Loader from "@/components/Loaders/Loader";
 
 interface Props {
     key?: number,
@@ -15,6 +16,7 @@ interface Props {
 
 function Post({ postContent, onLoad }: Props) {
     const [bottomOptions, setBottomOptions] = useState<PostOptions[]>(bottomPostOptions);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const handleClick = (idClicked: number) => {
         const options = bottomOptions.map(({ id, active, ...rest }) => {
@@ -35,6 +37,11 @@ function Post({ postContent, onLoad }: Props) {
         setBottomOptions([...options])
     }
 
+    const handleLoadImage = () => {
+        onLoad();
+        setIsLoading(false);
+    }
+
     return (
         <section className='w-full h-full min-h-[8rem] overflow-visible p-5 flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray'>
             <div className='w-12 h-full'>
@@ -51,7 +58,13 @@ function Post({ postContent, onLoad }: Props) {
                     <br />
                     {postContent.body}
                 </p>
-                <Image src={postContent.imageURL || ""} width={500} height={300} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => onLoad()} />
+                {
+                    isLoading &&
+                    <div className='w-full h-[20rem] flex justify-center items-center'>
+                        <Loader className="w-12 h-12" />
+                    </div>
+                }
+                <Image src={postContent.imageURL || ""} width={500} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => handleLoadImage()} />
                 <div className='w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray'>
                     {bottomOptions.map((option) => {
                         return (

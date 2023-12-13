@@ -40,11 +40,13 @@ function Page() {
                     className="w-full"
                 />
                 <div className='w-full flex justify-between items-center flex-row flex-nowrap'>
+                    <div className='relative ml-6 sm:ml-10 bottom-8 sm:mb-16 w-20 h-20 sm:scale-150 border-white dark:border-black border-[5px] rounded-full flex justify-center items-center'>
                     <UserImage
                         src=""
                         username={user?.name}
-                        className='relative ml-6 sm:ml-10 bottom-8 sm:mb-16 w-20 h-20 sm:scale-150 border-white dark:border-black border-[5px]'
+                        className='w-full h-full'
                     />
+                    </div>
                     <button className='btn-edit px-3 sm:px-4 py-2 mr-5 sm:mr-6 mb-6 sm:mb-20'>
                         <Link href='./edit' className='no-underline'>Edit profile</Link>
                     </button>

@@ -1,6 +1,8 @@
 'use client'
 import { useAppSelector } from "@/redux/hook";
 import Image from "next/image";
+import { useState } from "react";
+import Loader from "./Loaders/Loader";
 
 type Props = React.ComponentProps<"img"> & {
     username?: string,
@@ -11,16 +13,27 @@ function UserImage({ className, src, username, onClick }: Props) {
     const user = useAppSelector(state => state.userReducer.user);
     const imgSrc = src || user?.profileImage.thumbnailUrl || user?.profileImage.url;
 
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
     if (imgSrc) {
         return (
-            <Image
-                src={imgSrc}
-                width={100}
-                height={100}
-                alt="profile-image"
-                className={`${className} rounded-full`}
-                onClick={onClick}
-            />
+            <>
+                {
+                    isLoading &&
+                    <div className='w-full h-full bg-white dark:bg-black flex justify-center items-center rounded-full' onClick={onClick}>
+                        <Loader className='w-12 h-12' />
+                    </div>
+                }
+                <Image
+                    src={imgSrc}
+                    width={0}
+                    height={0}
+                    alt="profile-image"
+                    className={`${isLoading && `scale-0 absolute`} ${className} rounded-full`}
+                    onClick={onClick}
+                    onLoad={() => setIsLoading(false)}
+                />
+            </>
         )
     } else {
         const firstLetter = username?.charAt(0).toUpperCase();
