@@ -20,7 +20,7 @@ function UserImage({ className, src, username, onClick }: Props) {
             <>
                 {
                     isLoading &&
-                    <div className='w-full h-full bg-white dark:bg-black flex justify-center items-center rounded-full'>
+                    <div className='w-full h-full bg-white dark:bg-black flex justify-center items-center rounded-full' onClick={onClick}>
                         <Loader className='w-12 h-12' />
                     </div>
                 }
