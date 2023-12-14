@@ -5,7 +5,6 @@ import { useState } from "react";
 import type { Post } from "@/types/posts/Posts";
 import Image from "next/image";
 import PostOption from "./PostOption";
-import type { PostOptions } from "@/types/posts/PostOptions";
 import Loader from "@/components/Loaders/Loader";
 import { useAppDispatch } from "@/redux/hook";
 import { toggleLikePost } from "@/redux/features/postsSlice";
@@ -18,13 +17,16 @@ interface Props {
 
 function Post({ postContent, onLoad }: Props) {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-
     const dispatch = useAppDispatch();
 
     const handleClick = (idClicked: number, name: string) => {
         if (name === 'likes') {
-            dispatch(toggleLikePost(idClicked));
+            handleLikePost(idClicked);
         }
+    }
+
+    const handleLikePost = (idClicked: number) => {
+        dispatch(toggleLikePost(idClicked));
     }
 
     const handleLoadImage = () => {
@@ -61,9 +63,7 @@ function Post({ postContent, onLoad }: Props) {
                             <PostOption
                                 key={option.id}
                                 option={option}
-                                likes={postContent.likes}
-                                comments={postContent.comments}
-                                retweets={postContent.retweets}
+                                post={postContent}
                                 handleClick={() => handleClick(postContent.id, option.name)}
                             />
                         )
