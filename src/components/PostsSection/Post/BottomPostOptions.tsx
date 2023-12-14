@@ -15,7 +15,6 @@ export const bottomPostOptions = [{
         }
     }],
     clickable: false,
-    active: false
 },
 {
     id: 1,
@@ -34,7 +33,6 @@ export const bottomPostOptions = [{
         }
     }],
     clickable: true,
-    active: false
 },
 {
     id: 2,
@@ -53,7 +51,6 @@ export const bottomPostOptions = [{
         }
     }],
     clickable: true,
-    active: false
 }, {
     id: 3,
     name: "share",
