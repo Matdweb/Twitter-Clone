@@ -4,7 +4,10 @@ export type Post = {
     title: string,
     body: string,
     imageURL?: string,
-    likes: number,
+    likes: {
+      amount: number,
+      active: boolean
+    },
     comments: [],
     retweets: number
   }
