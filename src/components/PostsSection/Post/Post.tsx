@@ -7,6 +7,8 @@ import Image from "next/image";
 import PostOption from "./PostOption";
 import type { PostOptions } from "@/types/posts/PostOptions";
 import Loader from "@/components/Loaders/Loader";
+import { useAppDispatch } from "@/redux/hook";
+import { toggleLikePost } from "@/redux/features/postsSlice";
 
 interface Props {
     key?: number,
@@ -15,26 +17,14 @@ interface Props {
 }
 
 function Post({ postContent, onLoad }: Props) {
-    const [bottomOptions, setBottomOptions] = useState<PostOptions[]>(bottomPostOptions);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    const handleClick = (idClicked: number) => {
-        const options = bottomOptions.map(({ id, active, ...rest }) => {
-            if (idClicked === id) {
-                return {
-                    id,
-                    active: !active,
-                    ...rest
-                }
-            } else {
-                return {
-                    id,
-                    active,
-                    ...rest
-                }
-            }
-        });
-        setBottomOptions([...options])
+    const dispatch = useAppDispatch();
+
+    const handleClick = (idClicked: number, name: string) => {
+        if (name === 'likes') {
+            dispatch(toggleLikePost(idClicked));
+        }
     }
 
     const handleLoadImage = () => {
@@ -66,7 +56,7 @@ function Post({ postContent, onLoad }: Props) {
                 }
                 <Image src={postContent.imageURL || ""} width={500} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => handleLoadImage()} />
                 <div className='w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray'>
-                    {bottomOptions.map((option) => {
+                    {bottomPostOptions.map((option) => {
                         return (
                             <PostOption
                                 key={option.id}
@@ -74,7 +64,7 @@ function Post({ postContent, onLoad }: Props) {
                                 likes={postContent.likes}
                                 comments={postContent.comments}
                                 retweets={postContent.retweets}
-                                handleClick={() => handleClick(option.id)}
+                                handleClick={() => handleClick(postContent.id, option.name)}
                             />
                         )
                     })}
