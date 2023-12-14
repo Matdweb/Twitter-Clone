@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) 1',
-        bounce: 'bounce 1s 2'
+        ping: 'ping .3s cubic-bezier(0, 0, 0.2, 1) 1',
+        bounce: 'bounce .8s 2'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
