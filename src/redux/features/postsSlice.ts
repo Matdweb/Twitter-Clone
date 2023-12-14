@@ -29,7 +29,27 @@ export const fecthPosts = createAsyncThunk('posts/fetchPosts',
 const postsSlice = createSlice({
     name: "posts",
     initialState,
-    reducers: {},
+    reducers: {
+        toggleLikePost: (state, { payload }: { payload: number }) => {
+            state.posts = state.posts.map(({ id, likes, ...rest }) => {
+                if (id === payload) {
+                    const newLikes = likes.active ? likes.amount - 1 : likes.amount + 1
+                    return {
+                        id,
+                        likes: {
+                            amount: newLikes,
+                            active: !likes.active
+                        },
+                        ...rest,
+                    }
+                } else {
+                    return {
+                        id, likes, ...rest
+                    }
+                }
+            })
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(fecthPosts.pending, (state) => {
             state.isLoading = true;
@@ -47,4 +67,5 @@ const postsSlice = createSlice({
     }
 })
 
+export const { toggleLikePost } = postsSlice.actions;
 export default postsSlice.reducer;
