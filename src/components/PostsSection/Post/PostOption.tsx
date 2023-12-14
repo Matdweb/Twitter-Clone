@@ -7,14 +7,17 @@ interface Props {
 }
 
 interface Props {
-    likes: number,
+    likes: {
+        amount: number,
+        active: boolean
+    },
     comments: [],
     retweets: number,
     handleClick: () => void
 }
 
 function PostOption({
-    option: { id, name, icons, active, clickable },
+    option: { id, name, icons, clickable },
     likes,
     comments,
     retweets,
@@ -25,6 +28,8 @@ function PostOption({
     const Icon = icons[0];
     const ActiveIcon = icons.length > 1 ? icons[1] : null;
 
+    const isActive = name === 'likes' ? likes.active : false;
+
     return (
         <div
             key={id}
@@ -32,16 +37,21 @@ function PostOption({
             onClick={() => { clickable && handleClick() }}
         >
             <div className='flex justify-start items-center flex-row flex-nowrap cursor-pointer'>
-                    {
-                        active && ActiveIcon ?
-                            <ActiveIcon.Icon style={ActiveIcon.style} className="animate-bounce" />
-                            :
-                            <Icon.Icon style={Icon.style} />
-                    }
+
                 {
-                    active != undefined &&
+                    isActive && ActiveIcon ?
+                        <ActiveIcon.Icon
+                            style={ActiveIcon.style}
+                            className={`${name === 'likes' ? `animate-ping` : `animate-bounce`}`}
+                        />
+                        :
+                        <Icon.Icon style={Icon.style} />
+                }
+
+                {
+                    clickable &&
                     <p className='ml-2 text-primary-dark-gray dark:text-primary-gray'>
-                        {name === "likes" && likes}
+                        {name === "likes" && likes.amount}
                         {name === "comments" && comments.length}
                         {name === "retweets" && retweets}
                     </p>
