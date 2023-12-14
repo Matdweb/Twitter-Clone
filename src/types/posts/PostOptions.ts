@@ -9,5 +9,4 @@ export type PostOptions = {
         style: CSSProperties
     }[],
     clickable: boolean,
-    active?: boolean
 }
