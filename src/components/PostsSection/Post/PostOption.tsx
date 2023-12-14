@@ -1,30 +1,21 @@
 'use client'
-import { useAppSelector } from "@/redux/hook"
 import type { PostOptions } from "@/types/posts/PostOptions"
+import type { Post } from "@/types/posts/Posts"
 
 interface Props {
     option: PostOptions
 }
 
 interface Props {
-    likes: {
-        amount: number,
-        active: boolean
-    },
-    comments: [],
-    retweets: number,
+    post: Post,
     handleClick: () => void
 }
 
 function PostOption({
     option: { id, name, icons, clickable },
-    likes,
-    comments,
-    retweets,
+    post: { likes, retweets, comments },
     handleClick
 }: Props) {
-
-    const windowWidth = useAppSelector(state => state.windowWidth);
     const Icon = icons[0];
     const ActiveIcon = icons.length > 1 ? icons[1] : null;
 
@@ -33,7 +24,7 @@ function PostOption({
     return (
         <div
             key={id}
-            className={`${(name === "stats" || name === "share") && windowWidth < 640 ? `hidden` : ''} `}
+            className={`${(name === "stats" || name === "share") && `hidden sm:inline`} `}
             onClick={() => { clickable && handleClick() }}
         >
             <div className='flex justify-start items-center flex-row flex-nowrap cursor-pointer'>
