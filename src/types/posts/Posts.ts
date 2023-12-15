@@ -9,5 +9,8 @@ export type Post = {
       active: boolean
     },
     comments: [],
-    retweets: number
+    retweets: {
+      amount: number,
+      active: boolean
+    }
   }
