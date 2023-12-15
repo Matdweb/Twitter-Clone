@@ -1,8 +1,11 @@
-import{ Schema } from "mongoose";
+import { Schema } from "mongoose";
 
 export const postSchema = new Schema({
     userId: {
         type: Number,
+    },
+    retweet: {
+        type: Boolean
     },
     id: {
         type: Number
