@@ -8,6 +8,8 @@ import PostOption from "./PostOption";
 import Loader from "@/components/Loaders/Loader";
 import { useAppDispatch } from "@/redux/hook";
 import { toggleLikePost } from "@/redux/features/postsSlice";
+import { toggleRetweetPost } from "@/redux/features/postsSlice";
+import { addUserPost } from "@/redux/features/userSlice";
 
 interface Props {
     key?: number,
@@ -22,11 +24,18 @@ function Post({ postContent, onLoad }: Props) {
     const handleClick = (idClicked: number, name: string) => {
         if (name === 'likes') {
             handleLikePost(idClicked);
+        } else if (name === 'retweets') {
+            handleRetweetPost(idClicked)
         }
     }
 
-    const handleLikePost = (idClicked: number) => {
-        dispatch(toggleLikePost(idClicked));
+    const handleLikePost = (id: number) => {
+        dispatch(toggleLikePost(id));
+    }
+
+    const handleRetweetPost = (id: number) => {
+        dispatch(toggleRetweetPost(id));
+        dispatch(addUserPost(postContent));
     }
 
     const handleLoadImage = () => {
