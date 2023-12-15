@@ -40,6 +40,7 @@ export const addUserPost = createAsyncThunk('user/addUserPost',
         post = {
             ...post,
             id: lastPostId + 1,
+            retweet: true,
             retweets: {
                 amount:newRetweetsAmount, 
                 active: true
