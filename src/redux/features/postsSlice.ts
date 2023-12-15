@@ -49,6 +49,26 @@ const postsSlice = createSlice({
                 }
             })
         },
+        toggleRetweetPost: (state, { payload }: { payload: number }) => {
+            state.posts = state.posts.map(({ id, likes, retweets, ...rest }) => {
+                if (id === payload) {
+                    const newRetweets = retweets.amount + 1
+                    return {
+                        id,
+                        likes,
+                        retweets: {
+                            amount: newRetweets,
+                            active: !retweets.active
+                        },
+                        ...rest,
+                    }
+                } else {
+                    return {
+                        id, likes, retweets, ...rest
+                    }
+                }
+            })
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fecthPosts.pending, (state) => {
@@ -67,5 +87,5 @@ const postsSlice = createSlice({
     }
 })
 
-export const { toggleLikePost } = postsSlice.actions;
+export const { toggleLikePost, toggleRetweetPost } = postsSlice.actions;
 export default postsSlice.reducer;
