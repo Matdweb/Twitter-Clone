@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { toggleResponsiveMenu } from "@/redux/features/responsiveMenuSlice";
-import { fecthPosts } from "@/redux/features/postsSlice";
 import TwitterHeader from "@/components/Header/TwitterHeader";
 import TwitterBackImage from "../../../../../public/assets/img/twitter-background-img.png";
 import Image from "next/image";
@@ -11,22 +10,13 @@ import Post from "@/components/PostsSection/Post/Post";
 import UserImage from "@/components/UserImage";
 import { CiLocationOn } from "react-icons/ci";
 import { CiLink } from "react-icons/ci";
+import Loader from "@/components/Loaders/Loader";
 
 function Page() {
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
     const user = useAppSelector(state => state.userReducer.user);
-    const posts = useAppSelector(state => state.postsReducer.posts);
+    const isLoading = useAppSelector(state => state.userReducer.isLoading);
     const dispatch = useAppDispatch();
-
-    const handleRequest = () => {
-        //fetchPost uses the lastPostId to fecth the missing posts from that point
-        const lastPostId = posts.length > 0 ? posts[posts.length - 1].id : 0;
-        dispatch(fecthPosts(lastPostId));
-    }
-
-    useEffect(() => {
-        handleRequest();
-    }, []);
 
     return (
         <>
@@ -41,11 +31,11 @@ function Page() {
                 />
                 <div className='w-full flex justify-between items-center flex-row flex-nowrap'>
                     <div className='relative ml-6 sm:ml-10 bottom-8 sm:mb-16 w-20 h-20 sm:scale-150 border-white dark:border-black border-[5px] rounded-full flex justify-center items-center'>
-                    <UserImage
-                        src=""
-                        username={user?.name}
-                        className='w-full h-full'
-                    />
+                        <UserImage
+                            src=""
+                            username={user?.name}
+                            className='w-full h-full'
+                        />
                     </div>
                     <button className='btn-edit px-3 sm:px-4 py-2 mr-5 sm:mr-6 mb-6 sm:mb-20'>
                         <Link href='./edit' className='no-underline'>Edit profile</Link>
@@ -73,15 +63,21 @@ function Page() {
                     </div>
                 </div>
                 <hr className='w-full border-primary' />
-                {/* {posts.map((post) => {
+                {user?.posts.map((post) => {
                     return (
                         <Post
                             key={post.id}
                             postContent={post}
-                            onLoad={() => post.id === posts.length && handleRequest()}
+                            onLoad={() => { }}
                         />
                     )
-                })} */}
+                })}
+                {
+                isLoading && 
+                <div className='w-full pt-6 flex justify-center items-center'>
+                    <Loader className='w-12 h-12' />
+                </div>
+                }
             </section>
         </>
     )
