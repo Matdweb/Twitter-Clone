@@ -21,7 +21,10 @@ export async function POST(request: Request) {
                     active: false
                 },
                 comments: [],
-                retweets: Math.floor(Math.random() * 201),
+                retweets: {
+                    amount: Math.floor(Math.random() * 201),
+                    active: false
+                },
                 imageURL: imageURLs[i]
             }
         })
