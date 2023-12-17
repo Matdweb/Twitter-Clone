@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import Loader from "./Loaders/Loader";
 
 type Props = React.ComponentProps<"img"> & {
-    username: string,
+    username?: string,
     src?: string
 };
 
-function UserImage({ className, src, username, onClick }: Props) {
+function UserImage({ className, src, username="Unauthenticated", onClick }: Props) {
     const user = useAppSelector(state => state.userReducer.user);
     const [imgSrc, setImgSrc] = useState<string>("");
 
