@@ -16,6 +16,8 @@ export async function POST(request: Request) {
         posts: posts.map((post: Post, i: number) => {
             return {
                 ...post,
+                name: "Name",
+                username: "username",
                 likes: {
                     amount: Math.floor(Math.random() * 201),
                     active: false
