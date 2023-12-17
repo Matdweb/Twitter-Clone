@@ -30,7 +30,7 @@ function Page() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [file, setFile] = useState<File>();
-    const [imagePreviewUrl, setImagePreviewUrl] = useState<string>('');
+    const [imagePreviewUrl, setImagePreviewUrl] = useState<string>("");
 
     const [urls, setUrls] = useState<{
         url: string,
@@ -88,7 +88,7 @@ function Page() {
         }
     }
 
-    
+
     const handlePreviewImage = (e: ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files?.[0] || undefined;
 
@@ -127,7 +127,11 @@ function Page() {
                     <div className='w-full sm:w-[19rem] flex justify-center items-center flex-col pb-3'>
                         <label htmlFor="userImage" className=''>
                             <p>User Image:</p>
-                            <UserImage src={imagePreviewUrl} className="w-20 h-20 mt-2 m-2 hover:opacity-60" />
+                            <UserImage
+                                src={imagePreviewUrl}
+                                className="w-20 h-20 mt-2 m-2 hover:opacity-60"
+                                username={user?.name || "Unauthenticated"}
+                            />
                         </label>
 
                         <input

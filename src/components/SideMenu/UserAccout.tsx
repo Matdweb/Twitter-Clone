@@ -23,7 +23,7 @@ function UserAccout() {
                             <div className={`flex justify-start flex-nowrap ${responsiveMenu ? `items-start flex-col` : `items-center flex-row`}`}>
                                 <div className='w-12 h-12 mr-2 mb-1'>
                                     <UserImage
-                                        username={user?.name}
+                                        username={user?.name || "Unauthenticated"}
                                         className='w-full h-full'
                                     />
                                 </div>
@@ -47,7 +47,7 @@ function UserAccout() {
                         </>
                         :
                         <UserImage
-                            username={user?.name}
+                            username={user?.name || "Unauthenticated"}
                             className='w-12 h-12'
                         />
                 }
