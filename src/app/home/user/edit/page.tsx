@@ -130,7 +130,7 @@ function Page() {
                             <UserImage
                                 src={imagePreviewUrl}
                                 className="w-20 h-20 mt-2 m-2 hover:opacity-60"
-                                username={user?.name || "Unauthenticated"}
+                                username={user?.name}
                             />
                         </label>
 

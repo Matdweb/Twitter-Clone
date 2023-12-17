@@ -27,7 +27,7 @@ function TwitterHeader({ section }: { section: string }) {
                         <UserImage
                             className='w-full h-full '
                             onClick={() => windowWidth <= 640 && dispatch(toggleResponsiveMenu())}
-                            username={user?.name || "Unauthenticated"}
+                            username={user?.name}
                         />
                     </div>
             }
