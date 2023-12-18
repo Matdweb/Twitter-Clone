@@ -14,7 +14,7 @@ export const bottomPostOptions = [{
             fontSize: "1rem",
         }
     }],
-    clickable: false,
+    clickable: true,
 },
 {
     id: 1,

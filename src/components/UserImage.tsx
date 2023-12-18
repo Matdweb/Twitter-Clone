@@ -1,7 +1,7 @@
 'use client'
 import { useAppSelector } from "@/redux/hook";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loader from "./Loaders/Loader";
 
 type Props = React.ComponentProps<"img"> & {
@@ -9,9 +9,21 @@ type Props = React.ComponentProps<"img"> & {
     src?: string
 };
 
-function UserImage({ className, src, username, onClick }: Props) {
+function UserImage({ className, src, username="Unauthenticated", onClick }: Props) {
     const user = useAppSelector(state => state.userReducer.user);
-    const imgSrc = src || user?.profileImage.thumbnailUrl || user?.profileImage.url;
+    const [imgSrc, setImgSrc] = useState<string>("");
+
+    useEffect(() => {
+        const update =
+            src ? src
+                :
+                username === user?.name ?
+                    user?.profileImage.thumbnailUrl || user?.profileImage.url
+                    :
+                    "";
+
+        setImgSrc(update);
+    }, [user])
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
 

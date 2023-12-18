@@ -1,5 +1,7 @@
 export type Post = {
     userId?: number,
+    name: string,
+    username: string,
     id: number,
     retweet: boolean,
     title: string,
