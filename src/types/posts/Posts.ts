@@ -4,6 +4,7 @@ export type Post = {
     username: string,
     id: number,
     retweet: boolean,
+    extraComment?: string,
     title: string,
     body: string,
     imageURL?: string,

@@ -7,6 +7,9 @@ export const postSchema = new Schema({
     retweet: {
         type: Boolean
     },
+    extraComment: {
+        type: String
+    },
     id: {
         type: Number
     },
