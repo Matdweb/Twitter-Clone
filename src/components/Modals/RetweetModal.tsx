@@ -38,7 +38,7 @@ function RetweetModal({ postContent, toggleModal }: Props) {
     return (
         <section className='w-screen h-screen top-0 left-0 fixed flex justify-end items-center flex-col z-30 rounded-xl'>
             <div className='opacity-60 bg-black w-full h-full' onClick={() => toggleModal()}></div>
-            <div className="w-full h-96 flex justify-start items-start flex-col p-5 bg-white dark:bg-black">
+            <div className="w-full min-h-[20rem] flex justify-start items-start flex-col p-5 bg-white dark:bg-black">
                 <div
                     className='p-3 flex justify-start items-center flex-row flex-nowrap hover:opacity-60 cursor-pointer'
                     onClick={() => handleRetweetPost()}
