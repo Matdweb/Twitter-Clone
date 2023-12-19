@@ -11,18 +11,18 @@ interface Props {
     onLoad?: () => void
 }
 
-function Retweet({ postContent, onLoad = () => { } }: Props) {
+function Retweet({ postContent }: Props) {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     return (
-        <section className='w-full h-full min-h-[8rem] overflow-visible p-5 flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray rounded-3xl border-2 border-white'>
+        <section className='w-full h-full min-h-[8rem] overflow-visible p-5 flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray rounded-3xl border-2'>
             <div className='w-12 h-full'>
                 <UserImage className='w-10 h-10' username={postContent.name} />
             </div>
             <div className='w-full h-full ml-4 flex justify-between items-start flex-col flex-nowrap'>
                 <div className='flex justify-start items-center flex-row flex-nowrap mb-1'>
-                    <p className='font-bold mr-1'>Name</p>
-                    <p className='font-gray-text'>@username</p>
+                    <p className='font-bold mr-1'>{postContent.name}</p>
+                    <p className='font-gray-text'>{postContent.username}</p>
                 </div>
                 <p>
                     {postContent.title}
