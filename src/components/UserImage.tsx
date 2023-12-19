@@ -9,7 +9,7 @@ type Props = React.ComponentProps<"img"> & {
     src?: string
 };
 
-function UserImage({ className, src, username="Unauthenticated", onClick }: Props) {
+function UserImage({ className, src, username = "Unauthenticated", onClick }: Props) {
     const user = useAppSelector(state => state.userReducer.user);
     const [imgSrc, setImgSrc] = useState<string>("");
 
@@ -23,7 +23,7 @@ function UserImage({ className, src, username="Unauthenticated", onClick }: Prop
                     "";
 
         setImgSrc(update);
-    }, [user])
+    }, [src, user])
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -36,7 +36,7 @@ function UserImage({ className, src, username="Unauthenticated", onClick }: Prop
                         <Loader className='w-12 h-12' />
                     </div>
                 }
-                <Image
+                <img
                     src={imgSrc}
                     width={0}
                     height={0}
