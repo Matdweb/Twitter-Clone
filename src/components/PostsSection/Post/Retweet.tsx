@@ -1,0 +1,45 @@
+'use client'
+import type { Post } from "@/types/posts/Posts";
+import UserImage from "@/components/UserImage";
+import Image from "next/image";
+import Loader from "@/components/Loaders/Loader";
+import { useState } from "react";
+
+interface Props {
+    key?: number,
+    postContent: Post,
+    onLoad?: () => void
+}
+
+function Retweet({ postContent, onLoad = () => { } }: Props) {
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    return (
+        <section className='w-full h-full min-h-[8rem] overflow-visible p-5 flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray rounded-3xl border-2 border-white'>
+            <div className='w-12 h-full'>
+                <UserImage className='w-10 h-10' username={postContent.name} />
+            </div>
+            <div className='w-full h-full ml-4 flex justify-between items-start flex-col flex-nowrap'>
+                <div className='flex justify-start items-center flex-row flex-nowrap mb-1'>
+                    <p className='font-bold mr-1'>Name</p>
+                    <p className='font-gray-text'>@username</p>
+                </div>
+                <p>
+                    {postContent.title}
+                    <br />
+                    <br />
+                    {postContent.body}
+                </p>
+                {
+                    isLoading &&
+                    <div className='w-full h-[12rem] flex justify-center items-center'>
+                        <Loader className="w-12 h-12" />
+                    </div>
+                }
+                <Image src={postContent.imageURL || ""} width={300} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => setIsLoading(false)} />
+            </div>
+        </section>
+    )
+}
+
+export default Retweet
