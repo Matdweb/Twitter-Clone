@@ -8,10 +8,9 @@ import PostOption from "./PostOption";
 import Loader from "@/components/Loaders/Loader";
 import { useAppSelector, useAppDispatch } from "@/redux/hook";
 import { toggleLikePost } from "@/redux/features/postsSlice";
-import { toggleRetweetPost } from "@/redux/features/postsSlice";
-import { addUserPost } from "@/redux/features/userSlice";
 import { FaRetweet } from "react-icons/fa6";
 import Retweet from "./Retweet";
+import RetweetModal from "@/components/Modals/RetweetModal";
 
 interface Props {
     key?: number,
@@ -26,22 +25,20 @@ function Post({ postContent, onLoad }: Props) {
 
     const [name, setName] = useState<string>('Unauthenticated');
     const [username, setUsername] = useState<string>('username');
+    const [modal, setModal] = useState<boolean>(false);
 
     const handleClick = (idClicked: number, name: string) => {
         if (name === 'likes') {
             handleLikePost(idClicked);
         } else if (name === 'retweets') {
-            handleRetweetPost(idClicked)
+            if (!postContent.retweets.active) {
+                setModal(true);
+            }
         }
     }
 
     const handleLikePost = (id: number) => {
         dispatch(toggleLikePost(id));
-    }
-
-    const handleRetweetPost = (id: number) => {
-        dispatch(toggleRetweetPost(id));
-        dispatch(addUserPost(postContent));
     }
 
     const handleLoadImage = () => {
@@ -64,7 +61,10 @@ function Post({ postContent, onLoad }: Props) {
                     <p className='font-bold mr-1'>
                         {
                             postContent.retweet ?
-                                name
+                                name.length > 12 ?
+                                    name.slice(0, 12) + "..."
+                                    :
+                                    name
                                 :
                                 postContent.name
                         }
@@ -88,9 +88,14 @@ function Post({ postContent, onLoad }: Props) {
                 </div>
                 {
                     postContent.retweet ?
-                        <div className='w-full scale-90 flex justify-end items-center'>
-                            <Retweet postContent={postContent} />
-                        </div>
+                        <>
+                            <p>
+                                {postContent.extraComment || ""}
+                            </p>
+                            <div className='w-full max-w-[30rem] scale-90 flex justify-end items-center'>
+                                <Retweet postContent={postContent} />
+                            </div>
+                        </>
                         :
                         <>
                             <p>
@@ -115,11 +120,18 @@ function Post({ postContent, onLoad }: Props) {
                                 key={option.id}
                                 option={option}
                                 post={postContent}
-                                handleClick={() => handleClick(postContent.id, option.name)}
+                                handleClick={() => !postContent.retweet && handleClick(postContent.id, option.name)}
                             />
                         )
                     })}
                 </div>
+                {
+                    modal &&
+                    <RetweetModal
+                        postContent={postContent}
+                        toggleModal={() => setModal(false)}
+                    />
+                }
             </div>
         </section>
     )
