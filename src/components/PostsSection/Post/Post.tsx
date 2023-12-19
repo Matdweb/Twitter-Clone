@@ -61,8 +61,8 @@ function Post({ postContent, onLoad }: Props) {
                     <p className='font-bold mr-1'>
                         {
                             postContent.retweet ?
-                                name.length > 12 ?
-                                    name.slice(0, 12) + "..."
+                                name.length > 10 ?
+                                    name.slice(0, 10) + "..."
                                     :
                                     name
                                 :
