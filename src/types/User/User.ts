@@ -1,3 +1,5 @@
+import type { Post } from "../posts/Posts";
+
 export type User = {
     name: string,
     email: string,
@@ -15,5 +17,5 @@ export type User = {
     },
     followers: [],
     following: [],
-    posts: []
+    posts: Post[]
 } | null;

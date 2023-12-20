@@ -16,6 +16,7 @@ export async function POST(request: Request) {
         posts: posts.map((post: Post, i: number) => {
             return {
                 ...post,
+                retweet: false,
                 name: "Name",
                 username: "username",
                 likes: {
@@ -23,8 +24,11 @@ export async function POST(request: Request) {
                     active: false
                 },
                 comments: [],
-                retweets: Math.floor(Math.random() * 201),
-                imageURL: imageURLs[i]
+                retweets: {
+                    amount: Math.floor(Math.random() * 201),
+                    active: false
+                },
+                imageURL: imageURLs[i],
             }
         })
     });

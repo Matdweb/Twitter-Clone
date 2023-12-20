@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       animation: {
         ping: 'ping .3s cubic-bezier(0, 0, 0.2, 1) 1',
-        bounce: 'bounce .8s 2'
+        spin: 'spin .5s linear 1'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

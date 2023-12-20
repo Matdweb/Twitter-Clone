@@ -19,7 +19,15 @@ function PostOption({
     const Icon = icons[0];
     const ActiveIcon = icons.length > 1 ? icons[1] : null;
 
-    const isActive = name === 'likes' ? likes.active : false;
+    const isActive =
+        name === 'likes'
+            ?
+            likes.active :
+            name === 'retweets'
+                ?
+                retweets.active
+                :
+                false;
 
     return (
         <div
@@ -33,7 +41,7 @@ function PostOption({
                     isActive && ActiveIcon ?
                         <ActiveIcon.Icon
                             style={ActiveIcon.style}
-                            className={`${name === 'likes' ? `animate-ping` : `animate-bounce`}`}
+                            className={`${name === 'likes' ? `animate-ping` : `animate-spin`}`}
                         />
                         :
                         <Icon.Icon style={Icon.style} />
@@ -44,7 +52,7 @@ function PostOption({
                     <p className='ml-2 text-primary-dark-gray dark:text-primary-gray'>
                         {name === "likes" && likes.amount}
                         {name === "comments" && comments.length}
-                        {name === "retweets" && retweets}
+                        {name === "retweets" && retweets.amount}
                     </p>
                 }
             </div>
