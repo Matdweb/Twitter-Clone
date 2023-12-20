@@ -36,10 +36,10 @@ function UserImage({ className, src, username = "Unauthenticated", onClick }: Pr
                         <Loader className='w-12 h-12' />
                     </div>
                 }
-                <img
+                <Image
                     src={imgSrc}
-                    width={0}
-                    height={0}
+                    width={500}
+                    height={500}
                     alt="profile-image"
                     className={`${isLoading && `scale-0 absolute`} ${className} rounded-full`}
                     onClick={onClick}
