@@ -12,7 +12,14 @@ export async function POST(request: Request) {
 
         const user = await User.findOneAndUpdate(
             { email: email },
-            { $push: { posts: post } },
+            {
+                $push: {
+                    posts: {
+                        $each: [post],
+                        $position: 0
+                    }
+                },
+            },
             { new: true, runValidators: true }
         );
 
