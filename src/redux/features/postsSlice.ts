@@ -68,6 +68,9 @@ const postsSlice = createSlice({
                     }
                 }
             })
+        },
+        addPost: (state, { payload }: { payload: Post }) => {
+            state.posts = [payload, ...state.posts];
         }
     },
     extraReducers: (builder) => {
@@ -87,5 +90,5 @@ const postsSlice = createSlice({
     }
 })
 
-export const { toggleLikePost, toggleRetweetPost } = postsSlice.actions;
+export const { toggleLikePost, toggleRetweetPost, addPost } = postsSlice.actions;
 export default postsSlice.reducer;
