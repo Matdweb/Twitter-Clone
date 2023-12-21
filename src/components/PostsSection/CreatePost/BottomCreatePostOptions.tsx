@@ -6,44 +6,49 @@ import { FaRegCalendarMinus } from "react-icons/fa";
 
 export const bottomCreatePostOptions = [{
     id: 0,
+    htmlfor: "postImage",
     Icon: LuImage,
     style: {
         fontSize: "1.5rem",
         cursor: " pointer",
     },
-    onClick: () => { }
+    aria: "Upload Image",
 },
 {
     id: 1,
+    htmlfor: "",
     Icon: MdOutlineGifBox,
     style: {
         fontSize: "1.5rem",
         cursor: " pointer",
     },
-    onClick: () => { }
+    aria: "Upload gif",
 },
 {
     id: 2,
+    htmlfor: "",
     Icon: IoStatsChartSharp,
     style: {
         fontSize: "1.5rem",
         cursor: " pointer",
     },
-    onClick: () => { }
+    aria: "See stats",
 }, {
     id: 3,
+    htmlfor: "",
     Icon: GrEmoji,
     style: {
         fontSize: "1.5rem",
         cursor: " pointer",
     },
-    onClick: () => { }
+    aria: "Use emojis",
 }, {
     id: 4,
+    htmlfor: "",
     Icon: FaRegCalendarMinus,
     style: {
         fontSize: "1.5rem",
         cursor: " pointer",
     },
-    onClick: () => { }
+    aria: "Calendar",
 }];
