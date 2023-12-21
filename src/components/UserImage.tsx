@@ -23,7 +23,7 @@ function UserImage({ className, src, username = "Unauthenticated", onClick }: Pr
                     "";
 
         setImgSrc(update);
-    }, [src, user])
+    }, [src, user, username])
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -32,7 +32,7 @@ function UserImage({ className, src, username = "Unauthenticated", onClick }: Pr
             <>
                 {
                     isLoading &&
-                    <div className='w-full h-full bg-white dark:bg-black flex justify-center items-center rounded-full' onClick={onClick}>
+                    <div className='w-full h-full bg-white dark:bg-black flex justify-center items-center rounded-full'>
                         <Loader className='w-12 h-12' />
                     </div>
                 }
@@ -48,7 +48,7 @@ function UserImage({ className, src, username = "Unauthenticated", onClick }: Pr
             </>
         )
     } else {
-        const firstLetter = username?.charAt(0).toUpperCase();
+        const firstLetter = username.charAt(0).toUpperCase();
         return (
             <div
                 className={`${className} rounded-full flex justify-center items-center border border-white bg-primary-gray`}
