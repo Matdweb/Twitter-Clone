@@ -54,7 +54,7 @@ function Post({ postContent, onLoad }: Props) {
     return (
         <section className='w-full h-full min-h-[8rem] overflow-visible p-5 flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray'>
             <div className='w-12 h-full'>
-                <UserImage className='w-10 h-10' username={postContent.name} />
+                <UserImage className='w-10 h-10' username={postContent.retweet ? name : postContent.name} />
             </div>
             <div className='w-full h-full ml-4 flex justify-between items-start flex-col flex-nowrap'>
                 <div className='flex justify-start items-center flex-row flex-nowrap mb-1'>
@@ -100,17 +100,22 @@ function Post({ postContent, onLoad }: Props) {
                         <>
                             <p>
                                 {postContent.title}
-                                <br />
-                                <br />
                                 {postContent.body}
                             </p>
+
                             {
-                                isLoading &&
-                                <div className='w-full h-[20rem] flex justify-center items-center'>
-                                    <Loader className="w-12 h-12" />
-                                </div>
+                                postContent.imageURL &&
+                                <>
+                                    {
+                                        isLoading &&
+                                        <div className='w-full h-[20rem] flex justify-center items-center'>
+                                            <Loader className="w-12 h-12" />
+                                        </div>
+                                    }
+
+                                    <Image src={postContent.imageURL} width={500} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => handleLoadImage()} />
+                                </>
                             }
-                            <Image src={postContent.imageURL || ""} width={500} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => handleLoadImage()} />
                         </>
                 }
                 <div className='w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray'>
