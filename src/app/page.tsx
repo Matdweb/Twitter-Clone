@@ -56,7 +56,7 @@ export default function Home() {
               }
             </div>
 
-            <div className='max-w-[23rem]'>
+            <div className='max-w-[20rem] sm:max-w-[23rem]'>
               <p className='block mb-5'>
                 By singing up you agree to the
                 <Link href='#' className='text-primary-blue'> Terms of Service </Link>
