@@ -52,7 +52,7 @@ export const menuOptions = [
     {
         id: 4,
         name: "Profile",
-        href: "./home/user/profile",
+        href: "/home/user/profile",
         icon: {
             ligth: <BsPerson style={{ fontSize: "1.75rem" }} />,
             bold: <BsPersonFill style={{ fontSize: "1.75rem" }} />

@@ -28,10 +28,21 @@ function RetweetModal({ postContent, toggleModal }: Props) {
         toggleModal();
         dispatch(toggleRetweetPost(postContent.id));
 
-        if (comment) {
-            postContent = { ...postContent, extraComment: comment }
-        }
+        const newRetweetsAmount = postContent.retweets.amount + 1;
 
+            postContent = {
+                ...postContent,
+                retweet: true,
+                retweets: {
+                    amount: newRetweetsAmount,
+                    active: true
+                }
+            }
+
+        if (comment) {
+            postContent.extraComment = comment;
+        }
+        
         dispatch(addUserPost(postContent));
     }
 

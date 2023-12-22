@@ -26,8 +26,6 @@ function Retweet({ postContent }: Props) {
                 </div>
                 <p>
                     {postContent.title}
-                    <br />
-                    <br />
                     {postContent.body}
                 </p>
                 {

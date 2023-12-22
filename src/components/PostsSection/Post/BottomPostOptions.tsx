@@ -29,7 +29,8 @@ export const bottomPostOptions = [{
         Icon: AiOutlineRetweet,
         style: {
             fontSize: "1rem",
-            color: "lightgreen"
+            color: "lightgreen",
+            animation: "spin .5s linear 1"
         }
     }],
     clickable: true,
@@ -47,7 +48,8 @@ export const bottomPostOptions = [{
         Icon: GoHeartFill,
         style: {
             fontSize: "1rem",
-            color: "#EF1C5C"
+            color: "#EF1C5C",
+            animation: "ping .3s cubic-bezier(0, 0, 0.2, 1) 1"
         }
     }],
     clickable: true,

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { User } from "@/types/User/User";
-import Post from "@/components/PostsSection/Post/Post";
+import type { Post } from "@/types/posts/Posts";
 import { RootState } from "../store";
 
 interface initialState {
@@ -31,23 +31,12 @@ export const fetchUser = createAsyncThunk('user/fetchUser',
 export const addUserPost = createAsyncThunk('user/addUserPost',
     async (post: Post, thunkAPI) => {
 
-        const { userReducer } = thunkAPI.getState() as RootState;
-        const email = userReducer.user?.email;
-        const lastPostId = userReducer.user?.posts.length || 0;
+        const { userReducer: { user } } = thunkAPI.getState() as RootState;
+        const email = user?.email;
+        const lastPostId: number = user && user.posts.length > 0 && user.posts[0].id || 100;
+        post.id = lastPostId + 1;
 
-        const newRetweetsAmount = post.retweets.amount + 1;
-
-        post = {
-            ...post,
-            id: lastPostId + 1,
-            retweet: true,
-            retweets: {
-                amount:newRetweetsAmount, 
-                active: true
-            }
-        }
-
-        const response = await fetch('api/user/addPost', {
+        const response = await fetch('/api/user/addPost', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, post })

@@ -1,17 +1,24 @@
 import { Schema } from "mongoose";
+import type { Post } from "@/types/posts/Posts";
 
 export const postSchema = new Schema({
     userId: {
         type: Number,
+    },
+    name: {
+        type: String
+    },
+    username: {
+        type: String
+    },
+    id: {
+        type: Number
     },
     retweet: {
         type: Boolean
     },
     extraComment: {
         type: String
-    },
-    id: {
-        type: Number
     },
     title: {
         type: String,

@@ -60,9 +60,7 @@ function HomeLayout({
                 </section>
 
 
-                {windowWidth > 768 &&
-                    <PopularTrendsSection />
-                }
+                <PopularTrendsSection />
 
                 {!responsiveMenu && windowWidth < 640 ? <TweetButton className='fixed w-12 h-12 scale-110 bottom-0 right-0 m-3' /> : ''}
             </section>

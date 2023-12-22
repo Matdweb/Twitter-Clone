@@ -27,7 +27,7 @@ function PostsSection() {
     return (
         <>
             <TwitterHeader section='Home' />
-            <CreatePost />
+            <CreatePost className='hidden sm:flex' />
 
             <section className={`pt-14 sm:pt-0 ${responsiveMenu && `opacity-50`}`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
                 {posts.map((post) => {
