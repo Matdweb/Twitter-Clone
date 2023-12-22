@@ -8,6 +8,7 @@ import PopularTrendsSection from '@/components/TrendsSection/PopularTrendsSectio
 import TweetButton from '@/components/Buttons/TweetButton';
 import { fetchUser } from '@/redux/features/userSlice';
 import TwitterIcon from '@/components/TwitterIcon';
+import { useRouter } from 'next/navigation';
 
 function HomeLayout({
     children
@@ -17,6 +18,7 @@ function HomeLayout({
     const windowWidth = useAppSelector(state => state.windowWidth);
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const router = useRouter();
 
     const { data: session } = useSession();
     const dispatch = useAppDispatch();
@@ -28,8 +30,9 @@ function HomeLayout({
     useEffect(() => {
         if (session?.user) {
             dispatch(fetchUser(session?.user?.email || ""))
+        } else {
+            router.push('/');
         }
-
     }, [session?.user])
 
     useEffect(() => {

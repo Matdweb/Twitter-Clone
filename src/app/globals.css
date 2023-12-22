@@ -27,14 +27,14 @@ p {
 
 .font-big-title {
   font-family: var(--font-roboto);
-  font-size: 5rem;
   font-weight: 900;
+  @apply text-[3rem] sm:text-[5rem]
 }
 
 .font-primary-title-roboto {
   font-family: var(--font-roboto);
-  font-size: 2.5rem;
   font-weight: 900;
+  @apply text-3xl sm:text-[2.5rem];
 }
 
 .font-primary-title-bold {

@@ -1,9 +1,8 @@
 'use client'
-import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { toggleResponsiveMenu } from "@/redux/features/responsiveMenuSlice";
 import TwitterHeader from "@/components/Header/TwitterHeader";
-import TwitterBackImage from "../../../../../public/assets/img/twitter-background-img.png";
+import TwitterBackImage from "../../../../../public/assets/img/twitter-profile-background-img.png";
 import Image from "next/image";
 import Link from 'next/link';
 import Post from "@/components/PostsSection/Post/Post";
