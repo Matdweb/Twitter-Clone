@@ -8,11 +8,9 @@ import twitterBackImage from '../../public/assets/img/twitter-background-img.png
 import Link from "next/link";
 import TwitterIcon from "@/components/TwitterIcon";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 import Loader from "@/components/Loaders/Loader";
 
 export default function Home() {
-  const user = useAppSelector(state => state.userReducer.user);
   const isLoading = useAppSelector(state => state.userReducer.isLoading);
   const { data: session } = useSession()
   const dispatch = useAppDispatch();
@@ -57,7 +55,6 @@ export default function Home() {
                   </Link>
               }
             </div>
-            <p onClick={() => signOut()} className='cursor-pointer hover:underline'>Sign out</p>
 
             <div className='max-w-[23rem]'>
               <p className='block mb-5'>
