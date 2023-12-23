@@ -11,6 +11,7 @@ import { toggleLikePost } from "@/redux/features/postsSlice";
 import { FaRetweet } from "react-icons/fa6";
 import Retweet from "./Retweet";
 import RetweetModal from "@/components/Modals/RetweetModal";
+import CommentModal from "@/components/Modals/CommentModal";
 
 interface Props {
     key?: number,
@@ -25,15 +26,18 @@ function Post({ postContent, onLoad }: Props) {
 
     const [name, setName] = useState<string>('Unauthenticated');
     const [username, setUsername] = useState<string>('username');
-    const [modal, setModal] = useState<boolean>(false);
+    const [retweetModal, setRetweetModal] = useState<boolean>(false);
+    const [commentModal, setCommentModal] = useState<boolean>(false);
 
     const handleClick = (idClicked: number, name: string) => {
         if (name === 'likes') {
             handleLikePost(idClicked);
         } else if (name === 'retweets') {
             if (!postContent.retweets.active) {
-                setModal(true);
+                setRetweetModal(true);
             }
+        } else if (name === 'comments') {
+            setCommentModal(true);
         }
     }
 
@@ -126,10 +130,17 @@ function Post({ postContent, onLoad }: Props) {
                     })}
                 </div>
                 {
-                    modal &&
+                    retweetModal &&
                     <RetweetModal
                         postContent={postContent}
-                        toggleModal={() => setModal(false)}
+                        toggleModal={() => setRetweetModal(false)}
+                    />
+                }
+                {
+                    commentModal &&
+                    <CommentModal
+                        postContent={postContent}
+                        toggleModal={() => setCommentModal(false)}
                     />
                 }
             </div>
