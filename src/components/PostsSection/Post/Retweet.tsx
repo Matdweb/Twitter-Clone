@@ -34,7 +34,10 @@ function Retweet({ postContent }: Props) {
                         <Loader className="w-12 h-12" />
                     </div>
                 }
-                <Image src={postContent.imageURL || ""} width={300} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => setIsLoading(false)} />
+                {
+                    postContent.imageURL &&
+                    <Image src={postContent.imageURL || ""} width={300} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => setIsLoading(false)} />
+                }
             </div>
         </section>
     )
