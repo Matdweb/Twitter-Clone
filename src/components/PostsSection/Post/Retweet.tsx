@@ -29,14 +29,17 @@ function Retweet({ postContent }: Props) {
                     {postContent.body}
                 </p>
                 {
-                    isLoading &&
-                    <div className='w-full h-[12rem] flex justify-center items-center'>
-                        <Loader className="w-12 h-12" />
-                    </div>
-                }
-                {
                     postContent.imageURL &&
-                    <Image src={postContent.imageURL || ""} width={300} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => setIsLoading(false)} />
+                    <>
+                        {
+                            isLoading &&
+                            <div className='w-full h-[12rem] flex justify-center items-center'>
+                                <Loader className="w-12 h-12" />
+                            </div>
+                        }
+
+                        <Image src={postContent.imageURL || ""} width={300} height={0} className='mt-4 rounded-3xl' alt="post-image" onLoad={() => setIsLoading(false)} />
+                    </>
                 }
             </div>
         </section>
