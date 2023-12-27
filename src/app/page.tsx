@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { fetchUser } from "@/redux/features/userSlice";
 import Image from "next/image";
 import twitterBackImage from '../../public/assets/img/twitter-background-img.png';
@@ -70,6 +70,14 @@ export default function Home() {
               <p className='block'>
                 Already have an account? <Link href='auth/login' className='text-primary-blue'>Log in</Link>
               </p>
+
+              {
+                session?.user &&
+                <p className='block'>
+                  Already Logged in?
+                  <span onClick={() => signOut()} className='text-primary-blue cursor-pointer hover:underline'> Sign Out</span>
+                </p>
+              }
 
             </div>
           </div>
