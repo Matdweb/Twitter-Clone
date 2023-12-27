@@ -14,7 +14,8 @@ function Comments({ comments }: Props) {
                         <div className='mr-4'>
                             <UserImage className='w-10 h-10' username={comment.username} />
                         </div>
-                        <div>
+                        <div className='w-full flex justify-center items-start flex-col flex-nowrap'>
+                            <p className='font-bold'>{comment.username}</p>
                             <p>{comment.body}</p>
                         </div>
                     </div>
