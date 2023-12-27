@@ -20,22 +20,23 @@ function CommentModal({ postContent, toggleModal }: Props) {
     const dispatch = useAppDispatch();
 
     const handleCommentPost = async () => {
-        setIsLoading(true);
-        const newComment = {
-            id: 0,
-            body: comment,
-            username: "username",
-        }
-        const data = await dispatch(addComment({
-            postId: postContent.id,
-            comment: newComment
-        }));
+        if (comment.length > 0) {
+            setIsLoading(true);
+            const newComment = {
+                id: 0,
+                body: comment,
+                username: "username",
+            }
+            const data = await dispatch(addComment({
+                postId: postContent.id,
+                comment: newComment
+            }));
 
-        if (data) {
-            setIsLoading(false);
-            setComment('');
+            if (data) {
+                setIsLoading(false);
+                setComment('');
+            }
         }
-
 
     }
 
