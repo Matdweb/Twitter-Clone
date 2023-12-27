@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import type { Post } from "@/types/posts/Posts";
+import { commentsSchema } from "./commentsSchema";
 
 export const postSchema = new Schema({
     userId: {
@@ -46,6 +46,6 @@ export const postSchema = new Schema({
         }
     },
     comments: {
-        type: []
+        type: [commentsSchema]
     }
 });

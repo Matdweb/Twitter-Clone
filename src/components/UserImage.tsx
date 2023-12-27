@@ -41,7 +41,7 @@ function UserImage({ className, src, username = "Unauthenticated", onClick }: Pr
                     width={500}
                     height={500}
                     alt="profile-image"
-                    className={`${isLoading && `scale-0 absolute`} ${className} rounded-full`}
+                    className={`${isLoading && `scale-0 absolute`} ${className} min-w-[2.5rem] min-h-[2.5rem] rounded-full`}
                     onClick={onClick}
                     onLoad={() => setIsLoading(false)}
                 />
