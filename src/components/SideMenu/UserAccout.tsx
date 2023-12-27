@@ -35,7 +35,7 @@ function UserAccout() {
 
                                         {userIsLoading ? "Loading..." :
                                             user ?
-                                                user.name.length > 13 ? user.name.slice(0, 13) + "..." : user.name
+                                                user.name?.length > 13 ? user.name.slice(0, 13) + "..." : user.name
                                                 :
                                                 "Unauthenticated"
                                         }
