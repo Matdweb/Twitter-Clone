@@ -1,3 +1,5 @@
+import { comment } from "./comments/comment"
+
 export type Post = {
     userId?: number,
     name: string,
@@ -12,7 +14,7 @@ export type Post = {
       amount: number,
       active: boolean
     },
-    comments: [],
+    comments: comment[],
     retweets: {
       amount: number,
       active: boolean
