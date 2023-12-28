@@ -39,7 +39,7 @@ function PostOption({
 
                 {
                     isActive && ActiveIcon ?
-                        <ActiveIcon.Icon style={ActiveIcon.style} />
+                        <ActiveIcon.Icon style={ActiveIcon.style} className={name === 'likes' ? 'animate-ping' :''} />
                         :
                         <Icon.Icon style={Icon.style} />
                 }
