@@ -11,7 +11,7 @@ import Loader from '@/components/Loaders/Loader';
 
 function Page({ params }: { params: { id: number } }) {
     const [postContent, setPostContent] = useState<PostType | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const posts = useAppSelector((state) => state.postsReducer.posts);
     const dispatch = useAppDispatch();
 
