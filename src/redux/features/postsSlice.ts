@@ -28,6 +28,32 @@ export const fecthPosts = createAsyncThunk('posts/fetchPosts',
         return posts;
     })
 
+export const toggleLikePost = createAsyncThunk('posts/toggleLikePost',
+    async (postId: number, thunkAPI) => {
+        const { userReducer: { user } } = thunkAPI.getState() as RootState;
+        const email = user?.email || "";
+
+        if (postId > 100) {
+            const post = user?.posts.find((post) => {
+                return post.id === postId;
+            });
+
+            const newLikes = post ? post.likes.active ? post.likes.amount - 1 : post.likes.amount + 1 : 0;
+            const newActive = !(post?.likes.active) || false;
+
+            const response = await fetch('/api/posts/likePost', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, postId, newLikes, newActive })
+            });
+
+            const { status } = await response.json();
+            if (status !== 201) return null;
+        }
+
+        return postId;
+    })
+
 export const addComment = createAsyncThunk('posts/addComment',
     async ({ postId, comment }: { postId: number, comment: comment }, thunkAPI) => {
         const { userReducer: { user }, postsReducer: { posts } } = thunkAPI.getState() as RootState;
@@ -71,25 +97,6 @@ const postsSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {
-        toggleLikePost: (state, { payload }: { payload: number }) => {
-            state.posts = state.posts.map(({ id, likes, ...rest }) => {
-                if (id === payload) {
-                    const newLikes = likes.active ? likes.amount - 1 : likes.amount + 1
-                    return {
-                        id,
-                        likes: {
-                            amount: newLikes,
-                            active: !likes.active
-                        },
-                        ...rest,
-                    }
-                } else {
-                    return {
-                        id, likes, ...rest
-                    }
-                }
-            })
-        },
         toggleRetweetPost: (state, { payload }: { payload: number }) => {
             state.posts = state.posts.map(({ id, likes, retweets, ...rest }) => {
                 if (id === payload) {
@@ -152,8 +159,38 @@ const postsSlice = createSlice({
             state.error = true;
             state.isLoading = false;
         });
+
+        builder.addCase(toggleLikePost.pending, (state) => {
+            state.isLoading = true;
+        });
+
+        builder.addCase(toggleLikePost.fulfilled, (state, { payload }) => {
+            state.isLoading = false;
+            state.posts = state.posts.map(({ id, likes, ...rest }) => {
+                if (id === payload) {
+                    const newLikes = likes.active ? likes.amount - 1 : likes.amount + 1
+                    return {
+                        id,
+                        likes: {
+                            amount: newLikes,
+                            active: !likes.active
+                        },
+                        ...rest,
+                    }
+                } else {
+                    return {
+                        id, likes, ...rest
+                    }
+                }
+            })
+        });
+
+        builder.addCase(toggleLikePost.rejected, (state) => {
+            state.error = true;
+            state.isLoading = false;
+        });
     }
 })
 
-export const { toggleLikePost, toggleRetweetPost, addPost } = postsSlice.actions;
+export const { toggleRetweetPost, addPost } = postsSlice.actions;
 export default postsSlice.reducer;
