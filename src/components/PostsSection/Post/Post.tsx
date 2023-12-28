@@ -12,17 +12,20 @@ import { FaRetweet } from "react-icons/fa6";
 import Retweet from "./Retweet";
 import RetweetModal from "@/components/Modals/RetweetModal";
 import CommentModal from "@/components/Modals/CommentModal";
+import { useRouter } from "next/navigation";
 
 interface Props {
     key?: number,
     postContent: Post,
-    onLoad: () => void
+    onLoad: () => void,
+    options?: boolean
 }
 
-function Post({ postContent, onLoad }: Props) {
+function Post({ postContent, onLoad, options=true }: Props) {
     const user = useAppSelector((state) => state.userReducer.user);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const [name, setName] = useState<string>('Unauthenticated');
     const [username, setUsername] = useState<string>('username');
@@ -48,6 +51,10 @@ function Post({ postContent, onLoad }: Props) {
     const handleLoadImage = () => {
         onLoad();
         setIsLoading(false);
+    }
+
+    const handleRedirectToPostPage = () => {
+        router.push('/home/post/' + postContent.id)
     }
 
     useEffect(() => {
@@ -102,7 +109,7 @@ function Post({ postContent, onLoad }: Props) {
                         </>
                         :
                         <>
-                            <p>
+                            <p className='cursor-pointer' onClick={()=> handleRedirectToPostPage()}>
                                 {postContent.title}
                                 {postContent.body}
                             </p>
@@ -122,14 +129,18 @@ function Post({ postContent, onLoad }: Props) {
                             }
                         </>
                 }
-                <div className='w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray'>
+                <div className={`w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray ${postContent.retweet && `opacity-40 cursor-not-allowed`} ${!options && `opacity-40 cursor-not-allowed`}`} onClick={()=> {
+                    if(!options){
+                        handleRedirectToPostPage();
+                    }
+                }}>
                     {bottomPostOptions.map((option) => {
                         return (
                             <PostOption
                                 key={option.id}
                                 option={option}
                                 post={postContent}
-                                handleClick={() => !postContent.retweet && handleClick(postContent.id, option.name)}
+                                handleClick={() => !postContent.retweet && options ? handleClick(postContent.id, option.name) : ''}
                             />
                         )
                     })}
