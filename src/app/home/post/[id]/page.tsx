@@ -60,7 +60,7 @@ function Page({ params }: { params: { id: number } }) {
                         </>
 
                         :
-                        <h2 className='font-primary-title-roboto mt-7 ml-5'>We're sorry, we lost your post :(</h2>
+                        <h2 className='font-primary-title-roboto mt-7 ml-5'>We &apos; re sorry, we lost your post :(</h2>
                 }
             </section>
         </>
