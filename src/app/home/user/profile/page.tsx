@@ -68,6 +68,7 @@ function Page() {
                             key={post.id}
                             postContent={post}
                             onLoad={() => { }}
+                            options={false}
                         />
                     )
                 })}
