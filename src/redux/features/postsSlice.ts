@@ -32,9 +32,16 @@ export const addComment = createAsyncThunk('posts/addComment',
     async ({ postId, comment }: { postId: number, comment: comment }, thunkAPI) => {
         const { userReducer: { user }, postsReducer: { posts } } = thunkAPI.getState() as RootState;
 
-        const [postToComment] = posts.filter((post) => {
+        const [post] = posts.filter((post) => {
             return post.id === postId;
-        })
+        });
+
+        const postToComment = postId > 100 &&
+            user?.posts.find((post) => {
+                return post.id === postId;
+            })
+            ||
+            post;
 
         comment = {
             ...comment,
