@@ -44,6 +44,22 @@ export const addUserPost = createAsyncThunk('user/addUserPost',
 
         const { status } = await response.json();
         return post;
+    });
+
+export const findPost = createAsyncThunk('user/findPost',
+    async (postId: number, thunkAPI) => {
+        const { userReducer: { user } } = thunkAPI.getState() as RootState;
+        const email = user?.email || "";
+
+        const response = await fetch('/api/posts/findPost', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, postId })
+        });
+
+        const { status, post } = await response.json();
+        if (status !== 201) return null;
+        return post;
     })
 
 const userSlice = createSlice({
