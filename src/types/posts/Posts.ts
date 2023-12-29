@@ -1,7 +1,7 @@
 import { comment } from "./comments/comment"
 
 export type Post = {
-    userId?: number,
+    userId: string,
     name: string,
     username: string,
     id: number,
