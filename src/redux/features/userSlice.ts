@@ -24,7 +24,6 @@ export const fetchUser = createAsyncThunk('user/fetchUser',
         });
 
         const { user } = await response.json();
-
         return user;
     })
 
@@ -43,18 +42,17 @@ export const addUserPost = createAsyncThunk('user/addUserPost',
         });
 
         const { status } = await response.json();
+        if(status !== 201) return null;
         return post;
     });
 
 export const findPost = createAsyncThunk('user/findPost',
-    async (postId: number, thunkAPI) => {
-        const { userReducer: { user } } = thunkAPI.getState() as RootState;
-        const email = user?.email || "";
+    async ({ userId, postId }: { userId: string, postId: number }, thunkAPI) => {
 
         const response = await fetch('/api/posts/findPost', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, postId })
+            body: JSON.stringify({ userId, postId })
         });
 
         const { status, post } = await response.json();
@@ -87,7 +85,7 @@ const userSlice = createSlice({
 
         builder.addCase(addUserPost.fulfilled, (state, action) => {
             state.isLoading = false;
-            if (state.user) {
+            if (state.user && action.payload) {
                 state.user.posts = [action.payload, ...state.user.posts]
             }
         });
