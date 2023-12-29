@@ -59,8 +59,10 @@ function CreatePost({ className }: { className?: string }) {
         const post = createNewPost(user, postText, imageUrl);
 
         const data = await dispatch(addUserPost(post));
-        dispatch(addPost(data.payload as Post))
-
+        if(data){
+            dispatch(addPost(data.payload as Post))
+        }
+        
         setPostText('');
         handleRemoveImage();
         setIsLoading(false);
