@@ -21,7 +21,7 @@ interface Props {
     options?: boolean
 }
 
-function Post({ postContent, onLoad, options=true }: Props) {
+function Post({ postContent, onLoad, options = true }: Props) {
     const user = useAppSelector((state) => state.userReducer.user);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const dispatch = useAppDispatch();
@@ -54,7 +54,7 @@ function Post({ postContent, onLoad, options=true }: Props) {
     }
 
     const handleRedirectToPostPage = () => {
-        router.push('/home/post/' + postContent.id)
+        router.push(`/home/user/${postContent.userId}/post/${postContent.id}`)
     }
 
     useEffect(() => {
@@ -109,7 +109,7 @@ function Post({ postContent, onLoad, options=true }: Props) {
                         </>
                         :
                         <>
-                            <p className='cursor-pointer' onClick={()=> handleRedirectToPostPage()}>
+                            <p className='cursor-pointer' onClick={() => handleRedirectToPostPage()}>
                                 {postContent.title}
                                 {postContent.body}
                             </p>
@@ -129,8 +129,8 @@ function Post({ postContent, onLoad, options=true }: Props) {
                             }
                         </>
                 }
-                <div className={`w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray ${postContent.retweet && `opacity-40 cursor-not-allowed`} ${!options && `opacity-40 cursor-not-allowed`}`} onClick={()=> {
-                    if(!options){
+                <div className={`w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray ${postContent.retweet && `opacity-40 cursor-not-allowed`} ${!options && `opacity-40 cursor-not-allowed`}`} onClick={() => {
+                    if (!options) {
                         handleRedirectToPostPage();
                     }
                 }}>
