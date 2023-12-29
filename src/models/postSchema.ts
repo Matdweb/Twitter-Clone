@@ -3,7 +3,7 @@ import { commentsSchema } from "./commentsSchema";
 
 export const postSchema = new Schema({
     userId: {
-        type: Number,
+        type: String,
     },
     name: {
         type: String
