@@ -3,13 +3,13 @@ import User from "@/models/user";
 import { User as UserType } from "@/types/User/User";
 
 export async function POST(request: Request) {
-    const { email, postId } = await request.json();
+    const { userId, postId } = await request.json();
 
     try {
         await connectMongoDB();
         const user: UserType = await User.findOne(
             {
-                email,
+                _id: userId,
                 posts: { $elemMatch: { id: postId } }
             },
         );
