@@ -9,14 +9,14 @@ import Link from 'next/link';
 import { findPost } from '@/redux/features/userSlice';
 import Loader from '@/components/Loaders/Loader';
 
-function Page({ params }: { params: { id: number } }) {
+function Page({ params }: { params: { userId: string, postId: number } }) {
     const [postContent, setPostContent] = useState<PostType | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const posts = useAppSelector((state) => state.postsReducer.posts);
     const dispatch = useAppDispatch();
 
     const handlePost = async () => {
-        const postId = params.id;
+        const { userId, postId } = params;
         if (postId <= 100) {
             const post = posts.find((post) => {
                 return post.id == postId
@@ -25,7 +25,7 @@ function Page({ params }: { params: { id: number } }) {
             setPostContent(post || null);
         } else if (postId > 100) {
             setIsLoading(true);
-            const data = await dispatch(findPost(postId));
+            const data = await dispatch(findPost({ userId, postId }));
             setPostContent(data.payload as PostType);
             setIsLoading(false);
         }
@@ -41,17 +41,17 @@ function Page({ params }: { params: { id: number } }) {
             <section className='pt-16 sm:pt-3'>
                 <Link href='/home' className='px-4 underline'>Back</Link>
                 {
+                    isLoading &&
+                    <div className='w-full h-[20rem] flex justify-center items-center'>
+                        <Loader className="w-12 h-12" />
+                    </div>
+                }
+                {
                     postContent ?
                         <>
-                            {
-                                isLoading &&
-                                <div className='w-full h-[20rem] flex justify-center items-center'>
-                                    <Loader className="w-12 h-12" />
-                                </div>
-                            }
                             <Post
                                 postContent={postContent}
-                                onLoad={() => {}}
+                                onLoad={() => { }}
                                 options={true}
                             />
                             <Comments
