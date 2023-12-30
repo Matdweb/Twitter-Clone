@@ -8,7 +8,6 @@ import PopularTrendsSection from '@/components/TrendsSection/PopularTrendsSectio
 import TweetButton from '@/components/Buttons/TweetButton';
 import { fetchUser } from '@/redux/features/userSlice';
 import TwitterIcon from '@/components/TwitterIcon';
-import { useRouter } from 'next/navigation';
 
 function HomeLayout({
     children
@@ -17,8 +16,8 @@ function HomeLayout({
 }) {
     const windowWidth = useAppSelector(state => state.windowWidth);
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
+    const isLoadingPosts = useAppSelector(state => state.userReducer.isLoading)
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const router = useRouter();
 
     const { data: session } = useSession();
     const dispatch = useAppDispatch();
@@ -30,8 +29,6 @@ function HomeLayout({
     useEffect(() => {
         if (session?.user) {
             dispatch(fetchUser(session?.user?.email || ""))
-        } else {
-            router.push('/');
         }
     }, [session?.user])
 
@@ -42,7 +39,11 @@ function HomeLayout({
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [])
+    }, []);
+
+    useEffect(()=> {
+        if(!isLoadingPosts) setIsLoading(false);
+    },[isLoadingPosts])
 
     return (
         <>
@@ -52,13 +53,12 @@ function HomeLayout({
                     <TwitterIcon fontSize="5rem" />
                 </section>
             }
-            <section className='w-full max-w-[93rem] m-auto max-h-screen min-h-screen bg-white dark:bg-black flex justify-start items-start overflow-x-hidden overflow-y-hidden' onLoad={()=> setIsLoading(false)}>
+            <section className='w-full max-w-[93rem] m-auto max-h-screen min-h-screen bg-white dark:bg-black flex justify-start items-start overflow-x-hidden overflow-y-hidden' onLoad={()=> setIsLoading(false)} onLoadStart={()=> setIsLoading(false)}>
                 <SideMenu />
 
                 <section className={`${responsiveMenu ? `min-w-full border-l` : `w-1/3`} max-h-screen min-h-screen border-primary grow overflow-y-scroll`}>
                     {children}
                 </section>
-
 
                 <PopularTrendsSection />
 
