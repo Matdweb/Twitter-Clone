@@ -34,6 +34,7 @@ export const addUserPost = createAsyncThunk('user/addUserPost',
         const email = user?.email;
         const lastPostId: number = user && user.posts.length > 0 && user.posts[0].id || 100;
         post.id = lastPostId + 1;
+        post.userId = user?._id || '';
 
         const response = await fetch('/api/user/addPost', {
             method: 'POST',
@@ -91,6 +92,19 @@ const userSlice = createSlice({
         });
 
         builder.addCase(addUserPost.rejected, (state) => {
+            state.error = true;
+            state.isLoading = false;
+        });
+
+        builder.addCase(findPost.pending, (state) => {
+            state.isLoading = true;
+        });
+
+        builder.addCase(findPost.fulfilled, (state, action) => {
+            state.isLoading = false;
+        });
+
+        builder.addCase(findPost.rejected, (state) => {
             state.error = true;
             state.isLoading = false;
         });
