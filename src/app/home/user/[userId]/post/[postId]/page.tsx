@@ -5,11 +5,13 @@ import Post from '@/components/PostsSection/Post/Post';
 import Comments from '@/components/PostsSection/Comments/Comments';
 import type { Post as PostType } from '@/types/posts/Posts'
 import { useAppSelector, useAppDispatch } from '@/redux/hook';
+import { toggleResponsiveMenu } from '@/redux/features/responsiveMenuSlice';
 import Link from 'next/link';
 import { findPost } from '@/redux/features/userSlice';
 import Loader from '@/components/Loaders/Loader';
 
 function Page({ params }: { params: { userId: string, postId: number } }) {
+    const responsiveMenu = useAppSelector((state) => state.responsiveMenu)
     const [postContent, setPostContent] = useState<PostType | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const posts = useAppSelector((state) => state.postsReducer.posts);
@@ -38,7 +40,7 @@ function Page({ params }: { params: { userId: string, postId: number } }) {
     return (
         <>
             <TwitterHeader section='Post' />
-            <section className='pt-16 sm:pt-3'>
+            <section className={`w-full pt-16 sm:pt-3 ${responsiveMenu && `cursor-pointer opacity-50`}`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
                 <Link href='/home' className='px-4 underline'>Back</Link>
                 {
                     isLoading &&
