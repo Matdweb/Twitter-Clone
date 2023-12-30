@@ -1,14 +1,13 @@
 import { connectMongoDB } from "@/lib/mongoDB/mongodb";
 import User from "@/models/user";
-import { User as UserType } from "@/types/User/User";
 import type { Post } from "@/types/posts/Posts";
 
 export async function POST(request: Request) {
-    const { email, postId, newLikes, newActive } = await request.json();
+    const { userId, postId } = await request.json();
 
     try {
         await connectMongoDB();
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ _id: userId });
 
         if (!user) {
             return Response.json({ status: 400, statusText: 'There was an error finding the user :(', post: null });
@@ -37,7 +36,7 @@ export async function POST(request: Request) {
         await user.save();
 
         if (postToUpdate) {
-            return Response.json({ status: 201, statusText: 'User updated successfully', endPost: postToUpdate });
+            return Response.json({ status: 201, statusText: 'User updated successfully', post: postToUpdate });
         }
 
     } catch (e) {
