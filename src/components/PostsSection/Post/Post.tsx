@@ -45,7 +45,10 @@ function Post({ postContent, onLoad, options = true }: Props) {
     }
 
     const handleLikePost = (id: number) => {
-        dispatch(toggleLikePost(id));
+        dispatch(toggleLikePost({
+            userId: postContent.userId,
+            postId: postContent.id
+        }));
     }
 
     const handleLoadImage = () => {
@@ -55,6 +58,14 @@ function Post({ postContent, onLoad, options = true }: Props) {
 
     const handleRedirectToPostPage = () => {
         router.push(`/home/user/${postContent.userId}/post/${postContent.id}`)
+    }
+
+    const handleDisabledOptions = () => {
+        if (!user) {
+            router.push('/')
+        } else if (!options) {
+            handleRedirectToPostPage();
+        }
     }
 
     useEffect(() => {
@@ -129,11 +140,7 @@ function Post({ postContent, onLoad, options = true }: Props) {
                             }
                         </>
                 }
-                <div className={`w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray ${postContent.retweet && `opacity-40 cursor-not-allowed`} ${!options && `opacity-40 cursor-not-allowed`}`} onClick={() => {
-                    if (!options) {
-                        handleRedirectToPostPage();
-                    }
-                }}>
+                <div className={`w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray ${postContent.retweet && `opacity-40 cursor-not-allowed`} ${!options || !user && `opacity-40 cursor-not-allowed`}`} onClick={handleDisabledOptions}>
                     {bottomPostOptions.map((option) => {
                         return (
                             <PostOption
