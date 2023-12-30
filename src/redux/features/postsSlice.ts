@@ -29,22 +29,14 @@ export const fecthPosts = createAsyncThunk('posts/fetchPosts',
     })
 
 export const toggleLikePost = createAsyncThunk('posts/toggleLikePost',
-    async (postId: number, thunkAPI) => {
-        const { userReducer: { user } } = thunkAPI.getState() as RootState;
-        const email = user?.email || "";
+    async ({ userId, postId }: { userId: string, postId: number }) => {
 
         if (postId > 100) {
-            const post = user?.posts.find((post) => {
-                return post.id === postId;
-            });
-
-            const newLikes = post ? post.likes.active ? post.likes.amount - 1 : post.likes.amount + 1 : 0;
-            const newActive = !(post?.likes.active) || false;
 
             const response = await fetch('/api/posts/likePost', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, postId, newLikes, newActive })
+                body: JSON.stringify({ userId, postId })
             });
 
             const { status } = await response.json();
@@ -55,41 +47,39 @@ export const toggleLikePost = createAsyncThunk('posts/toggleLikePost',
     })
 
 export const addComment = createAsyncThunk('posts/addComment',
-    async ({ postId, comment }: { postId: number, comment: comment }, thunkAPI) => {
-        const { userReducer: { user }, postsReducer: { posts } } = thunkAPI.getState() as RootState;
-
-        const [post] = posts.filter((post) => {
-            return post.id === postId;
-        });
-
-        const postToComment = postId > 100 &&
-            user?.posts.find((post) => {
-                return post.id === postId;
-            })
-            ||
-            post;
-
-        comment = {
-            ...comment,
-            id: postToComment.comments.length > 0 ? postToComment.comments[postToComment.comments.length - 1].id + 1 : 0,
-            username: user?.name || "Name",
-        };
+    async ({ userId, postId, comment }: { userId: string, postId: number, comment: comment }, thunkAPI) => {
+        const { userReducer: { user }, postsReducer: { posts } } = await thunkAPI.getState() as RootState;
 
         if (postId > 100) {
+            comment.username = user?.name || "Name";
             const response = await fetch('/api/posts/addComment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: user?.email || "", postId, comment })
+                body: JSON.stringify({ userId, postId, comment })
             });
 
-            const { status } = await response.json();
+            const { status, post } = await response.json();
             if (status !== 201) return null;
-        }
 
-        return {
-            ...postToComment,
-            comments: [...postToComment.comments, comment]
-        };
+            return post
+        } else {
+            const postToComment = posts.find((post) => post.id === postId)
+
+            if (postToComment) {
+                comment = {
+                    ...comment,
+                    id: postToComment.comments.length > 0 ? postToComment?.comments[postToComment?.comments.length - 1].id + 1 : 0,
+                    username: user?.name || "Name",
+                };
+
+                return {
+                    ...postToComment,
+                    comments: [...postToComment.comments, comment]
+                };
+            }
+
+            return null;
+        }
 
     })
 
