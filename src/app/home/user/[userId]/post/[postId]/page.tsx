@@ -15,6 +15,7 @@ function Page({ params }: { params: { userId: string, postId: number } }) {
     const [postContent, setPostContent] = useState<PostType | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const posts = useAppSelector((state) => state.postsReducer.posts);
+    const user = useAppSelector((state)=> state.userReducer.user);
     const dispatch = useAppDispatch();
 
     const handlePost = async () => {
@@ -35,7 +36,7 @@ function Page({ params }: { params: { userId: string, postId: number } }) {
 
     useEffect(() => {
         handlePost();
-    }, [posts]);
+    }, [posts, user]);
 
     return (
         <>
