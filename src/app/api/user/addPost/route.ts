@@ -10,6 +10,8 @@ export async function POST(request: Request) {
     try {
         await connectMongoDB();
 
+        post.likes = [];
+
         const user = await User.findOneAndUpdate(
             { email: email },
             {
