@@ -54,7 +54,7 @@ function Page({ params }: { params: { userId: string, postId: number } }) {
                             <Post
                                 postContent={postContent}
                                 onLoad={() => { }}
-                                options={true}
+                                options={!(postContent.retweet)}
                             />
                             <Comments
                                 comments={postContent.comments}
