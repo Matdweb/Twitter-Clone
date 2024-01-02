@@ -13,30 +13,28 @@ export async function POST(request: Request) {
             return Response.json({ status: 400, statusText: 'There was an error finding the user :(', post: null });
         }
 
-        const postToUpdate = user?.posts.find((post: Post) => post.id === postId);
+        const postToUpdate = user.posts.find((post: { id: string, likes: string[] }) => post.id === postId);
 
         if (!postToUpdate) {
             return Response.json({ status: 400, statusText: 'There was an error finding the post :(', post: null });
         }
 
-        const newAmount = postToUpdate.likes.active
-            ?
-            postToUpdate.likes.amount - 1
-            :
-            postToUpdate.likes.amount + 1;
+        const activeUserLike: boolean = postToUpdate.likes.includes(userId)
 
-
-        const newActive = !(postToUpdate.likes.active);
-
-        postToUpdate.likes = {
-            amount: newAmount,
-            active: newActive
-        };
+        if (activeUserLike) {
+            postToUpdate.likes = postToUpdate.likes.filter((user: string) => {
+                if (user !== userId) {
+                    return user;
+                }
+            })
+        } else {
+            postToUpdate.likes.push(userId);
+        }
 
         await user.save();
 
         if (postToUpdate) {
-            return Response.json({ status: 201, statusText: 'User updated successfully', post: postToUpdate });
+            return Response.json({ status: 201, statusText: 'User updated successfully', post: postToUpdate, likes: postToUpdate.likes.length, active: !activeUserLike });
         }
 
     } catch (e) {
