@@ -26,16 +26,29 @@ function Page({ params }: { params: { userId: string, postId: number } }) {
             });
 
             setPostContent(post || null);
+            return post;
         } else if (postId > 100) {
             setIsLoading(true);
             const data = await dispatch(findPost({ userId, postId }));
             setPostContent(data.payload as PostType);
             setIsLoading(false);
+            return data.payload;
         }
     }
 
     useEffect(() => {
-        handlePost();
+
+        const handlePostRequets = async () => {
+            const prevRetweets = postContent?.retweets.amount;
+            const updatedPost = await handlePost();
+            if(prevRetweets && updatedPost?.retweets.amount !== prevRetweets){
+                updatedPost.retweets.active = true
+                setPostContent(updatedPost);
+            }
+        }
+
+        handlePostRequets();
+
     }, [posts, user]);
 
     return (
@@ -55,7 +68,7 @@ function Page({ params }: { params: { userId: string, postId: number } }) {
                             <Post
                                 postContent={postContent}
                                 onLoad={() => { }}
-                                options={!(postContent.retweet)}
+                                options={true}
                             />
                             <Comments
                                 comments={postContent.comments}
