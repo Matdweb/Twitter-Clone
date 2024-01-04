@@ -1,6 +1,8 @@
 'use client'
 import type { PostOptions } from "@/types/posts/PostOptions"
 import type { Post } from "@/types/posts/Posts"
+import { useEffect, useState } from "react";
+import { useAppSelector } from "@/redux/hook";
 
 interface Props {
     option: PostOptions
@@ -13,21 +15,32 @@ interface Props {
 
 function PostOption({
     option: { id, name, icons, clickable },
-    post: { likes, retweets, comments },
+    post,
     handleClick
 }: Props) {
+    const user = useAppSelector(state => state.userReducer.user);
     const Icon = icons[0];
     const ActiveIcon = icons.length > 1 ? icons[1] : null;
 
-    const isActive =
-        name === 'likes'
-            ?
-            likes.active :
-            name === 'retweets'
+    const { likes, retweets, comments } = post;
+
+    const likeIsActive = () => {
+        return likes.userIds.includes(user?._id || '');
+    }
+
+    const [isActive, setIsActive] = useState<boolean>(false);
+
+    useEffect(() => {
+        setIsActive(
+            name === 'likes'
                 ?
-                retweets.active
-                :
-                false;
+                likeIsActive() :
+                name === 'retweets'
+                    ?
+                    retweets.active
+                    :
+                    false);
+    }, [post, user])
 
     return (
         <div
@@ -39,7 +52,7 @@ function PostOption({
 
                 {
                     isActive && ActiveIcon ?
-                        <ActiveIcon.Icon style={ActiveIcon.style} className={name === 'likes' ? 'animate-ping' :''} />
+                        <ActiveIcon.Icon style={ActiveIcon.style} className={name === 'likes' ? 'animate-ping' : ''} />
                         :
                         <Icon.Icon style={Icon.style} />
                 }
