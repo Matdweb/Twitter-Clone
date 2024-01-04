@@ -1,5 +1,5 @@
 'use client'
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent } from "react";
 import { useState, useRef } from "react";
 import UserImage from "../../UserImage"
 import { bottomCreatePostOptions } from "./BottomCreatePostOptions";
@@ -124,7 +124,7 @@ function CreatePost({ className }: { className?: string }) {
                         onChange={handleImagePreview}
                     />
                     <button
-                        disabled={postText || imagePreviewUrl ? false : true}
+                        disabled={user && (postText || imagePreviewUrl) ? false : true}
                         className='btn-primary px-4 py-2 mt-4 sm:mt-0 text-white shadow-md w-full sm:w-20'
                         onClick={handleCreatePost}
                     >
