@@ -30,7 +30,8 @@ export const postSchema = new Schema({
         type: String
     },
     likes: {
-        type: [String]
+        userIds: { type: [String] },
+        amount: { type: Number },
     },
     retweets: {
         amount: {

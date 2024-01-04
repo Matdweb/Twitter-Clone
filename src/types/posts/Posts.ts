@@ -11,8 +11,8 @@ export type Post = {
     body: string,
     imageURL?: string,
     likes: {
+      userIds: string[],
       amount: number,
-      active: boolean
     },
     comments: comment[],
     retweets: {
