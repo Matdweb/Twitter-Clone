@@ -12,6 +12,8 @@ import { CiLink } from "react-icons/ci";
 import Loader from "@/components/Loaders/Loader";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { fetchUser } from "@/redux/features/userSlice";
+import { fecthPosts } from "@/redux/features/postsSlice";
 
 function Page() {
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
