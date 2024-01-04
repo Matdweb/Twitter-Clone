@@ -21,8 +21,8 @@ export async function POST(request: Request) {
                 name: "Name",
                 username: "username",
                 likes: {
+                    userIds: [],
                     amount: Math.floor(Math.random() * 201),
-                    active: false
                 },
                 comments: [],
                 retweets: {

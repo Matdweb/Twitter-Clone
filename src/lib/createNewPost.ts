@@ -13,8 +13,8 @@ const createNewPost = (user: User, postText: string, imageURL: string ) => {
         body: postText,
         imageURL,
         likes: {
+            userIds: [],
             amount: 0,
-            active: false,
         },
         comments: [],
         retweets: {
