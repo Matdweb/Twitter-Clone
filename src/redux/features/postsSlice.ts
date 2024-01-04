@@ -28,65 +28,6 @@ export const fecthPosts = createAsyncThunk('posts/fetchPosts',
         return posts;
     })
 
-export const toggleLikePost = createAsyncThunk('posts/toggleLikePost',
-    async ({ userId, postId }: { userId: string, postId: number }, thunkAPI) => {
-
-        if (postId > 100) {
-            const { userReducer: { user } } = await thunkAPI.getState() as RootState;
-
-            const response = await fetch('/api/posts/likePost', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId, postId })
-            });
-
-            const { status, post, likes, active } = await response.json();
-            if (post && user) {
-                user.posts = user.posts.map((postToUpdate) => {
-                    if (postToUpdate.id === postId) {
-                        console.log(likes, active)
-                        console.log(user);
-                        return {
-                            ...postToUpdate,
-                            likes: {
-                                amount: likes,
-                                active
-                            }
-                        }
-                    } else {
-                        return { ...postToUpdate }
-                    }
-                })
-            }
-            return null;
-        }
-
-        return postId;
-    })
-
-export const toggleRetweetPost = createAsyncThunk('posts/toggleRetweetPost',
-    async (postId: number, thunkAPI) => {
-        if (postId > 100) {
-            const { userReducer: { user } } = await thunkAPI.getState() as RootState;
-            if (user) {
-                user.posts = user.posts.map((post) => {
-                    if (post.id === postId) {
-                        return {
-                            ...post,
-                            retweets: {
-                                amount: post.retweets.amount + 1,
-                                active: true
-                            }
-                        }
-                    } else {
-                        return { ...post }
-                    }
-                })
-            }
-        } else {
-            return postId;
-        }
-    })
 
 export const addComment = createAsyncThunk('posts/addComment',
     async ({ userId, postId, comment }: { userId: string, postId: number, comment: comment }, thunkAPI) => {
@@ -129,9 +70,58 @@ const postsSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {
+        toggleLikePost: (state, { payload }: {
+            payload: {
+                userId: string,
+                postId: number
+            }
+        }) => {
+            state.posts = state.posts.map(({ id, likes, ...rest }) => {
+                if (id === payload.postId) {
+                    const isIncluded = likes.userIds.includes(payload.userId);
+                    const newAmount = isIncluded
+                        ?
+                        likes.amount - 1
+                        :
+                        likes.amount + 1;
+                    const newUserIds = isIncluded
+                        ?
+                        likes.userIds.filter((user_id) => user_id !== payload.userId)
+                        :
+                        [...likes.userIds, payload.userId];
+                    return {
+                        id, likes: {
+                            userIds: newUserIds,
+                            amount: newAmount
+                        }, ...rest
+                    }
+                } else {
+                    return { id, likes, ...rest }
+                }
+            })
+        },
+        toggleRetweetPost: (state, { payload }: { payload: number }) => {
+            state.posts = state.posts.map(({ id, retweets, ...rest }) => {
+                if (id === payload) {
+                    const newRetweets = retweets.active ? retweets.amount - 1 : retweets.amount + 1
+                    return {
+                        id,
+                        retweets: {
+                            amount: newRetweets,
+                            active: !retweets.active
+                        },
+                        ...rest,
+                    }
+                } else {
+                    return {
+                        id, retweets, ...rest
+                    }
+                }
+            })
+        },
         addPost: (state, { payload }: { payload: Post }) => {
             state.posts = [payload, ...state.posts];
-        }
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fecthPosts.pending, (state) => {
@@ -171,72 +161,8 @@ const postsSlice = createSlice({
             state.error = true;
             state.isLoading = false;
         });
-
-        builder.addCase(toggleLikePost.pending, (state) => {
-            state.isLoading = true;
-        });
-
-        builder.addCase(toggleLikePost.fulfilled, (state, { payload }) => {
-            state.isLoading = false;
-            if (payload) {
-                state.posts = state.posts.map(({ id, likes, ...rest }) => {
-                    if (id === payload) {
-                        const newLikes = likes.active ? likes.amount - 1 : likes.amount + 1
-                        return {
-                            id,
-                            likes: {
-                                amount: newLikes,
-                                active: !likes.active
-                            },
-                            ...rest,
-                        }
-                    } else {
-                        return {
-                            id, likes, ...rest
-                        }
-                    }
-                })
-            }
-        });
-
-        builder.addCase(toggleLikePost.rejected, (state) => {
-            state.error = true;
-            state.isLoading = false;
-        });
-
-        builder.addCase(toggleRetweetPost.pending, (state) => {
-            state.isLoading = true;
-        });
-
-        builder.addCase(toggleRetweetPost.fulfilled, (state, { payload }) => {
-            state.isLoading = false;
-            if (payload) {
-                state.posts = state.posts.map(({ id, retweets, ...rest }) => {
-                    if (id === payload) {
-                        const newRetweets = retweets.active ? retweets.amount - 1 : retweets.amount + 1
-                        return {
-                            id,
-                            retweets: {
-                                amount: newRetweets,
-                                active: !retweets.active
-                            },
-                            ...rest,
-                        }
-                    } else {
-                        return {
-                            id, retweets, ...rest
-                        }
-                    }
-                })
-            }
-        });
-
-        builder.addCase(toggleRetweetPost.rejected, (state) => {
-            state.error = true;
-            state.isLoading = false;
-        });
     }
 })
 
-export const { addPost } = postsSlice.actions;
+export const { addPost, toggleLikePost, toggleRetweetPost } = postsSlice.actions;
 export default postsSlice.reducer;
