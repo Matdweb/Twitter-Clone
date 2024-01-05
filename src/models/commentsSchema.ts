@@ -10,12 +10,7 @@ export const commentsSchema = new Schema({
     username: {
         type: String
     },
-    profileImage: {
-        url: {
-            type: String
-        },
-        thumbnailUrl: {
-            type: String
-        },
+    userId: {
+        type: String
     }
 });
