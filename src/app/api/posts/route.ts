@@ -16,12 +16,13 @@ export async function POST(request: Request) {
         posts: posts.map((post: Post, i: number) => {
             return {
                 ...post,
+                userId: post.userId.toString(),
                 retweet: false,
                 name: "Name",
                 username: "username",
                 likes: {
+                    userIds: [],
                     amount: Math.floor(Math.random() * 201),
-                    active: false
                 },
                 comments: [],
                 retweets: {

@@ -28,6 +28,7 @@ function CommentModal({ postContent, toggleModal }: Props) {
                 username: "username",
             }
             const data = await dispatch(addComment({
+                userId: postContent.userId,
                 postId: postContent.id,
                 comment: newComment
             }));

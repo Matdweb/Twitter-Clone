@@ -3,7 +3,7 @@ import { commentsSchema } from "./commentsSchema";
 
 export const postSchema = new Schema({
     userId: {
-        type: Number,
+        type: String,
     },
     name: {
         type: String
@@ -30,12 +30,8 @@ export const postSchema = new Schema({
         type: String
     },
     likes: {
-        amount: {
-            type: Number,
-        },
-        active: {
-            type: Boolean
-        }
+        userIds: { type: [String] },
+        amount: { type: Number },
     },
     retweets: {
         amount: {

@@ -3,7 +3,7 @@ import type { User } from "@/types/User/User";
 
 const createNewPost = (user: User, postText: string, imageURL: string ) => {
     const post: Post = {
-        userId: user?.id || 0,
+        userId: user?._id || '',
         name: user?.name || "Name",
         username: user?.username || "username",
         id: 0,
@@ -13,8 +13,8 @@ const createNewPost = (user: User, postText: string, imageURL: string ) => {
         body: postText,
         imageURL,
         likes: {
+            userIds: [],
             amount: 0,
-            active: false,
         },
         comments: [],
         retweets: {

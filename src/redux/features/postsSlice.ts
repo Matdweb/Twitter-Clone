@@ -28,35 +28,41 @@ export const fecthPosts = createAsyncThunk('posts/fetchPosts',
         return posts;
     })
 
+
 export const addComment = createAsyncThunk('posts/addComment',
-    async ({ postId, comment }: { postId: number, comment: comment }, thunkAPI) => {
-        const { userReducer: { user }, postsReducer: { posts } } = thunkAPI.getState() as RootState;
-
-        const [postToComment] = posts.filter((post) => {
-            return post.id === postId;
-        })
-
-        comment = {
-            ...comment,
-            id: postToComment.comments.length > 0 ? postToComment.comments[postToComment.comments.length - 1].id + 1 : 0,
-            username: user?.name || "Name",
-        };
+    async ({ userId, postId, comment }: { userId: string, postId: number, comment: comment }, thunkAPI) => {
+        const { userReducer: { user }, postsReducer: { posts } } = await thunkAPI.getState() as RootState;
 
         if (postId > 100) {
+            comment.username = user?.name || "Name";
             const response = await fetch('/api/posts/addComment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: user?.email || "", postId, comment })
+                body: JSON.stringify({ userId, postId, comment })
             });
 
-            const { status } = await response.json();
+            const { status, post } = await response.json();
             if (status !== 201) return null;
-        }
 
-        return {
-            ...postToComment,
-            comments: [...postToComment.comments, comment]
-        };
+            return post
+        } else {
+            const postToComment = posts.find((post) => post.id === postId)
+
+            if (postToComment) {
+                comment = {
+                    ...comment,
+                    id: postToComment.comments.length > 0 ? postToComment?.comments[postToComment?.comments.length - 1].id + 1 : 0,
+                    username: user?.name || "Name",
+                };
+
+                return {
+                    ...postToComment,
+                    comments: [...postToComment.comments, comment]
+                };
+            }
+
+            return null;
+        }
 
     })
 
@@ -64,32 +70,42 @@ const postsSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {
-        toggleLikePost: (state, { payload }: { payload: number }) => {
+        toggleLikePost: (state, { payload }: {
+            payload: {
+                userId: string,
+                postId: number
+            }
+        }) => {
             state.posts = state.posts.map(({ id, likes, ...rest }) => {
-                if (id === payload) {
-                    const newLikes = likes.active ? likes.amount - 1 : likes.amount + 1
+                if (id === payload.postId) {
+                    const isIncluded = likes.userIds.includes(payload.userId);
+                    const newAmount = isIncluded
+                        ?
+                        likes.amount - 1
+                        :
+                        likes.amount + 1;
+                    const newUserIds = isIncluded
+                        ?
+                        likes.userIds.filter((user_id) => user_id !== payload.userId)
+                        :
+                        [...likes.userIds, payload.userId];
                     return {
-                        id,
-                        likes: {
-                            amount: newLikes,
-                            active: !likes.active
-                        },
-                        ...rest,
+                        id, likes: {
+                            userIds: newUserIds,
+                            amount: newAmount
+                        }, ...rest
                     }
                 } else {
-                    return {
-                        id, likes, ...rest
-                    }
+                    return { id, likes, ...rest }
                 }
             })
         },
         toggleRetweetPost: (state, { payload }: { payload: number }) => {
-            state.posts = state.posts.map(({ id, likes, retweets, ...rest }) => {
+            state.posts = state.posts.map(({ id, retweets, ...rest }) => {
                 if (id === payload) {
-                    const newRetweets = retweets.amount + 1
+                    const newRetweets = retweets.active ? retweets.amount - 1 : retweets.amount + 1
                     return {
                         id,
-                        likes,
                         retweets: {
                             amount: newRetweets,
                             active: !retweets.active
@@ -98,14 +114,14 @@ const postsSlice = createSlice({
                     }
                 } else {
                     return {
-                        id, likes, retweets, ...rest
+                        id, retweets, ...rest
                     }
                 }
             })
         },
         addPost: (state, { payload }: { payload: Post }) => {
             state.posts = [payload, ...state.posts];
-        }
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fecthPosts.pending, (state) => {
@@ -148,5 +164,5 @@ const postsSlice = createSlice({
     }
 })
 
-export const { toggleLikePost, toggleRetweetPost, addPost } = postsSlice.actions;
+export const { addPost, toggleLikePost, toggleRetweetPost } = postsSlice.actions;
 export default postsSlice.reducer;

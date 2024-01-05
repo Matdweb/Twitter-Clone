@@ -37,7 +37,7 @@ export default function Home() {
             alt='twitter-background-Image'
           />
         </div>
-        <div className='w-full md:w-1/2 h-[95%] flex justify-start items-center'>
+        <div className='w-full md:w-1/2 h-[95%] flex justify-start items-center overflow-hidden overflow-y-scroll'>
           <div className='w-full flex justify-center items-start flex-col flex-wrap ml-11'>
             <TwitterIcon />
             <h1 className='font-big-title mt-14'>Happening now</h1>

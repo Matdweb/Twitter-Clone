@@ -1,6 +1,7 @@
 import type { Post } from "../posts/Posts";
 
 export type User = {
+    _id: string,
     name: string,
     email: string,
     username: string,

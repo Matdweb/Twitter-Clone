@@ -7,47 +7,77 @@ import Image from "next/image";
 import PostOption from "./PostOption";
 import Loader from "@/components/Loaders/Loader";
 import { useAppSelector, useAppDispatch } from "@/redux/hook";
+import { toggleLikeUserPost } from "@/redux/features/userSlice";
 import { toggleLikePost } from "@/redux/features/postsSlice";
 import { FaRetweet } from "react-icons/fa6";
 import Retweet from "./Retweet";
 import RetweetModal from "@/components/Modals/RetweetModal";
 import CommentModal from "@/components/Modals/CommentModal";
+import { useRouter } from "next/navigation";
 
 interface Props {
     key?: number,
     postContent: Post,
-    onLoad: () => void
+    onLoad: () => void,
+    options?: boolean
 }
 
-function Post({ postContent, onLoad }: Props) {
+function Post({ postContent, onLoad, options = true }: Props) {
     const user = useAppSelector((state) => state.userReducer.user);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const [name, setName] = useState<string>('Unauthenticated');
     const [username, setUsername] = useState<string>('username');
     const [retweetModal, setRetweetModal] = useState<boolean>(false);
     const [commentModal, setCommentModal] = useState<boolean>(false);
 
-    const handleClick = (idClicked: number, name: string) => {
-        if (name === 'likes') {
-            handleLikePost(idClicked);
-        } else if (name === 'retweets') {
+    const handleClick = (optionName: string) => {
+        if (optionName === 'likes') {
+            handleLikePost();
+        } else if (optionName === 'retweets') {
             if (!postContent.retweets.active) {
                 setRetweetModal(true);
             }
-        } else if (name === 'comments') {
+        } else if (optionName === 'comments') {
             setCommentModal(true);
         }
     }
 
-    const handleLikePost = (id: number) => {
-        dispatch(toggleLikePost(id));
+    const handleLikePost = () => {
+        //toggle like in redux state 
+        dispatch(toggleLikePost({
+            userId: user?._id || '',
+            postId: postContent.id
+        }));
+        //toggle like in data base and redux if necessary
+        if (postContent.id > 100) {
+            dispatch(toggleLikeUserPost({
+                userId: user?._id || '',
+                post: {
+                    id: postContent.id,
+                    userId: postContent.userId
+                }
+            }));
+        }
     }
 
     const handleLoadImage = () => {
         onLoad();
         setIsLoading(false);
+    }
+
+    const handleRedirectToPostPage = () => {
+        router.push(`/home/user/${postContent.userId}/post/${postContent.id}`)
+    }
+
+    const handleDisabledOptions = () => {
+        if (!user) {
+            router.push('/')
+        } else if (!options) {
+            handleRedirectToPostPage();
+        }
     }
 
     useEffect(() => {
@@ -102,7 +132,7 @@ function Post({ postContent, onLoad }: Props) {
                         </>
                         :
                         <>
-                            <p>
+                            <p className='cursor-pointer' onClick={() => handleRedirectToPostPage()}>
                                 {postContent.title}
                                 {postContent.body}
                             </p>
@@ -122,14 +152,14 @@ function Post({ postContent, onLoad }: Props) {
                             }
                         </>
                 }
-                <div className='w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray'>
+                <div className={`w-full max-w-[16rem] sm:max-w-[29rem] flex justify-between items-center flex-row flex-nowrap mt-5 text-primary-dark-gray dark:text-primary-gray ${!options || !user || postContent.retweet ? `opacity-40 cursor-not-allowed` : ''}`} onClick={handleDisabledOptions}>
                     {bottomPostOptions.map((option) => {
                         return (
                             <PostOption
                                 key={option.id}
                                 option={option}
                                 post={postContent}
-                                handleClick={() => !postContent.retweet && handleClick(postContent.id, option.name)}
+                                handleClick={() => !(postContent.retweet) && options ? handleClick(option.name) : ''}
                             />
                         )
                     })}

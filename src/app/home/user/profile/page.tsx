@@ -10,12 +10,23 @@ import UserImage from "@/components/UserImage";
 import { CiLocationOn } from "react-icons/ci";
 import { CiLink } from "react-icons/ci";
 import Loader from "@/components/Loaders/Loader";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { fetchUser } from "@/redux/features/userSlice";
+import { fecthPosts } from "@/redux/features/postsSlice";
 
 function Page() {
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
     const user = useAppSelector(state => state.userReducer.user);
     const isLoading = useAppSelector(state => state.userReducer.isLoading);
     const dispatch = useAppDispatch();
+    const router = useRouter();
+
+    useEffect(()=> {
+        if(!user){
+            router.push('/')
+        }
+    },[user])
 
     return (
         <>
@@ -68,6 +79,7 @@ function Page() {
                             key={post.id}
                             postContent={post}
                             onLoad={() => { }}
+                            options={false}
                         />
                     )
                 })}

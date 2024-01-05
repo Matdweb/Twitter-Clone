@@ -1,7 +1,7 @@
 import { comment } from "./comments/comment"
 
 export type Post = {
-    userId?: number,
+    userId: string,
     name: string,
     username: string,
     id: number,
@@ -11,8 +11,8 @@ export type Post = {
     body: string,
     imageURL?: string,
     likes: {
+      userIds: string[],
       amount: number,
-      active: boolean
     },
     comments: comment[],
     retweets: {
