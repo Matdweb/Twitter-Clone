@@ -76,7 +76,7 @@ export const toggleLikeUserPost = createAsyncThunk('posts/toggleLikePost',
                 body: JSON.stringify({ userId, post })
             });
 
-            const { status }: { status: number, likedPost: Post } = await response.json(); 4
+            const { status }: { status: number, likedPost: Post } = await response.json();
             if (status !== 201) return null;
 
             return { userId, postId: post.id };
