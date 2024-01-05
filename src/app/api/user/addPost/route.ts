@@ -13,24 +13,28 @@ export async function POST(request: Request) {
 
         if (post.retweet) {
             //if the post belongs to a user it finds the original post and updates the retweets amount
-            const user = await User.findOne({ _id: post.userId });
+            try {
+                const user = await User.findOne({ _id: post.userId });
 
-            user.posts = user.posts.map(({ id, retweets, ...rest }: Post) => {
-                if (id === post.id) {
-                    return {
-                        id,
-                        retweets: {
-                            amount: post.retweets.amount,
-                            active: false
-                        },
-                        ...rest
+                user.posts = user.posts.map(({ id, retweets, ...rest }: Post) => {
+                    if (id === post.id) {
+                        return {
+                            id,
+                            retweets: {
+                                amount: post.retweets.amount,
+                                active: false
+                            },
+                            ...rest
+                        }
+                    } else {
+                        return { id, retweets, ...rest }
                     }
-                } else {
-                    return { id, retweets, ...rest }
-                }
-            })
+                })
 
-            await user.save();
+                await user.save();
+            } catch (e) {
+                console.log(e);
+            }
         }
 
         const user = await User.findOne({ email });
