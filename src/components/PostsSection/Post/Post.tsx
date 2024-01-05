@@ -88,7 +88,7 @@ function Post({ postContent, onLoad, options = true }: Props) {
     return (
         <section className='w-full h-full min-h-[8rem] overflow-visible p-5 flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray transition-all'>
             <div className='w-12 h-full'>
-                <UserImage className='w-10 h-10' username={postContent.retweet ? name : postContent.name} />
+                <UserImage className='w-10 h-10' username={postContent.retweet ? name : postContent.name} userId={postContent.userId} />
             </div>
             <div className='w-full h-full ml-4 flex justify-between items-start flex-col flex-nowrap'>
                 <div className='flex justify-start items-center flex-row flex-nowrap mb-1'>

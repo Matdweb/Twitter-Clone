@@ -3,29 +3,40 @@ import { useAppSelector } from "@/redux/hook";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Loader from "./Loaders/Loader";
+import requestUserProfileImage from "@/lib/mongoDB/requestUserProfileImage";
 
 type Props = React.ComponentProps<"img"> & {
     username?: string,
-    src?: string
+    src?: string,
+    userId?: string
 };
 
-function UserImage({ className, src, username = "Unauthenticated", onClick }: Props) {
+function UserImage({ className, src, username = "Unauthenticated", userId, onClick }: Props) {
     const user = useAppSelector(state => state.userReducer.user);
     const [imgSrc, setImgSrc] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const handleRequestUserProfileImage = async () => {
+        const userImageSrc = await requestUserProfileImage(userId || "");
+        return userImageSrc?.thumbnailUrl || userImageSrc?.url;
+    }
 
     useEffect(() => {
-        const update =
-            src ? src
-                :
-                username === user?.name ?
-                    user?.profileImage.thumbnailUrl || user?.profileImage.url
-                    :
-                    "";
+        const handleImageSrcUpdate = async () => {
+            if (src) {
+                setImgSrc(src);
+            } else if (username === user?.name) {
+                setImgSrc(user?.profileImage.thumbnailUrl || user?.profileImage.url);
+            } else {
+                const fetchedUserImage = await handleRequestUserProfileImage();
+                if (fetchedUserImage) {
+                    setImgSrc(fetchedUserImage);
+                }
+            }
+        }
+        handleImageSrcUpdate()
 
-        setImgSrc(update);
-    }, [src, user, username])
-
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    }, [src, user, username, userId])
 
     if (imgSrc) {
         return (

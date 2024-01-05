@@ -149,7 +149,7 @@ function Page() {
                         {
                             isLoading ?
                                 <div className='w-full flex justify-center items-center'>
-                                    <Loader className='w-10 h-10' />
+                                    <Loader className='w-10 h-10 text-white' />
                                 </div>
                                 :
                                 <h3 className='font-primary-title-bold text-white'>Register</h3>
