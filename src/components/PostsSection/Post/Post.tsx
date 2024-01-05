@@ -34,14 +34,16 @@ function Post({ postContent, onLoad, options = true }: Props) {
     const [commentModal, setCommentModal] = useState<boolean>(false);
 
     const handleClick = (optionName: string) => {
-        if (optionName === 'likes') {
-            handleLikePost();
-        } else if (optionName === 'retweets') {
-            if (!postContent.retweets.active) {
-                setRetweetModal(true);
+        if(user){
+            if (optionName === 'likes') {
+                handleLikePost();
+            } else if (optionName === 'retweets') {
+                if (!postContent.retweets.active) {
+                    setRetweetModal(true);
+                }
+            } else if (optionName === 'comments') {
+                setCommentModal(true);
             }
-        } else if (optionName === 'comments') {
-            setCommentModal(true);
         }
     }
 
