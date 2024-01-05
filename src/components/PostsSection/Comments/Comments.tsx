@@ -12,7 +12,7 @@ function Comments({ comments }: Props) {
                 return (
                     <div key={comment.id} className='w-full px-5 py-3 flex justify-start items-center'>
                         <div className='mr-4'>
-                            <UserImage className='w-10 h-10' username={comment.username} />
+                            <UserImage className='w-10 h-10' username={comment.username} userId={comment.userId}  />
                         </div>
                         <div className='w-full flex justify-center items-start flex-col flex-nowrap'>
                             <p className='font-bold'>{comment.username}</p>
