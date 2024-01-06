@@ -26,7 +26,6 @@ function CommentModal({ postContent, toggleModal }: Props) {
                 id: 0,
                 body: comment,
                 username: "username",
-                userId: '0',
             }
             const data = await dispatch(addComment({
                 userId: postContent.userId,

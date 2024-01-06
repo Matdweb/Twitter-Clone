@@ -80,7 +80,7 @@ function CreatePost({ className }: { className?: string }) {
     return (
         <section className={`w-full h-full min-h-[10rem] overflow-visible p-5 mt-14 sm:mt-0 flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray ${className}`}>
             <div className='w-12 h-full flex-shrink-0'>
-                <UserImage className='w-10 h-10' username={user?.name} userId={user?._id || ""} />
+                <UserImage className='w-10 h-10' username={user?.name} />
             </div>
             <div className='w-5/6 sm:w-full h-full ml-1 sm:ml-4 flex justify-between items-start flex-col flex-nowrap flex-shrink'>
                 <textarea

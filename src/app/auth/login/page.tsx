@@ -80,7 +80,7 @@ function LogInPage() {
                     {
                         isLoading ?
                             <div className='w-full flex justify-center items-center'>
-                                <Loader className='w-10 h-10 text-white' />
+                                <Loader className='w-10 h-10' />
                             </div>
                             :
                             <h3 className='font-primary-title-bold text-white'>Log in</h3>

@@ -35,7 +35,6 @@ export const addComment = createAsyncThunk('posts/addComment',
 
         if (postId > 100) {
             comment.username = user?.name || "Name";
-            comment.userId = user?._id || '0';
             const response = await fetch('/api/posts/addComment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -54,7 +53,6 @@ export const addComment = createAsyncThunk('posts/addComment',
                     ...comment,
                     id: postToComment.comments.length > 0 ? postToComment?.comments[postToComment?.comments.length - 1].id + 1 : 0,
                     username: user?.name || "Name",
-                    userId: user?._id || '0'
                 };
 
                 return {
