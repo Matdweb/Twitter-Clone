@@ -40,7 +40,9 @@ export async function POST(request: Request) {
         const user = await User.findOne({ email });
         const lastPostId: number = user && user.posts.length > 0 && user.posts[0].id || 100;
         post.id = lastPostId + 1;
-        post.userId = user._id;
+        if(!(post.retweet)){
+            post.userId = user._id;
+        }
 
         user.posts = [post, ...user.posts];
 
