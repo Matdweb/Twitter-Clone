@@ -75,6 +75,10 @@ function Post({ postContent, onLoad, options = true }: Props) {
         router.push(`/home/user/${postContent.retweet ? userId : postContent.userId}/post/${postContent.id}`)
     }
 
+    const handleRedirectToUserPage = () => {
+        router.push(`/home/user/${postContent.retweet ? userId : postContent.userId}/profile`)
+    }
+
     const handleDisabledOptions = () => {
         if (!user) {
             router.push('/')
@@ -99,7 +103,7 @@ function Post({ postContent, onLoad, options = true }: Props) {
                 />
             </div>
             <div className='w-full h-full ml-4 flex justify-between items-start flex-col flex-nowrap'>
-                <div className='flex justify-start items-center flex-row flex-nowrap mb-1'>
+                <div className='flex justify-start items-center flex-row flex-nowrap mb-1 cursor-pointer' onClick={handleRedirectToUserPage}>
                     <p className='font-bold mr-1'>
                         {
                             postContent.retweet ?
