@@ -23,7 +23,7 @@ function TwitterHeader({ section }: { section: string }) {
                         <FaArrowRight style={{ fontSize: "1rem" }} />
                     </div>
                     :
-                    <div className='w-9 h-9 outline outline-2 outline-offset-2 outline-black dark:outline-white cursor-pointer ml-5 rounded-full'>
+                    <div className='w-9 h-9 outline outline-2 outline-offset-2 outline-black dark:outline-white cursor-pointer ml-5 rounded-full flex justify-center items-center'>
                         <UserImage
                             className='w-full h-full '
                             onClick={() => windowWidth <= 640 && dispatch(toggleResponsiveMenu())}
