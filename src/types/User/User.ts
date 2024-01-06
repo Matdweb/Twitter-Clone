@@ -16,7 +16,7 @@ export type User = {
         name: string,
         url: string
     },
-    followers: [],
-    following: [],
+    followers: number,
+    following: number,
     posts: Post[]
 } | null;

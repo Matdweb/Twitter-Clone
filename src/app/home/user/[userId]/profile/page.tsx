@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { toggleResponsiveMenu } from "@/redux/features/responsiveMenuSlice";
 import TwitterHeader from "@/components/Header/TwitterHeader";
-import TwitterBackImage from "../../../../../public/assets/img/twitter-profile-background-img.png";
+import TwitterBackImage from "../../../../../../public/assets/img/twitter-profile-background-img.png";
 import Image from "next/image";
 import Link from 'next/link';
 import Post from "@/components/PostsSection/Post/Post";
@@ -10,21 +10,56 @@ import UserImage from "@/components/UserImage";
 import { CiLocationOn } from "react-icons/ci";
 import { CiLink } from "react-icons/ci";
 import Loader from "@/components/Loaders/Loader";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import type { User } from "@/types/User/User";
+import findUserById from "@/lib/mongoDB/findUserById";
 
-function Page() {
+function Page({ params }: { params: { userId: string } }) {
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
-    const user = useAppSelector(state => state.userReducer.user);
-    const isLoading = useAppSelector(state => state.userReducer.isLoading);
+    const [user, setUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const dispatch = useAppDispatch();
-    const router = useRouter();
 
-    useEffect(()=> {
-        if(!user){
-            router.push('/')
+    const createDefualtUser = () => {
+        const defaultUser: User = {
+            _id: '0',
+            name: 'Name',
+            email: 'name@gmail.com',
+            username: 'username',
+            id: 0,
+            country: 'Nowhere',
+            bio: 'I am an anonymous user created by @mat.dweb',
+            profileImage: {
+                url: '',
+                thumbnailUrl: '',
+            },
+            web_page: {
+                name: 'My false personal page',
+                url: '',
+            },
+            followers: 0,
+            following: 0,
+            posts: [],
         }
-    },[user])
+        return defaultUser;
+    }
+
+    useEffect(() => {
+
+        const handleUserRequest = async () => {
+            if (params.userId.length > 4) {
+                const fecthedUser = await findUserById(params.userId);
+                setUser(fecthedUser);
+                setIsLoading(false);
+            } else {
+                const defaultUser: User = createDefualtUser();
+                setUser(defaultUser);
+                setIsLoading(false);
+            }
+        }
+
+        handleUserRequest();
+    }, [])
 
     return (
         <>
@@ -42,11 +77,12 @@ function Page() {
                         <UserImage
                             src=""
                             username={user?.name}
+                            userId={user?._id}
                             className='w-full h-full'
                         />
                     </div>
                     <button className='btn-edit px-3 sm:px-4 py-2 mr-5 sm:mr-6 mb-6 sm:mb-20'>
-                        <Link href='./edit' className='no-underline'>Edit profile</Link>
+                        <Link href='#' className='no-underline'>Follow</Link>
                     </button>
                 </div>
                 <div className='ml-6 mt-[-1.5rem] sm:mt-[-3.75rem]'>
@@ -82,10 +118,10 @@ function Page() {
                     )
                 })}
                 {
-                isLoading && 
-                <div className='w-full pt-6 flex justify-center items-center'>
-                    <Loader className='w-12 h-12' />
-                </div>
+                    isLoading &&
+                    <div className='w-full pt-6 flex justify-center items-center'>
+                        <Loader className='w-12 h-12' />
+                    </div>
                 }
             </section>
         </>
