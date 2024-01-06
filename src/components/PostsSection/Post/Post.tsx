@@ -30,11 +30,12 @@ function Post({ postContent, onLoad, options = true }: Props) {
 
     const [name, setName] = useState<string>('Unauthenticated');
     const [username, setUsername] = useState<string>('username');
+    const [userId, setUserId] = useState<string>('');
     const [retweetModal, setRetweetModal] = useState<boolean>(false);
     const [commentModal, setCommentModal] = useState<boolean>(false);
 
     const handleClick = (optionName: string) => {
-        if(user){
+        if (user) {
             if (optionName === 'likes') {
                 handleLikePost();
             } else if (optionName === 'retweets') {
@@ -71,7 +72,7 @@ function Post({ postContent, onLoad, options = true }: Props) {
     }
 
     const handleRedirectToPostPage = () => {
-        router.push(`/home/user/${postContent.userId}/post/${postContent.id}`)
+        router.push(`/home/user/${postContent.retweet ? userId : postContent.userId}/post/${postContent.id}`)
     }
 
     const handleDisabledOptions = () => {
@@ -85,12 +86,17 @@ function Post({ postContent, onLoad, options = true }: Props) {
     useEffect(() => {
         setName(user?.name || "Unauthenticated");
         setUsername(user?.username || "");
+        setUserId(user?._id || '')
     }, [user])
 
     return (
         <section className='w-full h-full min-h-[8rem] overflow-visible p-5 flex justify-start items-start flex-row flex-nowrap border-b border-primary-gray dark:border-primary-dark-gray transition-all'>
             <div className='w-12 h-full'>
-                <UserImage className='w-10 h-10' username={postContent.retweet ? name : postContent.name} userId={postContent.userId} />
+                <UserImage
+                    className='w-10 h-10'
+                    username={postContent.retweet ? name : postContent.name}
+                    userId={postContent.retweet ? userId : postContent.userId}
+                />
             </div>
             <div className='w-full h-full ml-4 flex justify-between items-start flex-col flex-nowrap'>
                 <div className='flex justify-start items-center flex-row flex-nowrap mb-1'>
