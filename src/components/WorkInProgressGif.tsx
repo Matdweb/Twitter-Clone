@@ -5,20 +5,29 @@ import { useState } from "react"
 import RobotWorkingGif from '../../public/assets/gif/network-robot-assistant-working-on-laptop.gif'
 import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { toggleResponsiveMenu } from "@/redux/features/responsiveMenuSlice"
+import Loader from "./Loaders/Loader"
 
 function WorkInProgressGif() {
     const responsiveMenu = useAppSelector(state => state.responsiveMenu);
     const dispatch = useAppDispatch();
     const [isHover, setIsHover] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     return (
         <section className={`w-full h-screen mt-14 sm:mt-0 ${responsiveMenu && `cursor-pointer opacity-50`} flex justify-start items-center flex-col flex-nowrap overflow-x-hidden`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
+            {
+                isLoading &&
+                <div className='w-full h-[15rem] flex justify-center items-center'>
+                    <Loader className="w-12 h-12" />
+                </div>
+            }
             <Image
                 src={RobotWorkingGif}
                 width={300}
                 height={300}
                 alt='Work in progress page GIF'
                 className='scale-100 sm:scale-150 mt-4'
+                onLoad={() => setIsLoading(false)}
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
             />
