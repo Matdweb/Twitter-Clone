@@ -40,7 +40,7 @@ function UserImage({ className, src, username = "Unauthenticated", userId, onCli
 
     if (imgSrc) {
         return (
-            <>
+            <div onClick={onClick} className={`${className} min-w-[2.5rem] min-h-[2.5rem]`}>
                 {
                     isLoading &&
                     <div className='w-full h-full bg-white dark:bg-black flex justify-center items-center rounded-full'>
@@ -53,10 +53,9 @@ function UserImage({ className, src, username = "Unauthenticated", userId, onCli
                     height={500}
                     alt="profile-image"
                     className={`${isLoading && `scale-0 absolute`} ${className} min-w-[2.5rem] min-h-[2.5rem] rounded-full`}
-                    onClick={onClick}
                     onLoad={() => setIsLoading(false)}
                 />
-            </>
+            </div>
         )
     } else {
         const firstLetter = username.charAt(0).toUpperCase();

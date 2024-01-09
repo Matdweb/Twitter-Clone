@@ -51,7 +51,7 @@ function LogInPage() {
         }
     }
 
-    return (<>
+    return (
         <section className='w-full min-h-screen flex justify-start items-center flex-col flex-nowrap bg-white dark:bg-black' >
             <form onSubmit={onSubmit} className='w-full sm:w-[30rem] p-4 sm:p-3 pt-0 flex justify-start items-start flex-col flex-nowrap mt-14 text-black dark:text-white'>
                 <TwitterIcon />
@@ -93,9 +93,7 @@ function LogInPage() {
                 </div>
             </form>
         </section>
-
-        <ModeToggleButton className='absolute scale-75 bottom-0 right-0 m-8' />
-    </>)
+    )
 }
 
 export default LogInPage
