@@ -9,14 +9,16 @@ import { toggleResponsiveMenu } from '@/redux/features/responsiveMenuSlice';
 import Link from 'next/link';
 import { findPost } from '@/redux/features/userSlice';
 import Loader from '@/components/Loaders/Loader';
+import { useRouter } from 'next/navigation';
 
 function Page({ params }: { params: { userId: string, postId: number } }) {
     const responsiveMenu = useAppSelector((state) => state.responsiveMenu)
     const [postContent, setPostContent] = useState<PostType | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const posts = useAppSelector((state) => state.postsReducer.posts);
-    const user = useAppSelector((state)=> state.userReducer.user);
+    const user = useAppSelector((state) => state.userReducer.user);
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const handlePost = async () => {
         const { userId, postId } = params;
@@ -41,7 +43,7 @@ function Page({ params }: { params: { userId: string, postId: number } }) {
         const handlePostRequets = async () => {
             const prevRetweets = postContent?.retweets.amount;
             const updatedPost = await handlePost();
-            if(prevRetweets && updatedPost?.retweets.amount !== prevRetweets){
+            if (prevRetweets && updatedPost?.retweets.amount !== prevRetweets) {
                 updatedPost.retweets.active = true
                 setPostContent(updatedPost);
             }
@@ -55,7 +57,7 @@ function Page({ params }: { params: { userId: string, postId: number } }) {
         <>
             <TwitterHeader section='Post' />
             <section className={`w-full pt-16 sm:pt-3 ${responsiveMenu && `cursor-pointer opacity-50`}`} onClick={() => responsiveMenu && dispatch(toggleResponsiveMenu())}>
-                <Link href='/home' className='px-4 underline'>Back</Link>
+                <span className='px-4 underline' onClick={() => router.back()}>Back</span>
                 {
                     isLoading &&
                     <div className='w-full h-[20rem] flex justify-center items-center'>
