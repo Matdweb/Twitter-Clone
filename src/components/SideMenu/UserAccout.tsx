@@ -1,7 +1,7 @@
 import { MdOutlineMoreHoriz } from 'react-icons/md';
-import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { toggleResponsiveMenu } from '@/redux/features/responsiveMenuSlice';
+import { useAppSelector } from '@/redux/hook';
 import UserImage from '../UserImage';
+import { signOut } from 'next-auth/react';
 
 function UserAccout() {
     const windowWidth = useAppSelector(state => state.windowWidth);
@@ -9,13 +9,16 @@ function UserAccout() {
     const user = useAppSelector(state => state.userReducer.user);
     const userIsLoading = useAppSelector(state => state.userReducer.isLoading);
     const userError = useAppSelector(state => state.userReducer.error);
-    const dispatch = useAppDispatch();
+
+    const handleClick = () => {
+        signOut({ callbackUrl: '/' });
+    }
 
     return (
         <>
             <div
                 className={`rounded-full mt-3 cursor-pointer w-full lg:w-60 lg:p-3 lg:hover:bg-primary-gray lg:dark:hover:bg-primary-dark-gray flex ${responsiveMenu ? `justify-start items-start flex-col pl-3` : `justify-between items-center flex-row`}`}
-                onClick={responsiveMenu ? () => dispatch(toggleResponsiveMenu()) : () => { }}
+                onClick={handleClick}
             >
                 {
                     windowWidth > 1024 || responsiveMenu ?
