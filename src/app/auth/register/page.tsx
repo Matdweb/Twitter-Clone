@@ -73,7 +73,7 @@ function Page() {
         }
     }, [email])
 
-    return (<>
+    return (
         <section className='w-full min-h-screen flex justify-start items-center flex-col flex-nowrap bg-white dark:bg-black'>
             <form onSubmit={onSubmit} className='w-full sm:w-[41rem] p-4 sm:p-3 pt-0 flex justify-start items-start flex-col flex-nowrap mt-6 text-black dark:text-white'>
                 <div className='w-full flex justify-center items-center mb-11'>
@@ -159,9 +159,7 @@ function Page() {
                 </div>
             </form>
         </section>
-
-        <ModeToggleButton className='absolute scale-75 bottom-0 right-0 m-8' />
-    </>)
+    )
 }
 
 export default Page
