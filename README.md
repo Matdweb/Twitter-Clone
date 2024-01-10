@@ -105,16 +105,16 @@ A Twitter clone project with the main purpose of simulating the Twitter experien
 - **New Route Pages:** Created `home/notifications`, `home/more`, `home/messages`, and `home/explore` pages.
 
 ### Endpoint Overview 🌐
-1. **API/login:** Validates user credentials and returns a success or error message. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/11).
-2.  **API/register:** Creates a new user in the database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/11).
-3. **API/posts:** Fetches posts from JSONPlaceholder and Piscum APIs and returns an array of posts. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/8).
-4. **API/posts/likePost:** Modifies the likes count for a post in the MongoDB database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/28)
-5. **API/posts/addComment:** Adds a new comment to the user structure in the database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/37)
-6. **API/posts/findPost:** Returns the post that matches the post ID.
-7. **API/user:** Retrieves user information based on the provided email. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/22)
-8. **API/user/addPost:** Adds a new post to the user's posts array. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/32)
-9. **API/user/findById:** Finds a user based on the user ID.
-10. **API/user/update:** Updates user information. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/22)
+1. **`api/login`:** Validates user credentials and returns a success or error message. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/11).
+2. **`api/register`:** Creates a new user in the database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/11).
+3. **`api/posts`:** Fetches posts from JSONPlaceholder and Piscum APIs and returns an array of posts. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/8).
+4. **`api/posts/likePost`:** Modifies the likes count for a post in the MongoDB database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/28)
+5. **`api/posts/addComment`:** Adds a new comment to the user structure in the database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/37)
+6. **`api/posts/findPost`:** Returns the post that matches the post ID.
+7. **`api/user`:** Retrieves user information based on the provided email. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/22)
+8. **`api/user/addPost`:** Adds a new post to the user's posts array. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/32)
+9. **`api/user/findById`:** Finds a user based on the user ID.
+10. **`api/user/update`:** Updates user information. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/22)
 
 ## How to Contribute
 
