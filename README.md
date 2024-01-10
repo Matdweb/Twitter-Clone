@@ -1,6 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Twitter Clone
 
-For commits we are using [`conventional-commits`](https://www.conventionalcommits.org/es/v1.0.0-beta.2/)
+🚀 Welcome to my Twitter Clone project – a platform designed to replicate the Twitter experience with features like posting, liking, retweeting, commenting, and more.
+
+## Purpose
+
+🌐 The main purpose of this project is to simulate the functionalities of Twitter, providing users with a social media space to express thoughts, create profiles, and share content.
+
+## Why Build This?
+
+🛠️ This project serves as a showcase for my skills and knowledge, demonstrating my ability to develop a real-world application. It's a portfolio piece highlighting my proficiency in creating scalable solutions and utilizing technology effectively.
+
+## Problem Solving
+
+🤔 In the realm of social media, this project addresses the need for users to share ideas, create profiles, and express themselves through images and text – solving the typical challenges faced by social media applications.
+
+## Motivations
+
+💡 My passion for creating things from scratch and utilizing technology to solve problems drove the development of this project. It provided valuable lessons in large-scale project planning and execution.
+
+## About the project 
+
+📽️ This [Next.js](https://nextjs.org/) project was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<br /> 📄 For commits we are using [`conventional-commits`](https://www.conventionalcommits.org/es/v1.0.0-beta.2/).
+ <br /> ✍🏼 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+### Design Solutions 🎨
+
+Take a closer look at my design solutions in Figma to get a visual sense of the project's aesthetics. I've used designs for both desktop and responsive versions to ensure a seamless and engaging user experience.
+
+- **Desktop Design:** [View Desktop Design](https://www.figma.com/file/VHDK0dBvWRZKIaqKW5QNHh/Twitter-desktop-pages-(feed%2C-sigup%2C-login%2C-profile)-(Community)?type=design&node-id=117%3A900&mode=design&t=TRokLBtdQnL0bqAj-1)
+- **Responsive Design:** [View Responsive Design](https://www.figma.com/file/E7lH6SMwwU6cXmJFvqYzip/Twitter-UI-mobile-version?type=design&node-id=4%3A1224&mode=design&t=HSfLtzr9BS70YAo6-1)
+
+Explore these designs to see how we've translated our project ideas into visually appealing and user-friendly interfaces. Your feedback and insights are always welcome!
+
 
 ## Getting Started
 
@@ -20,7 +52,69 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Features 🚀
+
+### Project Overview
+A Twitter clone project with the main purpose of simulating the Twitter experience. It includes features such as creating ⬆️, liking ❤️, retweeting 🔄, and commenting 📝 on posts.
+
+### Key Features
+#### **Mock Data API:**
+-  Utilizes a mock data API to extract and display posts and images. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/8).
+
+![image](https://github.com/Matdweb/Twitter-Clone/assets/110640534/47e2361f-9873-4c75-9531-52f9d3e380cf)
+
+#### **User Authentication:**
+- Implements user registration and login functionalities using NextAuth. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/11).
+#### **Database Connection:** 
+- Connects to a [MongoDB](https://www.mongodb.com/es) database (MongoDB) for storing user information.
+#### **Theme Switching:** 
+- Manual button to switch between light and dark modes. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/17)
+
+![READMEmanualThemeSwitch](https://github.com/Matdweb/Twitter-Clone/assets/110640534/e969954e-918a-49b0-86b8-e8147527f6c2)
+
+#### **Main Page:**
+- Displays a set of posts with mock data, images, and loaders for a seamless user experience. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/20).
+
+![READMEmainPage](https://github.com/Matdweb/Twitter-Clone/assets/110640534/e0867421-39fb-4092-a85e-740c0ea4c6dd)
+
+#### **Profile Page:**
+- Renders detailed information about the authenticated user and their posts. Also gives the user the ability to edit their profiles. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/22)
+
+![image](https://github.com/Matdweb/Twitter-Clone/assets/110640534/56ed781d-32e5-4e32-93a2-51969b03e68e)
+
+#### **Post Interactions:**
+- Allows users to like, retweet, comment, and share posts, updating both the database and Redux state. Learn about [likes](https://github.com/Matdweb/Twitter-Clone/pull/28), [retweets](https://github.com/Matdweb/Twitter-Clone/pull/29), and [comments](https://github.com/Matdweb/Twitter-Clone/pull/37)
+
+![READMEInteractWithPost](https://github.com/Matdweb/Twitter-Clone/assets/110640534/e8891928-c44e-432b-bb02-0160264ea4a7)
+
+
+#### **User Posts:**
+- Users can create their own posts, add text, and upload images managed by the [Edgestore](https://edgestore.dev/) service.
+  
+#### **User page:**
+- Users can go the post's owners profile page and interact with their profile. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/46)
+
+#### **Welcome Page:**
+- A landing page that redirects authenticated users to the /home route or provides registration/login options. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/34)
+
+
+### Additional Functionalities
+- **Sign Out:** Enables users to log out across the application.
+- **Dynamic Routing:** Unique pages for each post and user profile, facilitating easy sharing.
+- **New Route Pages:** Created `home/notifications`, `home/more`, `home/messages`, and `home/explore` pages.
+
+### Endpoint Overview 🌐
+1. **API/login:** Validates user credentials and returns a success or error message. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/11).
+2.  **API/register:** Creates a new user in the database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/11).
+3. **API/posts:** Fetches posts from JSONPlaceholder and Piscum APIs and returns an array of posts. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/8).
+4. **API/posts/likePost:** Modifies the likes count for a post in the MongoDB database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/28)
+5. **API/posts/addComment:** Adds a new comment to the user structure in the database. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/37)
+6. **API/posts/findPost:** Returns the post that matches the post ID.
+7. **API/user:** Retrieves user information based on the provided email. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/22)
+8. **API/user/addPost:** Adds a new post to the user's posts array. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/32)
+9. **API/user/findById:** Finds a user based on the user ID.
+10. **API/user/update:** Updates user information. Learn more [here](https://github.com/Matdweb/Twitter-Clone/pull/22)
 
 ## How to Contribute
 
@@ -57,6 +151,22 @@ We encourage contributors to feature their `'Twitter-Clone'` project contributio
 5. **Connect with Us**: Let us know when you've added your `'Twitter-Clone'` contributions to your portfolio. We'd love to celebrate your success and promote your work within our community.
 
 Your contributions are a testament to your skills and dedication. We're thrilled to have you as part of our project. Share your portfolio with us, and let's continue to grow and learn together!
+
+## Technologies Used
+- [Next.js](https://nextjs.org/)
+- [React](https://es.react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [NextAuth](https://next-auth.js.org/)
+- [EdgStore](https://edgestore.dev/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [MongoDB](https://www.mongodb.com/es)
+- [jsonPlaceholder](https://jsonplaceholder.typicode.com/posts)
+- [Picsum](https://picsum.photos/)
+- [Ouch! illustrations](https://icons8.com/illustrations)
+
+## License
+This project is licensed under the MIT License.
 
 ## Learn More
 
