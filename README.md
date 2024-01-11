@@ -158,7 +158,7 @@ Your contributions are a testament to your skills and dedication. We're thrilled
 - [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [NextAuth](https://next-auth.js.org/)
-- [EdgStore](https://edgestore.dev/)
+- [EdgeStore](https://edgestore.dev/)
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [MongoDB](https://www.mongodb.com/es)
 - [jsonPlaceholder](https://jsonplaceholder.typicode.com/posts)
